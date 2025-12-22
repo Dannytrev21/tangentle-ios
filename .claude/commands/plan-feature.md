@@ -55,7 +55,7 @@ Consider at minimum:
 - API design
 - UI/UX approach
 - Integration strategy
-- Testing approach
+- Testing strategy (unit, integration, UI tests)
 
 ### Step 5: Create plan.md
 Use this template:
@@ -81,6 +81,13 @@ Use this template:
 
 ### Key Decisions
 {Tree of Thought analysis for each major decision}
+
+### Testing Strategy
+| Test Type | Scope | Files | Priority |
+|-----------|-------|-------|----------|
+| Unit | {what to unit test} | TangentleTests/Unit/... | Required |
+| Integration | {what to integration test} | TangentleTests/Integration/... | {Required/Optional} |
+| UI | {what to UI test} | TangentleUITests/... | {Required/Optional} |
 
 ## Implementation Steps
 
@@ -173,14 +180,43 @@ Reference: `{existing file}` lines {X-Y}
 - [ ] {criterion 1}
 - [ ] {criterion 2}
 - [ ] {criterion 3}
+- [ ] All tests pass
+
+## Testing Requirements
+Each step MUST include appropriate tests. Select applicable types:
+
+### Unit Tests
+- [ ] Test file: `TangentleTests/Unit/{FeatureName}Tests.swift`
+- [ ] Test cases:
+  - `test{FunctionName}_when{Condition}_should{ExpectedBehavior}()`
+  - {additional test cases}
+
+### Integration Tests (if applicable)
+- [ ] Test file: `TangentleTests/Integration/{FeatureName}IntegrationTests.swift`
+- [ ] Test cases:
+  - `test{ComponentA}IntegratesWith{ComponentB}()`
+
+### UI Tests (if applicable)
+- [ ] Test file: `TangentleUITests/{FeatureName}UITests.swift`
+- [ ] Test cases:
+  - `test{UserAction}_should{VisibleResult}()`
+
+### What to Test
+- {specific behavior 1}
+- {specific behavior 2}
+- Edge cases: {list edge cases}
+- Error handling: {list error scenarios}
 
 ## Verification Commands
 ```bash
-# Command 1: {description}
-{command}
+# Build project
+xcodebuild -scheme Tangentle -sdk iphonesimulator build
 
-# Command 2: {description}
-{command}
+# Run unit tests for this feature
+xcodebuild test -scheme Tangentle -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15' -only-testing:TangentleTests/Unit/{TestClass}
+
+# Run all tests
+xcodebuild test -scheme Tangentle -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15'
 ```
 
 ## Documentation Updates
@@ -219,6 +255,8 @@ If verification fails:
       "startedAt": null,
       "completedAt": null,
       "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
       "attempts": 0,
       "notes": ""
     }
@@ -226,6 +264,7 @@ If verification fails:
   "context": {
     "filesCreated": [],
     "filesModified": [],
+    "testsCreated": [],
     "keyDecisions": [],
     "blockers": [],
     "learnings": []
@@ -255,6 +294,11 @@ This file maintains context for resuming work on this plan from a fresh terminal
 ## Files Modified
 | File | Changes |
 |------|---------|
+
+## Tests Created
+| Test File | Test Cases | Status |
+|-----------|------------|--------|
+| {test file path} | {number} tests | Passing/Failing |
 
 ## Key Decisions Made
 1. {Decision 1}: {rationale}
@@ -306,6 +350,20 @@ After creating all files, output:
 - Steps should have clear, testable acceptance criteria
 - Dependencies between steps must be explicit
 - Verification commands must be copy-pasteable
+- **Every step MUST include tests** - no exceptions
+
+### For Testing (MANDATORY)
+- Every step must define what tests to write
+- Unit tests for all new functions, methods, and computed properties
+- Integration tests when multiple components interact
+- UI tests for user-facing features and interactions
+- Tests must be written BEFORE marking a step complete
+- Test naming convention: `test{What}_when{Condition}_should{Expected}()`
+- Minimum test coverage goals:
+  - Services/Business Logic: 80%+ coverage
+  - ViewModels: 70%+ coverage
+  - Repositories: 60%+ coverage
+  - UI Components: UI tests for critical paths
 
 ### For Tree of Thought
 - Consider at least 3 options for each major decision
@@ -319,5 +377,25 @@ After creating all files, output:
 - Document "why" not just "what"
 - Update after every significant change
 
-Constraints: 
-- DO NOT Begin working on any of the next prompts or implementing this before the plan-prompts has been called. This is just for the setup and plan. Actual implementation step will begin after. 
+## Constraints
+- DO NOT begin working on any of the next prompts or implementing this before the plan-prompts has been called. This is just for the setup and plan. Actual implementation step will begin after.
+- **TESTING IS MANDATORY**: No step can be marked complete without tests. If a step creates new code, that code must have tests. UI-only steps must have UI tests or at minimum manual verification checklists.
+
+## Test Type Guidelines
+
+| Code Type | Test Type Required | Example |
+|-----------|-------------------|---------|
+| Services | Unit tests | `testTaskService_createTask_shouldPersistToRepository()` |
+| ViewModels | Unit tests | `testTodayViewModel_loadTasks_shouldPopulateTasksList()` |
+| Repositories | Unit tests (in-memory) | `testTaskRepository_fetchByStatus_shouldFilterCorrectly()` |
+| Views/Components | UI tests | `testTaskCard_tapCheckbox_shouldMarkComplete()` |
+| Gestures/Animations | Manual verification + UI tests | `testSwipeableRow_swipeLeft_shouldRevealActions()` |
+| API/Network | Integration tests (mocked) | `testAIService_sendMessage_shouldReturnResponse()` |
+
+## When Tests Are Not Applicable
+In rare cases where tests are genuinely not applicable (e.g., pure asset changes, documentation-only steps), document:
+```markdown
+## Testing Requirements
+**N/A - Reason**: {explain why tests don't apply}
+**Manual Verification**: {what to check manually}
+```

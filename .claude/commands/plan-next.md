@@ -107,14 +107,34 @@ Then execute the prompt contents:
    - Check all acceptance criteria
    - Fix any failures
 
-4. **Completion Protocol**
-   - Update progress.json
+4. **Testing (MANDATORY)**
+   - Write tests as specified in the step's Testing Requirements
+   - Run tests and ensure they pass
+   - A step CANNOT be marked complete without passing tests
+
+5. **Completion Protocol**
+   - Update progress.json (including testsWritten and testsPassed)
    - Update context.md
    - Update documentation if required
 
 ### Step 7: Handle Verification Results
 
-#### If ALL Acceptance Criteria Pass:
+#### Pre-Completion Check: Tests Required
+Before marking any step complete, verify:
+1. Tests are written per the Testing Requirements section
+2. All tests pass when run
+3. Test file paths are recorded
+
+```bash
+# Run tests for the feature
+xcodebuild test -scheme Tangentle -sdk iphonesimulator \
+  -destination 'platform=iOS Simulator,name=iPhone 15' \
+  -only-testing:TangentleTests 2>&1 | tail -20
+```
+
+**If tests are missing or failing, the step is NOT complete.**
+
+#### If ALL Acceptance Criteria AND Tests Pass:
 
 1. **Update progress.json**:
 ```javascript
@@ -125,6 +145,8 @@ const progress = JSON.parse(fs.readFileSync('progress.json'));
 progress.steps[currentStep - 1].status = 'completed';
 progress.steps[currentStep - 1].completedAt = new Date().toISOString();
 progress.steps[currentStep - 1].verificationPassed = true;
+progress.steps[currentStep - 1].testsPassed = true;
+progress.steps[currentStep - 1].testsWritten = ['TestFile1.swift', 'TestFile2.swift']; // actual test files
 progress.steps[currentStep - 1].attempts = (progress.steps[currentStep - 1].attempts || 0) + 1;
 
 // Advance to next step
@@ -134,6 +156,7 @@ progress.updatedAt = new Date().toISOString();
 // Update context
 progress.context.filesCreated.push(...newFiles);
 progress.context.filesModified.push(...modifiedFiles);
+progress.context.testsCreated.push(...newTestFiles);
 progress.context.learnings.push(anyLearnings);
 
 // Check if plan complete
@@ -160,10 +183,15 @@ Add a new section:
 ### Files Modified
 - `{path}`: {what changed}
 
+### Tests Written
+- `TangentleTests/Unit/{TestFile}.swift`: {N} test cases
+- Status: All passing
+
 ### Verification Results
 - [x] {AC1}: Passed
 - [x] {AC2}: Passed
 - [x] {AC3}: Passed
+- [x] All tests pass
 
 ### Key Decisions
 - {decision made}: {rationale}
@@ -186,6 +214,11 @@ Prerequisites met: {yes/no}
 ✓ {AC1}
 ✓ {AC2}
 ✓ {AC3}
+
+## Tests
+✓ {N} tests written
+✓ All tests passing
+  Files: {list of test files}
 
 ## Files Changed
 Created: {list}
@@ -359,6 +392,10 @@ If `currentStep === totalSteps` and verification passes:
 ## Files Modified
 {list}
 
+## Tests Created
+{list of test files}
+Total: {N} test cases across {M} test files
+
 ## Documentation Updated
 {list}
 
@@ -366,10 +403,11 @@ If `currentStep === totalSteps` and verification passes:
 {from context.md learnings}
 
 ## Recommended Follow-ups
-1. Run full test suite
-2. Manual QA testing
-3. Code review
-4. Update related documentation
+1. Run full test suite: `xcodebuild test -scheme Tangentle ...`
+2. Check test coverage report
+3. Manual QA testing
+4. Code review
+5. Update related documentation
 ═══════════════════════════════════════════════════════════════
 ```
 
@@ -386,14 +424,25 @@ If context.md exists with recent session data:
 - [ ] Prerequisites verified
 - [ ] Required files read
 - [ ] Context loaded
+- [ ] Testing requirements reviewed
 
 ### During Implementation
 - [ ] Following established patterns
 - [ ] Handling edge cases
 - [ ] No debug code left
+- [ ] Writing tests alongside implementation
 
 ### After Each Step
 - [ ] All AC verified
-- [ ] Progress updated
-- [ ] Context updated
+- [ ] **Tests written and passing** (MANDATORY)
+- [ ] Progress updated (including testsWritten)
+- [ ] Context updated (including tests created)
 - [ ] Ready for next step
+
+### Testing Checklist
+- [ ] Unit tests for new functions/methods
+- [ ] Integration tests if components interact
+- [ ] UI tests for user-facing changes
+- [ ] Edge cases covered
+- [ ] Error handling tested
+- [ ] All tests pass: `xcodebuild test -scheme Tangentle ...`
