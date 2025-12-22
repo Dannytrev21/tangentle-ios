@@ -4,7 +4,7 @@ This file maintains context for resuming work on this plan from a fresh terminal
 
 ## Quick Status
 - **Plan**: Fluid UI & Gesture System
-- **Current Step**: 7 - SwipeableRow (next)
+- **Current Step**: 8 - TaskCard (next)
 - **Last Updated**: 2025-12-22
 
 ## Overview
@@ -21,6 +21,7 @@ Creating a beautiful, modern, warm UI with fluid physics-based gestures for Tang
 - **Step 4 Complete**: Animation Library
 - **Step 5 Complete**: Haptic Engine
 - **Step 6 Complete**: Gesture Foundation
+- **Step 7 Complete**: SwipeableRow
 
 ## Key Decisions Made
 
@@ -136,7 +137,7 @@ All Steps ──► Step 12 (Integration)
 ```
 
 ## Next Actions
-1. Run `/plan-next 002` to begin Step 7 (SwipeableRow)
+1. Run `/plan-next 002` to begin Step 8 (TaskCard)
 
 ## Things to Remember
 - iOS 17.0 minimum - can use `@Observable` and modern SwiftUI features
@@ -394,3 +395,41 @@ LongPressChargeView(chargeDuration: 0.5) { progress in
 ### Ready for Next Step
 Step 7: SwipeableRow
 Prerequisites met: Yes (Gesture Foundation complete)
+
+---
+
+## Step 7 Complete - 2025-12-22
+
+### Summary
+Created SwipeableRow component with physics-based swipe gestures, rubber-band resistance, haptic feedback, and configurable leading/trailing actions.
+
+### Files Created
+- `Tangentle/UI/Components/SwipeAction.swift`: SwipeAction model and StandardSwipeActions factory
+- `Tangentle/UI/Components/SwipeActionButton.swift`: Action button with icon and label
+- `Tangentle/UI/Components/SwipeableRow.swift`: Generic swipe container component
+
+### Verification Results
+- [x] AC1: SwipeableRow reveals actions on swipe
+- [x] AC2: Rubber band effect via MomentumCalculator.rubberBand
+- [x] AC3: Haptic feedback on threshold crossing
+- [x] AC4: Spring animation on release (SpringConfig.bouncy/snappy)
+- [x] AC5: Supports leading and trailing actions
+- [x] AC6: StandardSwipeActions factory exists (complete, delete, defer, edit, unblock, duplicate)
+- [x] AC7: Build succeeded
+
+### Key Decisions
+- Used SwiftUI DragGesture instead of UIKit for simpler integration
+- Action executed after 0.2s delay for animation to settle
+- Rubber band coefficient 0.55 matches iOS standard
+- Velocity threshold 500 for fast swipes to trigger action
+- First action in array is the "primary" action that triggers on swipe completion
+
+### Learnings
+- SwiftUI DragGesture works well for swipe actions
+- predictedEndTranslation - translation gives approximate velocity
+- StandardSwipeActions factory ensures consistent action styling
+- .themed() requires explicit theme parameter in previews
+
+### Ready for Next Step
+Step 8: TaskCard
+Prerequisites met: Yes (SwipeableRow complete)
