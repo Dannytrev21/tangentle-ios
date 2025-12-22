@@ -4,7 +4,8 @@ import UIKit
 
 /// Protocol for haptic feedback service.
 /// Use this protocol for dependency injection and testing.
-protocol HapticEngineProtocol {
+/// AnyObject bound allows weak references to avoid retain cycles.
+protocol HapticEngineProtocol: AnyObject {
     /// Trigger a haptic feedback pattern
     func trigger(_ type: HapticType)
 

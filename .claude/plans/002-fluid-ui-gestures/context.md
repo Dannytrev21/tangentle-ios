@@ -4,8 +4,8 @@ This file maintains context for resuming work on this plan from a fresh terminal
 
 ## Quick Status
 - **Plan**: Fluid UI & Gesture System
-- **Current Step**: 6 - Gesture Foundation (next)
-- **Last Updated**: 2025-12-21
+- **Current Step**: 7 - SwipeableRow (next)
+- **Last Updated**: 2025-12-22
 
 ## Overview
 Creating a beautiful, modern, warm UI with fluid physics-based gestures for Tangentle. Inspired by Timepage, Things 3, Bear, Clear, and Apple Design Award winners. The goal is to make the app feel like a "living, breathing companion" that responds naturally to touch.
@@ -19,6 +19,8 @@ Creating a beautiful, modern, warm UI with fluid physics-based gestures for Tang
 - **Step 2 Complete**: Theme System
 - **Step 3 Complete**: Typography Scale
 - **Step 4 Complete**: Animation Library
+- **Step 5 Complete**: Haptic Engine
+- **Step 6 Complete**: Gesture Foundation
 
 ## Key Decisions Made
 
@@ -134,7 +136,7 @@ All Steps ──► Step 12 (Integration)
 ```
 
 ## Next Actions
-1. Run `/plan-next 002` to begin Step 5 (Haptic Engine)
+1. Run `/plan-next 002` to begin Step 7 (SwipeableRow)
 
 ## Things to Remember
 - iOS 17.0 minimum - can use `@Observable` and modern SwiftUI features
@@ -312,3 +314,83 @@ let animator = UISpringConfig.snappy.animator(velocity: gestureVelocity)
 ### Ready for Next Step
 Step 5: Haptic Engine
 Prerequisites met: Yes (Animation Library complete)
+
+---
+
+## Step 5 Complete - 2025-12-22
+
+### Summary
+Created haptic feedback engine with configurable intensity levels and 13 haptic patterns.
+
+### Files Created
+- `Tangentle/UI/Haptics/HapticType.swift`: 13 haptic patterns and 3 intensity levels
+- `Tangentle/UI/Haptics/HapticEngine.swift`: Service with protocol and NoOpHapticEngine
+
+### Verification Results
+- [x] AC1: HapticType enum with 13 patterns
+- [x] AC2: HapticIntensity enum (off, selective, rich)
+- [x] AC3: HapticEngine implements protocol
+- [x] AC4: NoOpHapticEngine for testing
+- [x] AC5: Environment key integration
+- [x] AC6: BUILD SUCCEEDED
+
+### Key Decisions
+- Default intensity is "selective" for ADHD sensory considerations
+- Key moments: success, error, completion, swipe threshold
+- Protocol marked AnyObject for weak references
+
+### Ready for Next Step
+Step 6: Gesture Foundation
+Prerequisites met: Yes (Haptic Engine complete)
+
+---
+
+## Step 6 Complete - 2025-12-22
+
+### Summary
+Created UIKit-based gesture handlers with precise velocity tracking, 120fps updates on ProMotion, and SwiftUI bridging via UIViewRepresentable.
+
+### Files Created
+- `Tangentle/UI/Gestures/GestureState.swift`: SwipeState and LongPressState enums
+- `Tangentle/UI/Gestures/SwipeGestureHandler.swift`: Pan gesture with velocity tracking and haptic feedback
+- `Tangentle/UI/Gestures/LongPressChargeHandler.swift`: Long press with CADisplayLink 120fps updates
+- `Tangentle/UI/Gestures/GestureViewRepresentable.swift`: SwiftUI wrappers (SwipeGestureView, LongPressChargeView)
+
+### Verification Results
+- [x] AC1: SwipeGestureHandler tracks translation and velocity
+- [x] AC2: Swipe triggers haptic at threshold crossing
+- [x] AC3: LongPressChargeHandler provides 0-1 progress
+- [x] AC4: 120fps via CAFrameRateRange(minimum: 60, maximum: 120, preferred: 120)
+- [x] AC5: CADisplayLink cleanup in deinit
+- [x] AC6: UIViewRepresentable bridge exists
+- [x] AC7: BUILD SUCCEEDED
+
+### Key Decisions
+- HapticEngineProtocol requires AnyObject constraint for weak delegate references
+- CADisplayLink added to .main runloop with .common mode
+- SwiftUI View extensions (.onSwipeGesture, .onChargeGesture) for convenience
+
+### Usage Patterns
+```swift
+// SwiftUI swipe gesture with velocity
+SwipeGestureView(threshold: 80) { translation, velocity in
+    offset = translation
+} onSwipeEnd: { translation, velocity in
+    // Handle completion
+} content: {
+    TaskRow(task: task)
+}
+
+// Long press charge gesture
+LongPressChargeView(chargeDuration: 0.5) { progress in
+    chargeProgress = progress
+} onChargeComplete: {
+    completeTask()
+} content: {
+    Checkbox(isComplete: task.isComplete)
+}
+```
+
+### Ready for Next Step
+Step 7: SwipeableRow
+Prerequisites met: Yes (Gesture Foundation complete)
