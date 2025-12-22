@@ -478,3 +478,46 @@ Created TaskCard component with warm aesthetics, visual hierarchy, badge compone
 ### Ready for Next Step
 Step 9: AnimatedCheckbox
 Prerequisites met: Yes (TaskCard complete)
+
+---
+
+## Step 9 Complete - 2025-12-22
+
+### Summary
+Created AnimatedCheckbox with physics-based animation, particle burst effect, and haptic feedback for satisfying task completion experience. Designed to provide positive reinforcement for ADHD users.
+
+### Files Created
+- `Tangentle/UI/Components/CheckmarkShape.swift`: Animatable checkmark path for trim animation
+- `Tangentle/UI/Components/ParticleBurst.swift`: 8-particle celebration burst effect
+- `Tangentle/UI/Components/AnimatedCheckbox.swift`: Main component with multi-phase animation
+
+### Files Modified
+- `Tangentle.xcodeproj/project.pbxproj`: Added 3 new files
+
+### Verification Results
+- [x] AC1: Checkbox animates from empty to filled (fillProgress)
+- [x] AC2: Checkmark draws in with trim animation (checkmarkProgress)
+- [x] AC3: Scale bounces on completion (SpringConfig.bouncy)
+- [x] AC4: Particle burst appears (ParticleBurst + showParticles)
+- [x] AC5: Haptic feedback triggers (haptics.trigger(.completion))
+- [x] AC6: Animation under 500ms (~450ms total)
+- [x] AC7: VoiceOver accessibility (accessibilityLabel + accessibilityHint)
+- [x] AC8: Build succeeded
+
+### Key Decisions
+- Animation sequence: Press (0.9 scale) → Fill → Checkmark draws → Bounce → Particles
+- Total animation ~450ms for snappy, responsive feel
+- DragGesture with minimumDistance: 0 for press-down feedback
+- onChange(of: isCompleted) handles external state changes (swipe-to-complete)
+- ParticleBurst uses random offsets for organic, not mechanical feel
+
+### Learnings
+- CheckmarkShape uses animatable trim(from: 0, to: progress) for draw-in effect
+- Particles with slight random angle offsets feel more natural
+- Multi-phase animation with DispatchQueue.asyncAfter sequences each phase
+- .simultaneousGesture allows tap and drag to coexist
+- triggerCompletion() method enables programmatic animation from external triggers
+
+### Ready for Next Step
+Step 10: Custom Tab Bar
+Prerequisites met: Yes (AnimatedCheckbox complete)
