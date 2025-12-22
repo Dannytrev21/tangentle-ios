@@ -4,9 +4,9 @@
   "title": "Fluid UI & Gesture System",
   "description": "Create a beautiful, modern, warm UI with fluid physics-based gestures inspired by Timepage, Things 3, Bear, and Clear. Premium feel with ADHD-friendly design.",
   "createdAt": "2025-12-21T00:00:00Z",
-  "updatedAt": "2025-12-21T22:45:00Z",
+  "updatedAt": "2025-12-21T23:00:00Z",
   "status": "in_progress",
-  "currentStep": 5,
+  "currentStep": 6,
   "totalSteps": 12,
   "steps": [
     {
@@ -61,13 +61,13 @@
       "id": 5,
       "name": "haptic-engine",
       "title": "Haptic Engine",
-      "status": "pending",
+      "status": "completed",
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "attempts": 0,
-      "notes": "Centralized haptic service with user preferences"
+      "startedAt": "2025-12-21T22:45:00Z",
+      "completedAt": "2025-12-21T23:00:00Z",
+      "verificationPassed": true,
+      "attempts": 1,
+      "notes": "HapticType with 13 patterns, intensity levels (off/selective/rich)"
     },
     {
       "id": 6,
@@ -166,18 +166,28 @@
       "Tangentle/UI/Animations/AnimationTokens.swift",
       "Tangentle/UI/Animations/SpringAnimation.swift",
       "Tangentle/UI/Animations/PhysicsEngine.swift",
-      "Tangentle/UI/Animations/AnimationModifiers.swift"
+      "Tangentle/UI/Animations/AnimationModifiers.swift",
+      "Tangentle/UI/Haptics/HapticType.swift",
+      "Tangentle/UI/Haptics/HapticEngine.swift"
     ],
-    "filesModified": [],
+    "filesModified": [
+      "Tangentle/Core/Models/TGSettings+Extensions.swift",
+      "Tangentle/Core/DI/Container.swift",
+      "Tangentle/Core/DI/AppContainer.swift",
+      "Tangentle/Core/DI/TestContainer.swift",
+      "Tangentle.xcodeproj/project.pbxproj"
+    ],
     "keyDecisions": [
       "Swipe-to-complete as default, long-press as optional setting",
       "UIKit integration for gestures per CLAUDE.md guidance",
       "Theme protocol for future palette extensibility",
       "Base + Contextual + Configurable swipe actions",
       "Selective haptics by default, user-configurable",
-      "Reduce Motion always returns .none animation",
+      "Reduce Motion always returns .instant animation",
       "Low Power Mode also disables animations",
-      "Rubber band uses 0.55 coefficient (iOS standard)"
+      "Rubber band uses 0.55 coefficient (iOS standard)",
+      "Default haptic intensity is 'selective' for ADHD sensory considerations",
+      "Key moments for haptics: success, error, completion, swipe threshold"
     ],
     "blockers": [],
     "learnings": [
@@ -188,7 +198,9 @@
       "22 typography styles defined including SF Rounded and monospaced variants",
       "21 animation tokens defined including spring configs and easing curves",
       "UISpringConfig provides UIKit bridge for gesture-driven animations",
-      "MomentumCalculator enables physics-based gesture endpoints"
+      "MomentumCalculator enables physics-based gesture endpoints",
+      "SwiftUI Animation type doesn't have .none - use .linear(duration: 0) instead",
+      "HapticEngine with protocol allows NoOpHapticEngine for previews/testing"
     ]
   }
 }

@@ -3,7 +3,11 @@ import SwiftUI
 // MARK: - Accessibility Support
 
 extension Animation {
-    /// Returns .none if Reduce Motion is enabled, otherwise the original animation.
+    /// An instant animation that completes immediately (no visible motion).
+    /// Use this as a replacement for "no animation" when Reduce Motion is enabled.
+    static let instant = Animation.linear(duration: 0)
+
+    /// Returns an instant animation if Reduce Motion is enabled, otherwise the original animation.
     /// Use this for all user-facing animations to respect accessibility settings.
     ///
     /// Usage:
@@ -13,7 +17,7 @@ extension Animation {
     /// }
     /// ```
     static func reduceMotionAware(_ animation: Animation) -> Animation {
-        UIAccessibility.isReduceMotionEnabled ? .none : animation
+        UIAccessibility.isReduceMotionEnabled ? .instant : animation
     }
 }
 
@@ -50,7 +54,7 @@ extension View {
     ) -> some View {
         let shouldAnimate = !UIAccessibility.isReduceMotionEnabled &&
                            !ProcessInfo.processInfo.isLowPowerModeEnabled
-        return self.animation(shouldAnimate ? animation : .none, value: value)
+        return self.animation(shouldAnimate ? animation : .instant, value: value)
     }
 
     /// Scale effect on press for interactive feedback.
@@ -123,7 +127,7 @@ private struct BounceOnAppearModifier: ViewModifier {
     }
 
     private var animation: Animation {
-        UIAccessibility.isReduceMotionEnabled ? .none : SpringConfig.bouncy
+        UIAccessibility.isReduceMotionEnabled ? .instant : SpringConfig.bouncy
     }
 }
 
@@ -156,7 +160,7 @@ private struct StaggeredAppearModifier: ViewModifier {
 
     private var animation: Animation {
         if UIAccessibility.isReduceMotionEnabled {
-            return .none
+            return .instant
         }
         return config.delay(Double(index) * baseDelay)
     }
