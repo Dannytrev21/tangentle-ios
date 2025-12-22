@@ -4,9 +4,9 @@
   "title": "Fluid UI & Gesture System",
   "description": "Create a beautiful, modern, warm UI with fluid physics-based gestures inspired by Timepage, Things 3, Bear, and Clear. Premium feel with ADHD-friendly design.",
   "createdAt": "2025-12-21T00:00:00Z",
-  "updatedAt": "2025-12-21T22:15:00Z",
+  "updatedAt": "2025-12-21T22:45:00Z",
   "status": "in_progress",
-  "currentStep": 3,
+  "currentStep": 5,
   "totalSteps": 12,
   "steps": [
     {
@@ -49,13 +49,13 @@
       "id": 4,
       "name": "animation-library",
       "title": "Animation Library",
-      "status": "pending",
+      "status": "completed",
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "attempts": 0,
-      "notes": "Spring physics, momentum, timing tokens"
+      "startedAt": "2025-12-21T22:30:00Z",
+      "completedAt": "2025-12-21T22:45:00Z",
+      "verificationPassed": true,
+      "attempts": 1,
+      "notes": "Spring physics, momentum calculator, Reduce Motion support"
     },
     {
       "id": 5,
@@ -162,7 +162,11 @@
       "Tangentle/UI/Themes/WarmDarkTheme.swift",
       "Tangentle/UI/Themes/ThemeEnvironment.swift",
       "Tangentle/UI/Themes/ThemeManager.swift",
-      "Tangentle/UI/Themes/Typography.swift"
+      "Tangentle/UI/Themes/Typography.swift",
+      "Tangentle/UI/Animations/AnimationTokens.swift",
+      "Tangentle/UI/Animations/SpringAnimation.swift",
+      "Tangentle/UI/Animations/PhysicsEngine.swift",
+      "Tangentle/UI/Animations/AnimationModifiers.swift"
     ],
     "filesModified": [],
     "keyDecisions": [
@@ -170,7 +174,10 @@
       "UIKit integration for gestures per CLAUDE.md guidance",
       "Theme protocol for future palette extensibility",
       "Base + Contextual + Configurable swipe actions",
-      "Selective haptics by default, user-configurable"
+      "Selective haptics by default, user-configurable",
+      "Reduce Motion always returns .none animation",
+      "Low Power Mode also disables animations",
+      "Rubber band uses 0.55 coefficient (iOS standard)"
     ],
     "blockers": [],
     "learnings": [
@@ -178,7 +185,10 @@
       "92 design tokens defined covering colors, spacing, radius, shadows, durations, and opacities",
       "ThemeProtocol with 31 color properties covers all semantic needs",
       "@Observable ThemeManager with UserDefaults persistence works well",
-      "22 typography styles defined including SF Rounded and monospaced variants"
+      "22 typography styles defined including SF Rounded and monospaced variants",
+      "21 animation tokens defined including spring configs and easing curves",
+      "UISpringConfig provides UIKit bridge for gesture-driven animations",
+      "MomentumCalculator enables physics-based gesture endpoints"
     ]
   }
 }
