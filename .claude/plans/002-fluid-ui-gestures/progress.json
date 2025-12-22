@@ -4,9 +4,9 @@
   "title": "Fluid UI & Gesture System",
   "description": "Create a beautiful, modern, warm UI with fluid physics-based gestures inspired by Timepage, Things 3, Bear, and Clear. Premium feel with ADHD-friendly design.",
   "createdAt": "2025-12-21T00:00:00Z",
-  "updatedAt": "2025-12-22T07:40:00Z",
+  "updatedAt": "2025-12-22T07:50:00Z",
   "status": "in_progress",
-  "currentStep": 8,
+  "currentStep": 9,
   "totalSteps": 12,
   "steps": [
     {
@@ -97,13 +97,13 @@
       "id": 8,
       "name": "task-card",
       "title": "TaskCard",
-      "status": "pending",
+      "status": "completed",
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "attempts": 0,
-      "notes": "Redesigned task row with all badges"
+      "startedAt": "2025-12-22T07:45:00Z",
+      "completedAt": "2025-12-22T07:50:00Z",
+      "verificationPassed": true,
+      "attempts": 1,
+      "notes": "TaskCard with CompletionIndicator, all badge components, full accessibility"
     },
     {
       "id": 9,
@@ -175,14 +175,22 @@
       "Tangentle/UI/Gestures/GestureViewRepresentable.swift",
       "Tangentle/UI/Components/SwipeAction.swift",
       "Tangentle/UI/Components/SwipeActionButton.swift",
-      "Tangentle/UI/Components/SwipeableRow.swift"
+      "Tangentle/UI/Components/SwipeableRow.swift",
+      "Tangentle/UI/Components/CompletionIndicator.swift",
+      "Tangentle/UI/Components/PriorityBadge.swift",
+      "Tangentle/UI/Components/EnergyBadge.swift",
+      "Tangentle/UI/Components/DurationBadge.swift",
+      "Tangentle/UI/Components/ProjectBadge.swift",
+      "Tangentle/UI/Components/StatusBadges.swift",
+      "Tangentle/UI/Components/TaskCard.swift"
     ],
     "filesModified": [
       "Tangentle/Core/Models/TGSettings+Extensions.swift",
       "Tangentle/Core/DI/Container.swift",
       "Tangentle/Core/DI/AppContainer.swift",
       "Tangentle/Core/DI/TestContainer.swift",
-      "Tangentle.xcodeproj/project.pbxproj"
+      "Tangentle.xcodeproj/project.pbxproj",
+      "Tangentle/UI/Components/TaskRow.swift"
     ],
     "keyDecisions": [
       "Swipe-to-complete as default, long-press as optional setting",
@@ -195,7 +203,10 @@
       "Rubber band uses 0.55 coefficient (iOS standard)",
       "Default haptic intensity is 'selective' for ADHD sensory considerations",
       "Key moments for haptics: success, error, completion, swipe threshold",
-      "SwipeableRow uses SwiftUI DragGesture instead of UIKit for simpler integration"
+      "SwipeableRow uses SwiftUI DragGesture instead of UIKit for simpler integration",
+      "TaskCard displays title as most prominent element using Typography.bodyLarge",
+      "Overdue tasks have red title using statusError color",
+      "Only show energy badge when not medium (default)"
     ],
     "blockers": [],
     "learnings": [
@@ -213,7 +224,10 @@
       "CADisplayLink with preferredFrameRateRange enables 120fps on ProMotion",
       "SwiftUI UIViewRepresentable wraps UIKit gesture handlers for seamless integration",
       "SwiftUI DragGesture works well for swipe actions without needing UIKit wrapper",
-      "StandardSwipeActions factory provides consistent action styling across the app"
+      "StandardSwipeActions factory provides consistent action styling across the app",
+      "Old TaskRow had Int-based PriorityBadge - replaced with enum-based version using Priority type",
+      "Badge components share consistent pattern: theme, spacing tokens, accessibility labels",
+      "StatusBadges combines multiple small badges (Blocked, Overdue, InProgress, Waiting) in one file"
     ]
   }
 }

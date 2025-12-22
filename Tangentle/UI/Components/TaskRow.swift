@@ -34,8 +34,8 @@ struct TaskRow: View {
                             .foregroundStyle(.secondary)
                     }
 
-                    if task.priority > 0 {
-                        PriorityBadge(priority: Int(task.priority))
+                    if task.taskPriority != .none {
+                        PriorityBadge(priority: task.taskPriority)
                     }
                 }
             }
@@ -57,36 +57,7 @@ struct TaskRow: View {
     }
 }
 
-struct PriorityBadge: View {
-    let priority: Int
-
-    var body: some View {
-        Text(priorityText)
-            .font(.caption2)
-            .fontWeight(.semibold)
-            .padding(.horizontal, 6)
-            .padding(.vertical, 2)
-            .background(priorityColor.opacity(0.15))
-            .foregroundStyle(priorityColor)
-            .clipShape(Capsule())
-    }
-
-    private var priorityText: String {
-        switch priority {
-        case 5: return "HIGH"
-        case 3...4: return "MED"
-        default: return "LOW"
-        }
-    }
-
-    private var priorityColor: Color {
-        switch priority {
-        case 5: return .red
-        case 3...4: return .orange
-        default: return .blue
-        }
-    }
-}
+// NOTE: PriorityBadge moved to PriorityBadge.swift with full theme integration
 
 #Preview {
     List {

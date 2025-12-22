@@ -433,3 +433,48 @@ Created SwipeableRow component with physics-based swipe gestures, rubber-band re
 ### Ready for Next Step
 Step 8: TaskCard
 Prerequisites met: Yes (SwipeableRow complete)
+
+---
+
+## Step 8 Complete - 2025-12-22
+
+### Summary
+Created TaskCard component with warm aesthetics, visual hierarchy, badge components for metadata, and full VoiceOver accessibility. Also created 7 supporting component files.
+
+### Files Created
+- `Tangentle/UI/Components/CompletionIndicator.swift`: Circular checkbox with priority-colored border
+- `Tangentle/UI/Components/PriorityBadge.swift`: Priority level badge with theme colors
+- `Tangentle/UI/Components/EnergyBadge.swift`: Energy level badge with lightning bolt icon
+- `Tangentle/UI/Components/DurationBadge.swift`: Time estimate badge with clock icon
+- `Tangentle/UI/Components/ProjectBadge.swift`: Project name with emoji prefix
+- `Tangentle/UI/Components/StatusBadges.swift`: BlockedBadge, OverdueBadge, InProgressBadge, WaitingBadge
+- `Tangentle/UI/Components/TaskCard.swift`: Main task display component
+
+### Files Modified
+- `Tangentle/UI/Components/TaskRow.swift`: Removed old Int-based PriorityBadge (now uses enum-based)
+- `Tangentle.xcodeproj/project.pbxproj`: Added 7 new files to Xcode project
+
+### Verification Results
+- [x] AC1: TaskCard displays title, project, duration, priority, energy
+- [x] AC2: Visual hierarchy clear (Typography.bodyLarge for title)
+- [x] AC3: Overdue tasks have red title (statusError)
+- [x] AC4: Completed tasks muted with strikethrough (textTertiary)
+- [x] AC5: All colors use theme (@Environment(\.theme))
+- [x] AC6: VoiceOver accessibility labels present
+- [x] AC7: All badge files created (5 badge files + StatusBadges)
+- [x] AC8: Build succeeded
+
+### Key Decisions
+- Only show energy badge when energy != .medium (default)
+- CompletionIndicator border color reflects priority level
+- StatusBadges file combines multiple small status indicators
+- TaskCard background changes to backgroundTertiary when completed
+
+### Learnings
+- Old TaskRow had Int-based PriorityBadge that conflicted - replaced with Priority enum version
+- Badge components share consistent pattern: @Environment(\.theme), spacing tokens, accessibility labels
+- Combining related small components (status badges) in single file reduces file count without hurting readability
+
+### Ready for Next Step
+Step 9: AnimatedCheckbox
+Prerequisites met: Yes (TaskCard complete)
