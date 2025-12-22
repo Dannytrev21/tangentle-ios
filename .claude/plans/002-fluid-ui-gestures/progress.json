@@ -1,0 +1,175 @@
+{
+  "planId": "002",
+  "name": "fluid-ui-gestures",
+  "title": "Fluid UI & Gesture System",
+  "description": "Create a beautiful, modern, warm UI with fluid physics-based gestures inspired by Timepage, Things 3, Bear, and Clear. Premium feel with ADHD-friendly design.",
+  "createdAt": "2025-12-21T00:00:00Z",
+  "updatedAt": "2025-12-21T21:45:00Z",
+  "status": "in_progress",
+  "currentStep": 1,
+  "totalSteps": 12,
+  "steps": [
+    {
+      "id": 1,
+      "name": "design-tokens",
+      "title": "Design Tokens",
+      "status": "completed",
+      "promptGenerated": true,
+      "startedAt": "2025-12-21T21:39:00Z",
+      "completedAt": "2025-12-21T21:45:00Z",
+      "verificationPassed": true,
+      "attempts": 1,
+      "notes": "Color, spacing, radius, shadow tokens for light/dark modes"
+    },
+    {
+      "id": 2,
+      "name": "theme-system",
+      "title": "Theme System",
+      "status": "pending",
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "attempts": 0,
+      "notes": "ThemeProtocol with WarmLight/WarmDark implementations"
+    },
+    {
+      "id": 3,
+      "name": "typography-scale",
+      "title": "Typography Scale",
+      "status": "pending",
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "attempts": 0,
+      "notes": "SF Pro type scale with semantic names"
+    },
+    {
+      "id": 4,
+      "name": "animation-library",
+      "title": "Animation Library",
+      "status": "pending",
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "attempts": 0,
+      "notes": "Spring physics, momentum, timing tokens"
+    },
+    {
+      "id": 5,
+      "name": "haptic-engine",
+      "title": "Haptic Engine",
+      "status": "pending",
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "attempts": 0,
+      "notes": "Centralized haptic service with user preferences"
+    },
+    {
+      "id": 6,
+      "name": "gesture-foundation",
+      "title": "Gesture Foundation",
+      "status": "pending",
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "attempts": 0,
+      "notes": "UIKit swipe/long-press handlers with SwiftUI bridge"
+    },
+    {
+      "id": 7,
+      "name": "swipeable-row",
+      "title": "SwipeableRow",
+      "status": "pending",
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "attempts": 0,
+      "notes": "Generic swipe action container component"
+    },
+    {
+      "id": 8,
+      "name": "task-card",
+      "title": "TaskCard",
+      "status": "pending",
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "attempts": 0,
+      "notes": "Redesigned task row with all badges"
+    },
+    {
+      "id": 9,
+      "name": "animated-checkbox",
+      "title": "AnimatedCheckbox",
+      "status": "pending",
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "attempts": 0,
+      "notes": "Satisfying completion animation with particles"
+    },
+    {
+      "id": 10,
+      "name": "custom-tab-bar",
+      "title": "Custom Tab Bar",
+      "status": "pending",
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "attempts": 0,
+      "notes": "Themed tab bar with hide/show support"
+    },
+    {
+      "id": 11,
+      "name": "today-view-redesign",
+      "title": "Today View Redesign",
+      "status": "pending",
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "attempts": 0,
+      "notes": "Complete Today screen with all new components"
+    },
+    {
+      "id": 12,
+      "name": "integration-polish",
+      "title": "Integration & Polish",
+      "status": "pending",
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "attempts": 0,
+      "notes": "Wire everything together, microinteractions, testing"
+    }
+  ],
+  "context": {
+    "filesCreated": [
+      "Tangentle/UI/Themes/DesignTokens.swift"
+    ],
+    "filesModified": [],
+    "keyDecisions": [
+      "Swipe-to-complete as default, long-press as optional setting",
+      "UIKit integration for gestures per CLAUDE.md guidance",
+      "Theme protocol for future palette extensibility",
+      "Base + Contextual + Configurable swipe actions",
+      "Selective haptics by default, user-configurable"
+    ],
+    "blockers": [],
+    "learnings": [
+      "Warm off-white (#FFFDF7) provides excellent readability while feeling inviting",
+      "92 design tokens defined covering colors, spacing, radius, shadows, durations, and opacities"
+    ]
+  }
+}
