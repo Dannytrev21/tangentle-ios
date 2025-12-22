@@ -564,3 +564,47 @@ Created custom tab bar with themed styling, matchedGeometryEffect for sliding se
 ### Ready for Next Step
 Step 11: Today View Redesign
 Prerequisites met: Yes (Custom Tab Bar complete)
+
+---
+
+## Step 11 Complete - 2025-12-22
+
+### Summary
+Completely redesigned TodayView using all new UI components - TodayHeader, TaskSection, TodayEmptyState, FloatingActionButton, and integration of SwipeableRow with TaskCard. Created an ADHD-friendly interface with time-based greetings and friendly empty states.
+
+### Files Created
+- `Tangentle/Features/Tasks/TodayHeader.swift`: Time-based greeting with date and decorative icon
+- `Tangentle/Features/Tasks/TaskSection.swift`: Reusable section component for Overdue/Today
+- `Tangentle/Features/Tasks/TodayEmptyState.swift`: Friendly "All Clear!" empty state
+- `Tangentle/UI/Components/FloatingActionButton.swift`: Material-style FAB with ScaleButtonStyle
+
+### Files Modified
+- `Tangentle/Features/Tasks/TodayView.swift`: Complete rewrite with new components
+- `Tangentle/Features/Tasks/TodayViewModel.swift`: Added deleteTask, deferTask methods
+- `Tangentle.xcodeproj/project.pbxproj`: Added 4 new files
+
+### Verification Results
+- [x] AC1: Today View uses theme colors (@Environment(\.theme))
+- [x] AC2: Header shows time-based greeting (Good Morning/Afternoon/Evening)
+- [x] AC3: Tasks in SwipeableRow with TaskCard
+- [x] AC4: Swipe actions work (StandardSwipeActions.complete/defer_/delete/unblock)
+- [x] AC5: Empty state shows (TodayEmptyState)
+- [x] AC6: FAB present (FloatingActionButton)
+- [x] AC7: Pull-to-refresh works (.refreshable)
+- [x] AC8: Build succeeded
+
+### Key Decisions
+- TodayView uses ZStack with FloatingActionButton overlay for proper positioning
+- TaskSection is a generic reusable component for task groupings
+- TodayEmptyState celebrates "All Clear!" rather than showing stark "no data"
+- Defer task uses updateTask with deferred status and tomorrow's date (no deferTask method in protocol)
+
+### Learnings
+- TodayHeader time-based greeting uses Calendar.current.component(.hour) for hour detection
+- FloatingActionButton uses ScaleButtonStyle for tactile press-down effect
+- TaskServiceProtocol doesn't have deferTask method - use updateTask with TaskChanges instead
+- LazyVStack with ForEach provides smooth scrolling for task lists
+
+### Ready for Next Step
+Step 12: Integration & Polish
+Prerequisites met: Yes (Today View Redesign complete)

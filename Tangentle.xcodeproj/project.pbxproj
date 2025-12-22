@@ -93,6 +93,10 @@
 		A0000001000000000000085 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000085 /* TabBarItem.swift */; };
 		A0000001000000000000086 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000086 /* CustomTabBar.swift */; };
 		A0000001000000000000087 /* TabBarContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000087 /* TabBarContainer.swift */; };
+		A0000001000000000000088 /* TodayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000088 /* TodayHeader.swift */; };
+		A0000001000000000000089 /* TaskSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000089 /* TaskSection.swift */; };
+		A0000001000000000000090 /* TodayEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000090 /* TodayEmptyState.swift */; };
+		A0000001000000000000091 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000091 /* FloatingActionButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,7 +121,7 @@
 		A0000002000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A0000002000000000000003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0000002000000000000004 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		A0000002000000000000005 /* Tangentle.xcdatamodeld */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = Tangentle.xcdatamodeld; path = Tangentle.xcdatamodeld; sourceTree = "<group>"; };
+		A0000002000000000000005 /* Tangentle.xcdatamodeld */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tangentle.xcdatamodeld; sourceTree = "<group>"; };
 		A0000002000000000000006 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		A0000002000000000000007 /* TGTask+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TGTask+Extensions.swift"; sourceTree = "<group>"; };
 		A0000002000000000000008 /* TGStrategy+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TGStrategy+Extensions.swift"; sourceTree = "<group>"; };
@@ -199,6 +203,10 @@
 		A0000002000000000000085 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		A0000002000000000000086 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		A0000002000000000000087 /* TabBarContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarContainer.swift; sourceTree = "<group>"; };
+		A0000002000000000000088 /* TodayHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayHeader.swift; sourceTree = "<group>"; };
+		A0000002000000000000089 /* TaskSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSection.swift; sourceTree = "<group>"; };
+		A0000002000000000000090 /* TodayEmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayEmptyState.swift; sourceTree = "<group>"; };
+		A0000002000000000000091 /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		A0000006000000000000001 /* Tangentle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tangentle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0000006000000000000002 /* TangentleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TangentleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0000006000000000000003 /* TangentleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TangentleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -433,6 +441,9 @@
 			children = (
 				A0000002000000000000042 /* TodayView.swift */,
 				A0000002000000000000043 /* TodayViewModel.swift */,
+				A0000002000000000000088 /* TodayHeader.swift */,
+				A0000002000000000000089 /* TaskSection.swift */,
+				A0000002000000000000090 /* TodayEmptyState.swift */,
 				A0000002000000000000044 /* TasksView.swift */,
 			);
 			path = Tasks;
@@ -523,6 +534,7 @@
 				A0000002000000000000083 /* AnimatedCheckbox.swift */,
 				A0000002000000000000085 /* TabBarItem.swift */,
 				A0000002000000000000086 /* CustomTabBar.swift */,
+				A0000002000000000000091 /* FloatingActionButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -539,6 +551,17 @@
 				A0000002000000000000060 /* Typography.swift */,
 			);
 			path = Themes;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000042 /* Gestures */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000067 /* GestureState.swift */,
+				A0000002000000000000068 /* SwipeGestureHandler.swift */,
+				A0000002000000000000069 /* LongPressChargeHandler.swift */,
+				A0000002000000000000070 /* GestureViewRepresentable.swift */,
+			);
+			path = Gestures;
 			sourceTree = "<group>";
 		};
 		A0000008000000000000043 /* Animations */ = {
@@ -559,17 +582,6 @@
 				A0000002000000000000066 /* HapticEngine.swift */,
 			);
 			path = Haptics;
-			sourceTree = "<group>";
-		};
-		A0000008000000000000042 /* Gestures */ = {
-			isa = PBXGroup;
-			children = (
-				A0000002000000000000067 /* GestureState.swift */,
-				A0000002000000000000068 /* SwipeGestureHandler.swift */,
-				A0000002000000000000069 /* LongPressChargeHandler.swift */,
-				A0000002000000000000070 /* GestureViewRepresentable.swift */,
-			);
-			path = Gestures;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -782,6 +794,10 @@
 				A0000001000000000000085 /* TabBarItem.swift in Sources */,
 				A0000001000000000000086 /* CustomTabBar.swift in Sources */,
 				A0000001000000000000087 /* TabBarContainer.swift in Sources */,
+				A0000001000000000000088 /* TodayHeader.swift in Sources */,
+				A0000001000000000000089 /* TaskSection.swift in Sources */,
+				A0000001000000000000090 /* TodayEmptyState.swift in Sources */,
+				A0000001000000000000091 /* FloatingActionButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -948,6 +964,7 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -976,6 +993,7 @@
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
