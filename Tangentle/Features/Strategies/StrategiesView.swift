@@ -1,25 +1,25 @@
 import SwiftUI
 
-struct TasksView: View {
+struct StrategiesView: View {
     @Environment(\.container) var container
     @Environment(\.theme) var theme
 
     var body: some View {
         NavigationStack {
             ContentUnavailableView(
-                "All Tasks",
-                systemImage: "checklist",
-                description: Text("Task list coming soon")
+                "Strategy Coaching",
+                systemImage: "lightbulb",
+                description: Text("Coaching features coming soon")
             )
             .foregroundStyle(theme.textSecondary)
-            .navigationTitle("Tasks")
+            .navigationTitle("Strategies")
             .background(theme.backgroundPrimary)
         }
     }
 }
 
 #Preview {
-    TasksView()
+    StrategiesView()
         .themed(WarmLightTheme())
         .withContainer(TestContainer())
 }

@@ -97,6 +97,8 @@
 		A0000001000000000000089 /* TaskSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000089 /* TaskSection.swift */; };
 		A0000001000000000000090 /* TodayEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000090 /* TodayEmptyState.swift */; };
 		A0000001000000000000091 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000091 /* FloatingActionButton.swift */; };
+		A0000001000000000000092 /* AppearanceSettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000092 /* AppearanceSettingsSection.swift */; };
+		A0000001000000000000093 /* ThemePreviewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000093 /* ThemePreviewWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,6 +209,8 @@
 		A0000002000000000000089 /* TaskSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSection.swift; sourceTree = "<group>"; };
 		A0000002000000000000090 /* TodayEmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayEmptyState.swift; sourceTree = "<group>"; };
 		A0000002000000000000091 /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
+		A0000002000000000000092 /* AppearanceSettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsSection.swift; sourceTree = "<group>"; };
+		A0000002000000000000093 /* ThemePreviewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePreviewWrapper.swift; sourceTree = "<group>"; };
 		A0000006000000000000001 /* Tangentle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tangentle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0000006000000000000002 /* TangentleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TangentleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0000006000000000000003 /* TangentleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TangentleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -511,6 +515,7 @@
 			isa = PBXGroup;
 			children = (
 				A0000002000000000000047 /* SettingsView.swift */,
+				A0000002000000000000092 /* AppearanceSettingsSection.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -549,6 +554,7 @@
 				A0000002000000000000058 /* ThemeEnvironment.swift */,
 				A0000002000000000000059 /* ThemeManager.swift */,
 				A0000002000000000000060 /* Typography.swift */,
+				A0000002000000000000093 /* ThemePreviewWrapper.swift */,
 			);
 			path = Themes;
 			sourceTree = "<group>";
@@ -798,6 +804,8 @@
 				A0000001000000000000089 /* TaskSection.swift in Sources */,
 				A0000001000000000000090 /* TodayEmptyState.swift in Sources */,
 				A0000001000000000000091 /* FloatingActionButton.swift in Sources */,
+				A0000001000000000000092 /* AppearanceSettingsSection.swift in Sources */,
+				A0000001000000000000093 /* ThemePreviewWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

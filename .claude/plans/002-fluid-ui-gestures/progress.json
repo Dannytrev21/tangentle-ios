@@ -4,8 +4,8 @@
   "title": "Fluid UI & Gesture System",
   "description": "Create a beautiful, modern, warm UI with fluid physics-based gestures inspired by Timepage, Things 3, Bear, and Clear. Premium feel with ADHD-friendly design.",
   "createdAt": "2025-12-21T00:00:00Z",
-  "updatedAt": "2025-12-22T08:21:00Z",
-  "status": "in_progress",
+  "updatedAt": "2025-12-22T09:00:00Z",
+  "status": "completed",
   "currentStep": 12,
   "totalSteps": 12,
   "steps": [
@@ -145,13 +145,13 @@
       "id": 12,
       "name": "integration-polish",
       "title": "Integration & Polish",
-      "status": "pending",
+      "status": "completed",
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "attempts": 0,
-      "notes": "Wire everything together, microinteractions, testing"
+      "startedAt": "2025-12-22T08:30:00Z",
+      "completedAt": "2025-12-22T09:00:00Z",
+      "verificationPassed": true,
+      "attempts": 1,
+      "notes": "TangentleApp updated with theme/haptic injection, AppearanceSettingsSection created, theme applied to all views, ThemePreviewWrapper for development"
     }
   ],
   "context": {
@@ -193,7 +193,9 @@
       "Tangentle/Features/Tasks/TodayHeader.swift",
       "Tangentle/Features/Tasks/TaskSection.swift",
       "Tangentle/Features/Tasks/TodayEmptyState.swift",
-      "Tangentle/UI/Components/FloatingActionButton.swift"
+      "Tangentle/UI/Components/FloatingActionButton.swift",
+      "Tangentle/Features/Settings/AppearanceSettingsSection.swift",
+      "Tangentle/UI/Themes/ThemePreviewWrapper.swift"
     ],
     "filesModified": [
       "Tangentle/Core/Models/TGSettings+Extensions.swift",
@@ -203,7 +205,12 @@
       "Tangentle.xcodeproj/project.pbxproj",
       "Tangentle/UI/Components/TaskRow.swift",
       "Tangentle/Features/Tasks/TodayView.swift",
-      "Tangentle/Features/Tasks/TodayViewModel.swift"
+      "Tangentle/Features/Tasks/TodayViewModel.swift",
+      "Tangentle/App/TangentleApp.swift",
+      "Tangentle/Features/Settings/SettingsView.swift",
+      "Tangentle/Features/Tasks/TasksView.swift",
+      "Tangentle/Features/Calendar/CalendarView.swift",
+      "Tangentle/Features/Strategies/StrategiesView.swift"
     ],
     "keyDecisions": [
       "Swipe-to-complete as default, long-press as optional setting",
@@ -257,7 +264,12 @@
       "Safe area bottom inset retrieved from UIWindowScene for proper home indicator spacing",
       "TodayHeader time-based greeting uses Calendar.current.component(.hour)",
       "FloatingActionButton uses ScaleButtonStyle for press-down scale effect",
-      "TaskServiceProtocol doesn't have deferTask - use updateTask with TaskChanges instead"
+      "TaskServiceProtocol doesn't have deferTask - use updateTask with TaskChanges instead",
+      "TangentleApp uses TabBarContainer as root, injecting theme/hapticEngine via @Environment",
+      "AppearanceSettingsSection groups theme/haptics/tab bar settings with @AppStorage persistence",
+      "ThemePreviewWrapper enables side-by-side light/dark theme comparison in Xcode previews",
+      "preferredColorScheme modifier controls system light/dark mode based on ThemeManager.colorScheme",
+      "TaskStatus enum has .done not .completed - check enum cases when writing preview helpers"
     ]
   }
 }

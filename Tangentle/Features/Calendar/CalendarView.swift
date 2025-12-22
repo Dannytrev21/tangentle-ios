@@ -1,25 +1,23 @@
 import SwiftUI
 
-struct TasksView: View {
-    @Environment(\.container) var container
+struct CalendarView: View {
     @Environment(\.theme) var theme
 
     var body: some View {
         NavigationStack {
             ContentUnavailableView(
-                "All Tasks",
-                systemImage: "checklist",
-                description: Text("Task list coming soon")
+                "Calendar",
+                systemImage: "calendar",
+                description: Text("Calendar view coming soon")
             )
             .foregroundStyle(theme.textSecondary)
-            .navigationTitle("Tasks")
+            .navigationTitle("Calendar")
             .background(theme.backgroundPrimary)
         }
     }
 }
 
 #Preview {
-    TasksView()
+    CalendarView()
         .themed(WarmLightTheme())
-        .withContainer(TestContainer())
 }
