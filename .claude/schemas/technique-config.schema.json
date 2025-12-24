@@ -1,0 +1,204 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://tangentle.app/schemas/technique-config.json",
+  "title": "Technique Configuration Schema",
+  "description": "Schema for the intelligent planning system technique configuration",
+  "type": "object",
+  "required": ["version", "problemTypes", "techniques", "riskLevels", "defaults"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this schema file"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of the configuration"
+    },
+    "problemTypes": {
+      "type": "object",
+      "description": "Problem type categories and their subtypes",
+      "additionalProperties": {
+        "$ref": "#/definitions/problemCategory"
+      }
+    },
+    "techniques": {
+      "type": "object",
+      "description": "Available prompt engineering techniques",
+      "additionalProperties": {
+        "$ref": "#/definitions/technique"
+      }
+    },
+    "riskLevels": {
+      "type": "object",
+      "description": "Risk level configurations with retry policies",
+      "properties": {
+        "low": { "$ref": "#/definitions/riskConfig" },
+        "medium": { "$ref": "#/definitions/riskConfig" },
+        "high": { "$ref": "#/definitions/riskConfig" },
+        "critical": { "$ref": "#/definitions/riskConfig" }
+      },
+      "required": ["low", "medium", "high", "critical"]
+    },
+    "defaults": {
+      "type": "object",
+      "description": "Default fallback configurations",
+      "properties": {
+        "unknownProblemType": {
+          "type": "string",
+          "description": "Default problem type for unclassified problems"
+        },
+        "unknownCategory": {
+          "type": "string",
+          "description": "Default category for unclassified problems"
+        },
+        "defaultRiskLevel": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "critical"]
+        },
+        "defaultTechniques": {
+          "$ref": "#/definitions/techniqueAssignment"
+        }
+      },
+      "required": ["unknownProblemType", "defaultRiskLevel", "defaultTechniques"]
+    }
+  },
+  "definitions": {
+    "problemCategory": {
+      "type": "object",
+      "required": ["description", "subtypes"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the category"
+        },
+        "subtypes": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/problemSubtype"
+          }
+        }
+      }
+    },
+    "problemSubtype": {
+      "type": "object",
+      "required": ["description", "keywords", "riskLevel", "techniques"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the problem type"
+        },
+        "keywords": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "description": "Keywords for classification matching"
+        },
+        "riskLevel": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "critical"],
+          "description": "Default risk level for this problem type"
+        },
+        "techniques": {
+          "$ref": "#/definitions/techniqueAssignment"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional notes about this problem type"
+        }
+      }
+    },
+    "techniqueAssignment": {
+      "type": "object",
+      "required": ["planning", "implementation", "verification"],
+      "properties": {
+        "planning": {
+          "type": "string",
+          "description": "Technique ID for planning phase"
+        },
+        "implementation": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+          ],
+          "description": "Technique ID(s) for implementation phase"
+        },
+        "verification": {
+          "type": "string",
+          "description": "Technique ID for verification phase"
+        }
+      }
+    },
+    "technique": {
+      "type": "object",
+      "required": ["name", "description", "promptTemplate", "costLevel", "bestFor"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Human-readable name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Brief description of the technique"
+        },
+        "promptTemplate": {
+          "type": "string",
+          "description": "Path to the technique's prompt template file"
+        },
+        "costLevel": {
+          "type": "string",
+          "enum": ["low", "medium", "high"],
+          "description": "Relative cost in terms of tokens/complexity"
+        },
+        "bestFor": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Use cases this technique excels at"
+        },
+        "incompatibleWith": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Techniques that should not be combined with this one"
+        }
+      }
+    },
+    "riskConfig": {
+      "type": "object",
+      "required": ["description", "retryConfig"],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "retryConfig": {
+          "type": "object",
+          "required": ["maxSameTechnique", "maxAlternative", "maxTotal"],
+          "properties": {
+            "maxSameTechnique": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Max retries with same technique before switching"
+            },
+            "maxAlternative": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Max retries with alternative techniques"
+            },
+            "maxTotal": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Total retry budget before escalation"
+            }
+          }
+        },
+        "escalationPath": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["retry-same", "retry-alternative", "escalate-user"]
+          },
+          "description": "Ordered list of escalation actions"
+        }
+      }
+    }
+  }
+}

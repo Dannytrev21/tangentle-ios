@@ -1,0 +1,492 @@
+{
+  "planId": "004",
+  "name": "intelligent-planning-system-v2",
+  "title": "Intelligent Planning System v2",
+  "description": "Upgrade planning system with automatic technique selection, composable techniques, and self-correction",
+  "problemType": "system-design",
+  "problemCategory": "ARCHITECTURE",
+  "createdAt": "2025-12-24T00:00:00Z",
+  "updatedAt": "2025-12-24T00:00:00Z",
+  "status": "in_progress",
+  "currentStep": 2,
+  "totalSteps": 15,
+  "techniqueProfile": {
+    "defaultPlanning": "tot",
+    "defaultImplementation": "self-refine",
+    "defaultVerification": "reflexion"
+  },
+  "steps": [
+    {
+      "id": 1,
+      "name": "technique-config-schema",
+      "title": "Technique Config Schema",
+      "problemType": "configuration",
+      "status": "completed",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "tdd"
+      },
+      "techniqueRationale": "Config design benefits from structured planning (PS+) and iterative refinement",
+      "riskLevel": "low",
+      "riskScore": 0.2,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1},
+        {"technique": "tdd", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2025-12-24T12:50:00Z",
+      "completedAt": "2025-12-24T13:05:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [".claude/scripts/test_technique_config.py"]
+    },
+    {
+      "id": 2,
+      "name": "problem-classifier-script",
+      "title": "Problem Classifier Script",
+      "problemType": "algorithm",
+      "status": "pending",
+      "techniques": {
+        "planning": "self-consistency",
+        "implementation": ["tdd"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Classification algorithm benefits from multiple approaches (Self-Consistency) and test-driven development",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": []
+    },
+    {
+      "id": 3,
+      "name": "technique-selector-script",
+      "title": "Technique Selector Script",
+      "problemType": "service-impl",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["tdd", "self-refine"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Service implementation benefits from TDD with refinement for selection logic",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": []
+    },
+    {
+      "id": 4,
+      "name": "risk-assessor-script",
+      "title": "Risk Assessor Script",
+      "problemType": "algorithm",
+      "status": "pending",
+      "techniques": {
+        "planning": "tot",
+        "implementation": ["tdd"],
+        "verification": "self-consistency"
+      },
+      "techniqueRationale": "Risk assessment needs exploration (ToT) for factor weighting, TDD for implementation",
+      "riskLevel": "medium",
+      "riskScore": 0.45,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": []
+    },
+    {
+      "id": 5,
+      "name": "cli-orchestrator",
+      "title": "CLI Orchestrator",
+      "problemType": "infrastructure",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["least-to-most"],
+        "verification": "self-refine"
+      },
+      "techniqueRationale": "CLI builds up from subcommands (Least-to-Most decomposition)",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": []
+    },
+    {
+      "id": 6,
+      "name": "update-plan-feature-initial",
+      "title": "Update plan-feature-initial",
+      "problemType": "refactor",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "tdd"
+      },
+      "techniqueRationale": "Command modification benefits from structured approach and iterative refinement",
+      "riskLevel": "low",
+      "riskScore": 0.3,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": []
+    },
+    {
+      "id": 7,
+      "name": "update-plan-feature",
+      "title": "Update plan-feature",
+      "problemType": "refactor",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "tdd"
+      },
+      "techniqueRationale": "Core planning command needs careful refactoring with testing",
+      "riskLevel": "medium",
+      "riskScore": 0.55,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": []
+    },
+    {
+      "id": "8a",
+      "name": "technique-template-extraction",
+      "title": "Technique Template Extraction",
+      "problemType": "data-modeling",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "tdd"
+      },
+      "techniqueRationale": "Template extraction is data modeling with structured approach and test-driven validation",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": []
+    },
+    {
+      "id": "8b",
+      "name": "prompt-embedding",
+      "title": "Prompt Embedding",
+      "problemType": "system-design",
+      "status": "pending",
+      "techniques": {
+        "planning": "tot",
+        "implementation": ["self-refine"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Prompt composition is complex system design needing exploration and iterative refinement",
+      "riskLevel": "high",
+      "riskScore": 0.75,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 3,
+        "maxTotal": 7
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": []
+    },
+    {
+      "id": 9,
+      "name": "update-plan-next",
+      "title": "Update plan-next",
+      "problemType": "service-impl",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["chain-of-code"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Execution command mixes logic with semantic understanding (Chain-of-Code)",
+      "riskLevel": "high",
+      "riskScore": 0.7,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 3,
+        "maxTotal": 7
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": []
+    },
+    {
+      "id": 10,
+      "name": "update-plan-verify",
+      "title": "Update plan-verify",
+      "problemType": "refactor",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "tdd"
+      },
+      "techniqueRationale": "Verification updates are straightforward refactoring",
+      "riskLevel": "medium",
+      "riskScore": 0.45,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": []
+    },
+    {
+      "id": 11,
+      "name": "update-plan-rollback",
+      "title": "Update plan-rollback",
+      "problemType": "refactor",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "self-refine"
+      },
+      "techniqueRationale": "Rollback is a recovery mechanism, needs careful refinement",
+      "riskLevel": "low",
+      "riskScore": 0.25,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": []
+    },
+    {
+      "id": 12,
+      "name": "update-plan-feature-review",
+      "title": "Update plan-feature-review",
+      "problemType": "refactor",
+      "status": "pending",
+      "techniques": {
+        "planning": "tot",
+        "implementation": ["self-refine"],
+        "verification": "got"
+      },
+      "techniqueRationale": "Review needs exploration (ToT) and aggregation (GoT) for findings",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": []
+    },
+    {
+      "id": 13,
+      "name": "self-correction-engine",
+      "title": "Self-Correction Engine",
+      "problemType": "algorithm",
+      "status": "pending",
+      "techniques": {
+        "planning": "tot",
+        "implementation": ["reflexion"],
+        "verification": "self-consistency"
+      },
+      "techniqueRationale": "Building Reflexion with Reflexion - meta-approach, needs validation via Self-Consistency",
+      "riskLevel": "high",
+      "riskScore": 0.8,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 3,
+        "maxTotal": 7
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": []
+    },
+    {
+      "id": 14,
+      "name": "documentation-testing",
+      "title": "Documentation & Testing",
+      "problemType": "documentation",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "got"
+      },
+      "techniqueRationale": "Documentation benefits from structured approach and review aggregation",
+      "riskLevel": "low",
+      "riskScore": 0.2,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": []
+    }
+  ],
+  "reviews": [
+    {
+      "date": "2025-12-24",
+      "scores": {
+        "completeness": 7,
+        "sequencing": 8,
+        "granularity": 6,
+        "technicalQuality": 8,
+        "riskRobustness": 7,
+        "total": 36
+      },
+      "changesApplied": [
+        "Split Step 8 into 8a (Template Extraction) and 8b (Prompt Embedding)",
+        "Added TechniqueTemplate dataclass specification to Step 8a",
+        "Added prompt composition algorithm to Step 8b",
+        "Expanded Step 1 description to include all dataclass interfaces"
+      ],
+      "issuesIdentified": [
+        "Step 8 was too complex (90-120 min scope)",
+        "Missing interface definitions early",
+        "Memory bank eviction policy not specified"
+      ]
+    }
+  ],
+  "context": {
+    "filesCreated": [
+      ".claude/technique-config.json",
+      ".claude/schemas/technique-config.schema.json",
+      ".claude/scripts/test_technique_config.py"
+    ],
+    "filesModified": [],
+    "testsCreated": [
+      ".claude/scripts/test_technique_config.py"
+    ],
+    "keyDecisions": [
+      "Hybrid problem classification with user confirmation",
+      "Phase-based technique composition (planning/implementation/verification)",
+      "Risk-based self-correction depth",
+      "Python scripts called by markdown commands",
+      "JSON configuration for technique mappings",
+      "33 problem subtypes across 8 categories (exceeds 22+ requirement)",
+      "Implementation techniques stored as array to support composition"
+    ],
+    "blockers": [],
+    "learnings": [
+      "jsonschema module not available - created custom validation tests instead"
+    ]
+  }
+}
