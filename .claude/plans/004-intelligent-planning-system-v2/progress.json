@@ -6,9 +6,9 @@
   "problemType": "system-design",
   "problemCategory": "ARCHITECTURE",
   "createdAt": "2025-12-24T00:00:00Z",
-  "updatedAt": "2025-12-24T00:00:00Z",
+  "updatedAt": "2025-12-31T09:00:00Z",
   "status": "in_progress",
-  "currentStep": 2,
+  "currentStep": 7,
   "totalSteps": 15,
   "techniqueProfile": {
     "defaultPlanning": "tot",
@@ -53,7 +53,7 @@
       "name": "problem-classifier-script",
       "title": "Problem Classifier Script",
       "problemType": "algorithm",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "self-consistency",
         "implementation": ["tdd"],
@@ -67,21 +67,25 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "tdd", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": []
+      "startedAt": "2025-12-24T14:30:00Z",
+      "completedAt": "2025-12-24T15:30:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [".claude/scripts/test_problem_classifier.py"],
+      "notes": "Classifier achieves 100% accuracy on core test set, 90%+ overall"
     },
     {
       "id": 3,
       "name": "technique-selector-script",
       "title": "Technique Selector Script",
       "problemType": "service-impl",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["tdd", "self-refine"],
@@ -95,21 +99,25 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "tdd", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": []
+      "startedAt": "2025-12-29T15:30:00Z",
+      "completedAt": "2025-12-29T16:00:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [".claude/scripts/test_technique_selector.py"],
+      "notes": "Selector handles all 33 problem types, 36 tests passing, context adjustment works"
     },
     {
       "id": 4,
       "name": "risk-assessor-script",
       "title": "Risk Assessor Script",
       "problemType": "algorithm",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "tot",
         "implementation": ["tdd"],
@@ -123,21 +131,25 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "tdd", "phase": "implementation", "attempts": 1},
+        {"technique": "self-consistency", "phase": "verification", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": []
+      "startedAt": "2025-12-30T09:30:00Z",
+      "completedAt": "2025-12-30T10:00:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [".claude/scripts/test_risk_assessor.py"],
+      "notes": "40 tests passing, 10 risk factors implemented, escalation logic working"
     },
     {
       "id": 5,
       "name": "cli-orchestrator",
       "title": "CLI Orchestrator",
       "problemType": "infrastructure",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["least-to-most"],
@@ -151,21 +163,25 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "least-to-most", "phase": "implementation", "attempts": 1},
+        {"technique": "self-refine", "phase": "verification", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": []
+      "startedAt": "2025-12-30T10:30:00Z",
+      "completedAt": "2025-12-30T11:00:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [".claude/scripts/test_tangentle_plan.py"],
+      "notes": "36 tests passing, CLI with classify/status/list/techniques/risk commands"
     },
     {
       "id": 6,
       "name": "update-plan-feature-initial",
       "title": "Update plan-feature-initial",
       "problemType": "refactor",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["self-refine"],
@@ -179,14 +195,17 @@
         "maxAlternative": 1,
         "maxTotal": 3
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": []
+      "startedAt": "2025-12-31T09:00:00Z",
+      "completedAt": "2025-12-31T09:15:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [],
+      "notes": "No unit tests needed - command file modification verified via grep commands"
     },
     {
       "id": 7,
@@ -469,24 +488,62 @@
     "filesCreated": [
       ".claude/technique-config.json",
       ".claude/schemas/technique-config.schema.json",
-      ".claude/scripts/test_technique_config.py"
+      ".claude/scripts/test_technique_config.py",
+      ".claude/scripts/__init__.py",
+      ".claude/scripts/problem_classifier.py",
+      ".claude/scripts/test_problem_classifier.py",
+      ".claude/scripts/technique_selector.py",
+      ".claude/scripts/test_technique_selector.py",
+      ".claude/scripts/risk_assessor.py",
+      ".claude/scripts/test_risk_assessor.py",
+      ".claude/scripts/utils.py",
+      ".claude/scripts/tangentle_plan.py",
+      ".claude/scripts/test_tangentle_plan.py"
     ],
-    "filesModified": [],
+    "filesModified": [
+      ".claude/technique-config.json",
+      ".claude/scripts/__init__.py",
+      ".claude/commands/plan-feature-initial.md"
+    ],
     "testsCreated": [
-      ".claude/scripts/test_technique_config.py"
+      ".claude/scripts/test_technique_config.py",
+      ".claude/scripts/test_problem_classifier.py",
+      ".claude/scripts/test_technique_selector.py",
+      ".claude/scripts/test_risk_assessor.py",
+      ".claude/scripts/test_tangentle_plan.py"
     ],
     "keyDecisions": [
+      "Classification step inserted as Step 1.5 (before Step 2 analysis)",
+      "Problem Type Confirmation as first blocking question (Question 0)",
+      "Manual fallback classification via keywords when Python unavailable",
       "Hybrid problem classification with user confirmation",
       "Phase-based technique composition (planning/implementation/verification)",
       "Risk-based self-correction depth",
       "Python scripts called by markdown commands",
       "JSON configuration for technique mappings",
       "33 problem subtypes across 8 categories (exceeds 22+ requirement)",
-      "Implementation techniques stored as array to support composition"
+      "Implementation techniques stored as array to support composition",
+      "Weighted keyword matching with penalty for generic keywords (add, new, feature)",
+      "Boost for domain-specific keywords (screen, api, refactor, etc.)",
+      "Context adjustment overrides base selection when appropriate",
+      "Cost estimation uses weighted scoring (1=low, 2=medium, 3=high)",
+      "Retry budget comes from config risk level (3/5/7/10)",
+      "10 risk factors with weights from -0.2 to 0.3",
+      "Negative factors (documentation_only, new_files_only) reduce risk",
+      "Score-to-level thresholds aligned with base scores (<0.35=LOW, <0.6=MEDIUM, <0.85=HIGH, >=0.85=CRITICAL)",
+      "CLI uses argparse with subcommand pattern",
+      "PlanOrchestrator integrates classifier, selector, and assessor",
+      "Formatted output with progress bars and status indicators"
     ],
     "blockers": [],
     "learnings": [
-      "jsonschema module not available - created custom validation tests instead"
+      "jsonschema module not available - created custom validation tests instead",
+      "Generic keywords like 'add', 'new', 'feature' need heavy penalty to avoid false positives",
+      "Domain-specific keywords should get extra weight for better accuracy",
+      "Phase enum must use .value for string comparison with config keys",
+      "Secondary techniques limited to 2 for composition sanity",
+      "Score-to-level thresholds must align with base risk scores from config to avoid unexpected level jumps",
+      "CLI needs to handle working directory changes when run from scripts dir"
     ]
   }
 }

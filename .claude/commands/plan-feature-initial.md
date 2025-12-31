@@ -14,6 +14,51 @@ Read `CLAUDE.md` and explore the codebase briefly to understand:
 - Technology stack
 - Coding conventions
 
+### Step 1.5: Classify Problem Type
+
+Before analyzing the request, classify the problem type to determine optimal techniques:
+
+```bash
+# Run classifier (if Python scripts available)
+python3 .claude/scripts/tangentle_plan.py classify "$ARGUMENTS"
+```
+
+If Python scripts are not available, manually classify based on keywords:
+- Contains "fix", "bug", "crash", "error" → `debug`
+- Contains "add", "create", "new" screen/view → `ui`
+- Contains "refactor", "restructure" → `refactor`
+- Contains "test" → `unit-test` or `integration-test`
+- Contains "api", "oauth", "auth" → `api-integration`
+- Default → `new-feature`
+
+#### Display Classification
+
+```
+═══════════════════════════════════════════════════════════════
+  PROBLEM CLASSIFICATION
+═══════════════════════════════════════════════════════════════
+
+  Detected Type: {primary_type} (Category: {category})
+  Confidence: {confidence}%
+
+  Suggested Techniques:
+  ┌─────────────┬────────────────────┐
+  │ Phase       │ Technique          │
+  ├─────────────┼────────────────────┤
+  │ Planning    │ {planning_tech}    │
+  │ Implement   │ {impl_tech}        │
+  │ Verify      │ {verify_tech}      │
+  └─────────────┴────────────────────┘
+
+  Alternatives considered:
+  - {alt1} ({confidence1}%)
+  - {alt2} ({confidence2}%)
+
+═══════════════════════════════════════════════════════════════
+```
+
+Use this classification to inform your analysis and include it in the output template.
+
 ### Step 2: Analyze the Initial Request
 
 Apply **Tree of Thought Analysis** to the feature request:
@@ -109,6 +154,22 @@ Based on your description, here's what I understand:
 
 These questions must be answered before I can create a good plan:
 
+#### 0. Problem Type Confirmation
+> The correct problem type affects which techniques are used and how the plan is structured.
+
+Based on your description, I classified this as a **{detected_type}** problem (Category: {category}).
+
+**Question**: Is this classification correct?
+
+**Options**:
+- [ ] Yes, this is correct
+- [ ] No, it's actually: {list alternatives from classification}
+- [ ] Other: _______________
+
+**Your answer**: _______________
+
+---
+
 #### 1. {Question Category}
 > {Context for why this matters}
 
@@ -169,6 +230,16 @@ Once you've answered the questions above, copy this completed prompt to `/plan-f
 
 ```
 /plan-feature {Feature Name}
+
+## Problem Classification
+- **Type**: {confirmed_type from question 0}
+- **Category**: {category}
+- **Risk Level**: {risk_level from classifier}
+
+## Technique Selection
+- **Planning**: {planning_technique} - {brief rationale}
+- **Implementation**: {impl_technique} - {brief rationale}
+- **Verification**: {verify_technique} - {brief rationale}
 
 ## Overview
 {Brief description from user's original input}

@@ -305,7 +305,7 @@
         },
         "api-integration": {
           "description": "API client implementation, network calls, data parsing",
-          "keywords": ["api", "network", "http", "rest", "request", "response", "fetch", "post"],
+          "keywords": ["api", "network", "http", "rest", "request", "response", "fetch", "post", "oauth", "authentication", "auth"],
           "riskLevel": "medium",
           "techniques": {
             "planning": "react",
