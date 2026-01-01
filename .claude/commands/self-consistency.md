@@ -6,6 +6,7 @@
 
 I will generate **5 independent solutions** to this problem, then evaluate and select the best one.
 
+<!-- SECTION:PLANNING -->
 ### Phase 1: Generate Multiple Solutions
 
 For each solution, I will:
@@ -13,8 +14,11 @@ For each solution, I will:
 2. Use a slightly different approach or starting point
 3. Include reasoning for design decisions
 
+<!-- /SECTION:PLANNING -->
+
 ---
 
+<!-- SECTION:IMPLEMENTATION -->
 **SOLUTION 1:**
 [Generate complete solution with reasoning]
 
@@ -38,8 +42,11 @@ For each solution, I will:
 **SOLUTION 5:**
 [Generate complete solution]
 
+<!-- /SECTION:IMPLEMENTATION -->
+
 ---
 
+<!-- SECTION:VERIFICATION -->
 ### Phase 2: Evaluation Matrix
 
 | Criteria | Sol 1 | Sol 2 | Sol 3 | Sol 4 | Sol 5 |
@@ -66,3 +73,15 @@ For each solution, I will:
 ### Final Implementation
 
 [Present the refined final solution incorporating best elements]
+<!-- /SECTION:VERIFICATION -->
+
+<!-- SECTION:ERROR_RECOVERY -->
+## Error Recovery
+
+If no solution reaches acceptable quality:
+1. Analyze common failure patterns across all solutions
+2. Generate more solutions with different strategies
+3. Consider if the problem needs decomposition
+4. Check if requirements were correctly understood
+5. Combine partial successes from different solutions
+<!-- /SECTION:ERROR_RECOVERY -->

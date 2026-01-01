@@ -8,14 +8,18 @@ I will attempt the task, evaluate results, reflect on failures, store lessons, a
 
 ---
 
+<!-- SECTION:PLANNING -->
 ## Memory Bank
 [This section accumulates across attempts]
 
 **Lessons Learned**:
 - (Empty at start, populated by reflections)
 
+<!-- /SECTION:PLANNING -->
+
 ---
 
+<!-- SECTION:IMPLEMENTATION -->
 ## Attempt 1
 
 ### Actor (Generate Solution)
@@ -115,8 +119,11 @@ I will attempt the task, evaluate results, reflect on failures, store lessons, a
 
 [Continue pattern...]
 
+<!-- /SECTION:IMPLEMENTATION -->
+
 ---
 
+<!-- SECTION:VERIFICATION -->
 ## Final Result
 
 **Successful Implementation**:
@@ -132,3 +139,15 @@ I will attempt the task, evaluate results, reflect on failures, store lessons, a
 3. [Lesson N]
 
 **Key Insight**: The most important lesson from this task was...
+<!-- /SECTION:VERIFICATION -->
+
+<!-- SECTION:ERROR_RECOVERY -->
+## Error Recovery
+
+If attempts repeatedly fail:
+1. Review all accumulated lessons in Memory Bank
+2. Consider if the fundamental approach needs to change
+3. Check if requirements were misunderstood
+4. Try a completely different strategy
+5. If blocked after 3+ attempts, escalate for review
+<!-- /SECTION:ERROR_RECOVERY -->

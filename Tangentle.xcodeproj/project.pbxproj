@@ -99,6 +99,44 @@
 		A0000001000000000000091 /* FloatingActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000091 /* FloatingActionButton.swift */; };
 		A0000001000000000000092 /* AppearanceSettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000092 /* AppearanceSettingsSection.swift */; };
 		A0000001000000000000093 /* ThemePreviewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000093 /* ThemePreviewWrapper.swift */; };
+		A0000001000000000000094 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = A000000F000000000000001 /* SnapshotTesting */; };
+		A0000001000000000000095 /* TestFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000095 /* TestFixtures.swift */; };
+		A0000001000000000000096 /* FakeDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000096 /* FakeDataGenerator.swift */; };
+		A0000001000000000000097 /* TangentleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000097 /* TangentleUITests.swift */; };
+		A0000001000000000000100 /* MockUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000100 /* MockUtilities.swift */; };
+		A0000001000000000000101 /* MockRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000101 /* MockRepositories.swift */; };
+		A0000001000000000000102 /* MockServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000102 /* MockServices.swift */; };
+		A0000001000000000000103 /* MockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000103 /* MockTests.swift */; };
+		A0000001000000000000110 /* TaskServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000110 /* TaskServiceTests.swift */; };
+		A0000001000000000000111 /* ScheduleServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000111 /* ScheduleServiceTests.swift */; };
+		A0000001000000000000112 /* SettingsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000112 /* SettingsServiceTests.swift */; };
+		A0000001000000000000113 /* AIServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000113 /* AIServiceTests.swift */; };
+		A0000001000000000000114 /* SeedDataServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000114 /* SeedDataServiceTests.swift */; };
+		A0000001000000000000120 /* TaskRelationshipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000120 /* TaskRelationshipTests.swift */; };
+		A0000001000000000000121 /* ProjectRelationshipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000121 /* ProjectRelationshipTests.swift */; };
+		A0000001000000000000122 /* StrategyRelationshipTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000122 /* StrategyRelationshipTests.swift */; };
+		A0000001000000000000123 /* CascadeDeleteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000123 /* CascadeDeleteTests.swift */; };
+		A0000001000000000000124 /* TaskServiceIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000124 /* TaskServiceIntegrationTests.swift */; };
+		A0000001000000000000125 /* StrategyServiceIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000125 /* StrategyServiceIntegrationTests.swift */; };
+		A0000001000000000000130 /* SnapshotTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000130 /* SnapshotTestCase.swift */; };
+		A0000001000000000000131 /* CheckboxSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000131 /* CheckboxSnapshotTests.swift */; };
+		A0000001000000000000132 /* BadgeSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000132 /* BadgeSnapshotTests.swift */; };
+		A0000001000000000000133 /* TaskCardSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000133 /* TaskCardSnapshotTests.swift */; };
+		A0000001000000000000134 /* TabBarSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000134 /* TabBarSnapshotTests.swift */; };
+		A0000001000000000000135 /* SwipeActionSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000135 /* SwipeActionSnapshotTests.swift */; };
+		A0000001000000000000136 /* FloatingActionButtonSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000136 /* FloatingActionButtonSnapshotTests.swift */; };
+		A0000001000000000000137 /* TodayViewSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000137 /* TodayViewSnapshotTests.swift */; };
+		A0000001000000000000140 /* UITestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000140 /* UITestHelpers.swift */; };
+		A0000001000000000000141 /* TodayPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000141 /* TodayPage.swift */; };
+		A0000001000000000000142 /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000142 /* TabBarPage.swift */; };
+		A0000001000000000000143 /* TaskFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000143 /* TaskFlowTests.swift */; };
+		A0000001000000000000144 /* NavigationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000144 /* NavigationTests.swift */; };
+		A0000001000000000000150 /* PerformanceTestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000150 /* PerformanceTestData.swift */; };
+		A0000001000000000000151 /* TaskRepositoryPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000151 /* TaskRepositoryPerformanceTests.swift */; };
+		A0000001000000000000152 /* StrategyRepositoryPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000152 /* StrategyRepositoryPerformanceTests.swift */; };
+		A0000001000000000000153 /* ServicePerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000153 /* ServicePerformanceTests.swift */; };
+		A0000001000000000000154 /* ViewModelPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000154 /* ViewModelPerformanceTests.swift */; };
+		A0000001000000000000160 /* AIServiceContractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002000000000000160 /* AIServiceContractTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -211,6 +249,43 @@
 		A0000002000000000000091 /* FloatingActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButton.swift; sourceTree = "<group>"; };
 		A0000002000000000000092 /* AppearanceSettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsSection.swift; sourceTree = "<group>"; };
 		A0000002000000000000093 /* ThemePreviewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePreviewWrapper.swift; sourceTree = "<group>"; };
+		A0000002000000000000095 /* TestFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFixtures.swift; sourceTree = "<group>"; };
+		A0000002000000000000096 /* FakeDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDataGenerator.swift; sourceTree = "<group>"; };
+		A0000002000000000000097 /* TangentleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TangentleUITests.swift; sourceTree = "<group>"; };
+		A0000002000000000000140 /* UITestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestHelpers.swift; sourceTree = "<group>"; };
+		A0000002000000000000141 /* TodayPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayPage.swift; sourceTree = "<group>"; };
+		A0000002000000000000142 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
+		A0000002000000000000143 /* TaskFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFlowTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000144 /* NavigationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000150 /* PerformanceTestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTestData.swift; sourceTree = "<group>"; };
+		A0000002000000000000151 /* TaskRepositoryPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepositoryPerformanceTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000152 /* StrategyRepositoryPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyRepositoryPerformanceTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000153 /* ServicePerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePerformanceTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000154 /* ViewModelPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelPerformanceTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000160 /* AIServiceContractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIServiceContractTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000100 /* MockUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUtilities.swift; sourceTree = "<group>"; };
+		A0000002000000000000101 /* MockRepositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRepositories.swift; sourceTree = "<group>"; };
+		A0000002000000000000102 /* MockServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockServices.swift; sourceTree = "<group>"; };
+		A0000002000000000000103 /* MockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000110 /* TaskServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskServiceTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000111 /* ScheduleServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleServiceTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000112 /* SettingsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsServiceTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000113 /* AIServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIServiceTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000114 /* SeedDataServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedDataServiceTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000120 /* TaskRelationshipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRelationshipTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000121 /* ProjectRelationshipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRelationshipTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000122 /* StrategyRelationshipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyRelationshipTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000123 /* CascadeDeleteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CascadeDeleteTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000124 /* TaskServiceIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskServiceIntegrationTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000125 /* StrategyServiceIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyServiceIntegrationTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000130 /* SnapshotTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestCase.swift; sourceTree = "<group>"; };
+		A0000002000000000000131 /* CheckboxSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxSnapshotTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000132 /* BadgeSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeSnapshotTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000133 /* TaskCardSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCardSnapshotTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000134 /* TabBarSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarSnapshotTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000135 /* SwipeActionSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionSnapshotTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000136 /* FloatingActionButtonSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButtonSnapshotTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000137 /* TodayViewSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewSnapshotTests.swift; sourceTree = "<group>"; };
 		A0000006000000000000001 /* Tangentle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tangentle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0000006000000000000002 /* TangentleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TangentleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0000006000000000000003 /* TangentleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TangentleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -228,6 +303,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0000001000000000000094 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +322,7 @@
 			children = (
 				A0000008000000000000002 /* Tangentle */,
 				A0000008000000000000003 /* TangentleTests */,
+				A0000008000000000000098 /* TangentleUITests */,
 				A0000008000000000000009 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -268,6 +345,12 @@
 			children = (
 				A0000008000000000000004 /* Unit */,
 				A0000008000000000000005 /* Integration */,
+				A0000008000000000000050 /* Snapshots */,
+				A0000008000000000000051 /* Performance */,
+				A0000008000000000000052 /* Contract */,
+				A0000008000000000000053 /* Mocks */,
+				A0000008000000000000054 /* TestHelpers */,
+				A0000008000000000000055 /* Fixtures */,
 			);
 			path = TangentleTests;
 			sourceTree = "<group>";
@@ -275,10 +358,10 @@
 		A0000008000000000000004 /* Unit */ = {
 			isa = PBXGroup;
 			children = (
-				A0000002000000000000050 /* TestHelpers.swift */,
-				A0000002000000000000051 /* TaskRepositoryTests.swift */,
-				A0000002000000000000052 /* StrategyServiceTests.swift */,
-				A0000002000000000000053 /* TodayViewModelTests.swift */,
+				A0000008000000000000060 /* Repositories */,
+				A0000008000000000000061 /* Services */,
+				A0000008000000000000062 /* ViewModels */,
+				A0000008000000000000104 /* Mocks */,
 			);
 			path = Unit;
 			sourceTree = "<group>";
@@ -286,6 +369,8 @@
 		A0000008000000000000005 /* Integration */ = {
 			isa = PBXGroup;
 			children = (
+				A0000008000000000000070 /* CoreData */,
+				A0000008000000000000071 /* Services */,
 			);
 			path = Integration;
 			sourceTree = "<group>";
@@ -590,6 +675,178 @@
 			path = Haptics;
 			sourceTree = "<group>";
 		};
+		A0000008000000000000050 /* Snapshots */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000130 /* SnapshotTestCase.swift */,
+				A0000008000000000000080 /* Components */,
+				A0000008000000000000081 /* Screens */,
+			);
+			path = Snapshots;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000051 /* Performance */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000150 /* PerformanceTestData.swift */,
+				A0000002000000000000151 /* TaskRepositoryPerformanceTests.swift */,
+				A0000002000000000000152 /* StrategyRepositoryPerformanceTests.swift */,
+				A0000002000000000000153 /* ServicePerformanceTests.swift */,
+				A0000002000000000000154 /* ViewModelPerformanceTests.swift */,
+			);
+			path = Performance;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000052 /* Contract */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000160 /* AIServiceContractTests.swift */,
+			);
+			path = Contract;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000053 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000100 /* MockUtilities.swift */,
+				A0000002000000000000101 /* MockRepositories.swift */,
+				A0000002000000000000102 /* MockServices.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000054 /* TestHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000050 /* TestHelpers.swift */,
+				A0000002000000000000095 /* TestFixtures.swift */,
+				A0000002000000000000096 /* FakeDataGenerator.swift */,
+			);
+			path = TestHelpers;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000055 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000060 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000051 /* TaskRepositoryTests.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000061 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000113 /* AIServiceTests.swift */,
+				A0000002000000000000111 /* ScheduleServiceTests.swift */,
+				A0000002000000000000114 /* SeedDataServiceTests.swift */,
+				A0000002000000000000112 /* SettingsServiceTests.swift */,
+				A0000002000000000000052 /* StrategyServiceTests.swift */,
+				A0000002000000000000110 /* TaskServiceTests.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000062 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000053 /* TodayViewModelTests.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000070 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000123 /* CascadeDeleteTests.swift */,
+				A0000002000000000000121 /* ProjectRelationshipTests.swift */,
+				A0000002000000000000122 /* StrategyRelationshipTests.swift */,
+				A0000002000000000000120 /* TaskRelationshipTests.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000071 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000125 /* StrategyServiceIntegrationTests.swift */,
+				A0000002000000000000124 /* TaskServiceIntegrationTests.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000080 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000131 /* CheckboxSnapshotTests.swift */,
+				A0000002000000000000132 /* BadgeSnapshotTests.swift */,
+				A0000002000000000000133 /* TaskCardSnapshotTests.swift */,
+				A0000002000000000000134 /* TabBarSnapshotTests.swift */,
+				A0000002000000000000135 /* SwipeActionSnapshotTests.swift */,
+				A0000002000000000000136 /* FloatingActionButtonSnapshotTests.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000081 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000137 /* TodayViewSnapshotTests.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000098 /* TangentleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000097 /* TangentleUITests.swift */,
+				A0000008000000000000140 /* Helpers */,
+				A0000008000000000000141 /* Pages */,
+				A0000008000000000000142 /* Flows */,
+			);
+			path = TangentleUITests;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000140 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000140 /* UITestHelpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000141 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000141 /* TodayPage.swift */,
+				A0000002000000000000142 /* TabBarPage.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000142 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000143 /* TaskFlowTests.swift */,
+				A0000002000000000000144 /* NavigationTests.swift */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		A0000008000000000000104 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000103 /* MockTests.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -624,6 +881,9 @@
 				A000000C000000000000001 /* PBXTargetDependency */,
 			);
 			name = TangentleTests;
+			packageProductDependencies = (
+				A000000F000000000000001 /* SnapshotTesting */,
+			);
 			productName = TangentleTests;
 			productReference = A0000006000000000000002 /* TangentleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -678,6 +938,9 @@
 				Base,
 			);
 			mainGroup = A0000008000000000000001;
+			packageReferences = (
+				A000000E000000000000001 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+			);
 			productRefGroup = A0000008000000000000009 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -814,9 +1077,40 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0000001000000000000050 /* TestHelpers.swift in Sources */,
+				A0000001000000000000095 /* TestFixtures.swift in Sources */,
+				A0000001000000000000096 /* FakeDataGenerator.swift in Sources */,
+				A0000001000000000000100 /* MockUtilities.swift in Sources */,
+				A0000001000000000000101 /* MockRepositories.swift in Sources */,
+				A0000001000000000000102 /* MockServices.swift in Sources */,
 				A0000001000000000000051 /* TaskRepositoryTests.swift in Sources */,
 				A0000001000000000000052 /* StrategyServiceTests.swift in Sources */,
 				A0000001000000000000053 /* TodayViewModelTests.swift in Sources */,
+				A0000001000000000000103 /* MockTests.swift in Sources */,
+				A0000001000000000000110 /* TaskServiceTests.swift in Sources */,
+				A0000001000000000000111 /* ScheduleServiceTests.swift in Sources */,
+				A0000001000000000000112 /* SettingsServiceTests.swift in Sources */,
+				A0000001000000000000113 /* AIServiceTests.swift in Sources */,
+				A0000001000000000000114 /* SeedDataServiceTests.swift in Sources */,
+				A0000001000000000000120 /* TaskRelationshipTests.swift in Sources */,
+				A0000001000000000000121 /* ProjectRelationshipTests.swift in Sources */,
+				A0000001000000000000122 /* StrategyRelationshipTests.swift in Sources */,
+				A0000001000000000000123 /* CascadeDeleteTests.swift in Sources */,
+				A0000001000000000000124 /* TaskServiceIntegrationTests.swift in Sources */,
+				A0000001000000000000125 /* StrategyServiceIntegrationTests.swift in Sources */,
+				A0000001000000000000130 /* SnapshotTestCase.swift in Sources */,
+				A0000001000000000000131 /* CheckboxSnapshotTests.swift in Sources */,
+				A0000001000000000000132 /* BadgeSnapshotTests.swift in Sources */,
+				A0000001000000000000133 /* TaskCardSnapshotTests.swift in Sources */,
+				A0000001000000000000134 /* TabBarSnapshotTests.swift in Sources */,
+				A0000001000000000000135 /* SwipeActionSnapshotTests.swift in Sources */,
+				A0000001000000000000136 /* FloatingActionButtonSnapshotTests.swift in Sources */,
+				A0000001000000000000137 /* TodayViewSnapshotTests.swift in Sources */,
+				A0000001000000000000150 /* PerformanceTestData.swift in Sources */,
+				A0000001000000000000151 /* TaskRepositoryPerformanceTests.swift in Sources */,
+				A0000001000000000000152 /* StrategyRepositoryPerformanceTests.swift in Sources */,
+				A0000001000000000000153 /* ServicePerformanceTests.swift in Sources */,
+				A0000001000000000000154 /* ViewModelPerformanceTests.swift in Sources */,
+				A0000001000000000000160 /* AIServiceContractTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -824,6 +1118,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0000001000000000000097 /* TangentleUITests.swift in Sources */,
+				A0000001000000000000140 /* UITestHelpers.swift in Sources */,
+				A0000001000000000000141 /* TodayPage.swift in Sources */,
+				A0000001000000000000142 /* TabBarPage.swift in Sources */,
+				A0000001000000000000143 /* TaskFlowTests.swift in Sources */,
+				A0000001000000000000144 /* NavigationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -970,6 +1270,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 3ZN684YFJH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -999,6 +1300,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 3ZN684YFJH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -1098,7 +1400,7 @@
 				A000000D000000000000004 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		A0000009000000000000002 /* Build configuration list for PBXNativeTarget "TangentleTests" */ = {
 			isa = XCConfigurationList;
@@ -1107,7 +1409,7 @@
 				A000000D000000000000006 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		A0000009000000000000003 /* Build configuration list for PBXNativeTarget "TangentleUITests" */ = {
 			isa = XCConfigurationList;
@@ -1116,7 +1418,7 @@
 				A000000D000000000000008 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		A0000009000000000000004 /* Build configuration list for PBXProject "Tangentle" */ = {
 			isa = XCConfigurationList;
@@ -1125,9 +1427,28 @@
 				A000000D000000000000002 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A000000E000000000000001 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.15.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A000000F000000000000001 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A000000E000000000000001 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A0000004000000000000001 /* Project object */;
 }

@@ -302,6 +302,7 @@ xcrun simctl boot "iPhone 15"
 | `docs/README.md` | Quick start, setup |
 | `docs/ARCHITECTURE.md` | Detailed architecture |
 | `docs/DATA-MODEL.md` | Entity documentation |
+| `docs/TESTING.md` | Comprehensive testing guide |
 
 ## Do NOT
 

@@ -8,6 +8,7 @@ I will explore multiple reasoning paths as a tree, evaluate each branch, prune u
 
 ---
 
+<!-- SECTION:PLANNING -->
 ## Root: Initial Problem Analysis
 
 **Problem**: [Clear statement]
@@ -58,8 +59,11 @@ I will explore multiple reasoning paths as a tree, evaluate each branch, prune u
 
 **Status**: [EXPLORE / PRUNE]
 
+<!-- /SECTION:PLANNING -->
+
 ---
 
+<!-- SECTION:IMPLEMENTATION -->
 ## Level 2: Expanding Best Branches
 
 ### Branch A.1 (Expanding Branch A)
@@ -118,8 +122,11 @@ I will explore multiple reasoning paths as a tree, evaluate each branch, prune u
 **New exploration from A.1b**:
 [Continue from alternative branch]
 
+<!-- /SECTION:IMPLEMENTATION -->
+
 ---
 
+<!-- SECTION:VERIFICATION -->
 ## Convergence
 
 **Winning Path**: Root → A → A.1 → A.1a → A.1a.1 → [Solution]
@@ -142,3 +149,15 @@ I will explore multiple reasoning paths as a tree, evaluate each branch, prune u
 ```
 
 **Confidence**: [High/Medium] - we explored N alternative paths and this was clearly the best.
+<!-- /SECTION:VERIFICATION -->
+
+<!-- SECTION:ERROR_RECOVERY -->
+## Error Recovery
+
+If no path leads to a solution:
+1. Review pruned branches - did we prune too aggressively?
+2. Consider combining insights from multiple branches
+3. Add new branches with alternative approaches
+4. Backtrack to an earlier decision point
+5. Re-evaluate initial problem understanding
+<!-- /SECTION:ERROR_RECOVERY -->

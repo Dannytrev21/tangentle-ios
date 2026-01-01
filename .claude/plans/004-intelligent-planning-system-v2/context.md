@@ -4,10 +4,10 @@ This file maintains context for resuming work on this plan from a fresh terminal
 
 ## Quick Status
 - **Plan**: Intelligent Planning System v2
-- **Current Step**: 7 - Update plan-feature
+- **Current Step**: 8b - Prompt Embedding
 - **Last Updated**: 2025-12-31
 - **Last Review**: 2025-12-24 (Score: 36/50)
-- **Progress**: 6/15 steps complete (40%)
+- **Progress**: 8/15 steps complete (53%)
 
 ## What's Been Done
 - Plan created with full Tree of Thought analysis
@@ -23,6 +23,8 @@ This file maintains context for resuming work on this plan from a fresh terminal
 - **Step 4 Complete**: Risk Assessor Script implemented
 - **Step 5 Complete**: CLI Orchestrator implemented
 - **Step 6 Complete**: plan-feature-initial updated with classification
+- **Step 7 Complete**: plan-feature updated with technique assignment per step
+- **Step 8a Complete**: Template parser created, section markers added to all 10 technique files
 
 ## Problem Type Taxonomy (Finalized)
 
@@ -134,8 +136,8 @@ User Request
 ```
 
 ## Next Actions
-1. Run `/plan-next 004` to start Step 7 (Update plan-feature)
-2. Continue through remaining 9 steps
+1. Run `/plan-next 004` to start Step 8b (Prompt Embedding)
+2. Continue through remaining 7 steps
 
 ## Things to Remember
 - All 10 prompt engineering techniques are available in `.claude/commands/`
@@ -454,5 +456,132 @@ $ python3 .claude/scripts/tangentle_plan.py classify "Add OAuth authentication"
 - Fallback mechanism essential for when Python scripts unavailable
 
 ### Ready for Next Step
-Step 7: Update plan-feature
-Prerequisites met: Yes (plan-feature-initial now provides problem type to plan-feature)
+Step 8a: Technique Template Extraction
+Prerequisites met: Yes (plan-feature now includes technique metadata in plans)
+
+---
+
+## Step 7 Complete - 2025-12-31
+
+### Summary
+Updated `/plan-feature` command to embed technique selection in plans, add technique metadata to progress.json, and generate technique-aware step files.
+
+### Files Modified
+- `.claude/commands/plan-feature.md`: Added Step 6.5 (Assign Techniques), updated plan.md template with technique matrix, updated step file template with technique sections, extended progress.json schema
+
+### Changes Made
+1. **Step 6.5: Assign Techniques to Steps** - New section that:
+   - Classifies each step's problem type (may differ from overall plan type)
+   - Selects techniques per phase using CLI or fallback table
+   - Assesses risk per step with retry configuration
+   - Documents technique rationale
+
+2. **plan.md Template Updates**:
+   - Added Technique Matrix section with columns: Step, Problem Type, Planning, Implementation, Verification, Risk
+   - Updated Implementation Steps table with Type and Risk columns
+
+3. **Step File Template Updates**:
+   - Added Problem Type section
+   - Added Technique Selection section (per phase with rationale)
+   - Added Risk Level section
+   - Added Retry Configuration section
+
+4. **progress.json Schema Updates**:
+   - Added top-level: `problemType`, `problemCategory`, `techniqueProfile`
+   - Added per-step: `problemType`, `techniques`, `techniqueRationale`, `riskLevel`, `riskScore`, `retryConfig`, `techniquesUsed`
+
+5. **Fallback Mechanism**:
+   - Keyword-based classification when Python unavailable
+   - Technique reference table for manual lookup
+
+### Verification Results
+- [x] AC1: Step 6.5 added (`grep "Assign Techniques to Steps"` → found)
+- [x] AC2: Technique Matrix in plan.md template (`grep "Technique Matrix"` → found)
+- [x] AC3: techniqueProfile in progress.json schema (`grep "techniqueProfile"` → found)
+- [x] AC4: Fallback works without Python (`grep "If Python unavailable"` → found)
+- [x] AC5: Step file has Technique Selection section (found)
+- [x] AC6: Step file has Risk Level section (found)
+- [x] AC7: Step file has Retry Configuration section (found)
+
+### Key Decisions
+- Step 6.5 placed after ADR creation but before step file creation (logical flow)
+- Fallback technique table covers 9 most common problem types
+- Risk assessment includes 5 key factors (migration, API, breaking, persistence, complexity)
+- Retry config defaults: Low=3, Medium=5, High=7, Critical=10
+
+### Learnings
+- Step file template needed multiple new sections (problem type, techniques, risk, retry config)
+- progress.json schema now matches the structure used by Plan 004 itself
+- Fallback table essential for environments without Python scripts
+
+---
+
+## Step 8a Complete - 2025-12-31
+
+### Summary
+Added section markers to all 10 technique template files and created a template parser that extracts structured TechniqueTemplate objects for programmatic composition.
+
+### Files Created
+- `.claude/scripts/template_parser.py`: Parser with TechniqueTemplate dataclass, parse_technique_template(), load_all_templates()
+- `.claude/scripts/test_template_parser.py`: 22 unit tests for parser functionality
+
+### Files Modified
+- All 10 technique files in `.claude/commands/`: Added section markers (PLANNING, IMPLEMENTATION, VERIFICATION, ERROR_RECOVERY)
+- `.claude/scripts/__init__.py`: Added exports for template parser functions
+
+### Section Marker Format
+```markdown
+<!-- SECTION:PLANNING -->
+## Planning Phase
+...
+<!-- /SECTION:PLANNING -->
+
+<!-- SECTION:IMPLEMENTATION -->
+## Implementation Phase
+...
+<!-- /SECTION:IMPLEMENTATION -->
+
+<!-- SECTION:VERIFICATION -->
+## Verification Phase
+...
+<!-- /SECTION:VERIFICATION -->
+
+<!-- SECTION:ERROR_RECOVERY -->
+## Error Recovery
+...
+<!-- /SECTION:ERROR_RECOVERY -->
+```
+
+### Verification Results
+- [x] AC1: All 10 technique files have section markers (`grep -l "SECTION:IMPLEMENTATION" .claude/commands/*.md | wc -l` = 10)
+- [x] AC2: Parser extracts all sections correctly (TDD template: 2332 chars in implementation)
+- [x] AC3: Missing sections return empty string
+- [x] AC4: All templates load successfully (10 templates loaded, all 3/3 sections)
+- [x] AC5: Unit tests pass (22 tests, 0 failures)
+
+### Tests Written
+- `test_template_parser.py`: 22 test cases
+  - TestTechniqueTemplate (2 tests): defaults, full creation
+  - TestParseMarkedTemplate (3 tests): sections, placeholders, description
+  - TestParseLegacyTemplate (1 test): heuristic parsing
+  - TestMissingSections (1 test): empty string return
+  - TestLoadAllTemplates (3 tests): load all, implementation section, parse success
+  - TestHelperFunctions (8 tests): title, description, placeholders, section getters
+  - TestActualTemplates (3 tests): TDD, Reflexion, ToT parsing
+  - TestFileNotFound (1 test): error handling
+- **Status**: All 22 tests passing
+
+### Key Decisions
+- HTML comment markers for section delimiters (invisible in rendered markdown)
+- TechniqueTemplate with 8 fields: id, name, description, 4 section fields, placeholders
+- Heuristic parsing per-technique (each has unique header patterns)
+- Graceful fallback: missing sections return empty string, parser continues
+
+### Learnings
+- Technique-specific section patterns needed for heuristic parsing
+- pytest not available - used unittest module instead
+- Parser needs working directory handling when run from scripts dir
+
+### Ready for Next Step
+Step 8b: Prompt Embedding
+Prerequisites met: Yes (TechniqueTemplate parser can load and extract sections from all technique files)

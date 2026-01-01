@@ -8,6 +8,7 @@ I will solve this by decomposing it into simpler subproblems, then solving each 
 
 ---
 
+<!-- SECTION:PLANNING -->
 ## Phase 1: Decomposition
 
 **Original Problem**: [Restate the problem clearly]
@@ -38,8 +39,11 @@ I will solve this by decomposing it into simpler subproblems, then solving each 
    - Description: Combine all subproblems into final solution
    - Dependencies: All previous
 
+<!-- /SECTION:PLANNING -->
+
 ---
 
+<!-- SECTION:IMPLEMENTATION -->
 ## Phase 2: Sequential Solving
 
 ### Solving Subproblem 1
@@ -85,8 +89,11 @@ I will solve this by decomposing it into simpler subproblems, then solving each 
 
 [Continue for all subproblems...]
 
+<!-- /SECTION:IMPLEMENTATION -->
+
 ---
 
+<!-- SECTION:VERIFICATION -->
 ## Phase 3: Final Integration
 
 **All Available Components**:
@@ -101,3 +108,15 @@ I will solve this by decomposing it into simpler subproblems, then solving each 
 ```
 
 **Integration Test**: [Verify the complete solution works]
+<!-- /SECTION:VERIFICATION -->
+
+<!-- SECTION:ERROR_RECOVERY -->
+## Error Recovery
+
+If a subproblem cannot be solved:
+1. Check if decomposition was correct
+2. Consider if a different breakdown is needed
+3. Verify previous solutions are being used correctly
+4. Add intermediate subproblems if the gap is too large
+5. Revise the dependency chain
+<!-- /SECTION:ERROR_RECOVERY -->

@@ -38,6 +38,7 @@ struct TabBarItem: View {
         }
         .frame(maxWidth: .infinity)
         .contentShape(Rectangle())
+        .accessibilityIdentifier("Tab_\(tab.rawValue)")
         .accessibilityLabel(tab.title)
         .accessibilityAddTraits(isSelected ? [.isSelected] : [])
     }

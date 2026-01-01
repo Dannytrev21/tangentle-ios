@@ -8,6 +8,7 @@ I will model reasoning as a graph, allowing thoughts to branch, merge, loop back
 
 ---
 
+<!-- SECTION:PLANNING -->
 ## Graph Initialization
 
 ### Thought Nodes (Initial)
@@ -32,8 +33,11 @@ I will model reasoning as a graph, allowing thoughts to branch, merge, loop back
 - Score: [0-10]
 - Connections: → T7
 
+<!-- /SECTION:PLANNING -->
+
 ---
 
+<!-- SECTION:IMPLEMENTATION -->
 ## Graph Transformations
 
 ### Transformation 1: Expansion (Generate new thoughts)
@@ -86,8 +90,11 @@ I will model reasoning as a graph, allowing thoughts to branch, merge, loop back
 - Score: [0-10]
 - Connections: → FINAL
 
+<!-- /SECTION:IMPLEMENTATION -->
+
 ---
 
+<!-- SECTION:VERIFICATION -->
 ## Graph Visualization
 
 ```
@@ -145,3 +152,15 @@ I will model reasoning as a graph, allowing thoughts to branch, merge, loop back
 - Combined with [insight from B]
 - Refined through [N] iterations
 - Final score [X/10] vs best single branch [Y/10]
+<!-- /SECTION:VERIFICATION -->
+
+<!-- SECTION:ERROR_RECOVERY -->
+## Error Recovery
+
+If graph exploration doesn't converge:
+1. Add more initial branches with different approaches
+2. Reconsider pruning decisions
+3. Try different aggregation strategies
+4. Loop back to earlier nodes with new constraints
+5. Increase refinement iterations on promising nodes
+<!-- /SECTION:ERROR_RECOVERY -->

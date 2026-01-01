@@ -88,7 +88,7 @@ final class TaskRepository: BaseRepository<TGTask>, TaskRepositoryProtocol {
 
     func fetchByEnergy(_ energy: EnergyLevel) async throws -> [TGTask] {
         let predicate = NSPredicate(
-            format: "energyLevel == %@ AND status != %@",
+            format: "energyRequired == %@ AND status != %@",
             energy.rawValue,
             TaskStatus.done.rawValue
         )

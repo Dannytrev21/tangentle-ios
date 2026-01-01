@@ -119,3 +119,7 @@ APIKeys.swift
 
 # Test output
 *.xcresult
+
+# Python
+__pycache__/
+*.pyc

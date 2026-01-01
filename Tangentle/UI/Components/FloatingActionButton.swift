@@ -38,6 +38,7 @@ struct FloatingActionButton: View {
                 )
         }
         .buttonStyle(ScaleButtonStyle())
+        .accessibilityIdentifier("AddTaskButton")
         .accessibilityLabel("Add task")
     }
 }

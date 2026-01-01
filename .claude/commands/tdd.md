@@ -8,6 +8,7 @@ I will follow strict TDD: write failing tests first, then implement just enough 
 
 ---
 
+<!-- SECTION:PLANNING -->
 ## Phase 1: Requirements → Test Cases
 
 **Understanding Requirements**:
@@ -72,8 +73,11 @@ def test_specific_business_rule_2():
     assert function_under_test(another_scenario) == another_expected
 ```
 
+<!-- /SECTION:PLANNING -->
+
 ---
 
+<!-- SECTION:IMPLEMENTATION -->
 ## Phase 2: Run Tests (Expecting RED)
 
 **Test Execution**:
@@ -178,8 +182,11 @@ test_specific_business_rule_2 PASSED
 
 **Confirmation**: All tests pass. ✓ GREEN phase complete.
 
+<!-- /SECTION:IMPLEMENTATION -->
+
 ---
 
+<!-- SECTION:VERIFICATION -->
 ## Phase 4: Refactor (Keep GREEN)
 
 Now improve the code without changing behavior (tests must stay green).
@@ -280,3 +287,15 @@ TOTAL                      25      0   100%
 | REFACTOR | ✓ | Improved code quality, tests still pass |
 
 **Key Benefit**: The tests now serve as living documentation and regression protection. Any future changes that break expected behavior will be caught immediately.
+<!-- /SECTION:VERIFICATION -->
+
+<!-- SECTION:ERROR_RECOVERY -->
+## Error Recovery
+
+If tests fail unexpectedly:
+1. Review the failing test to understand what's expected
+2. Check if the implementation logic matches the test requirements
+3. Verify edge case handling is complete
+4. If stuck, add debugging output to trace the issue
+5. Consider if the test itself might need adjustment
+<!-- /SECTION:ERROR_RECOVERY -->

@@ -75,6 +75,7 @@ struct TaskCard: View {
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("TaskCard_\(task.id?.uuidString ?? "unknown")")
         .accessibilityLabel(accessibilityLabel)
         .accessibilityHint("Double tap to view details")
     }

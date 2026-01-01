@@ -28,6 +28,7 @@ struct SwipeActionButton: View {
             .animation(SpringConfig.snappy, value: isActive)
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("\(action.title)Action")
         .accessibilityLabel(action.title)
         .accessibilityHint(action.isDestructive ? "Double tap to \(action.title.lowercased()). This action cannot be undone." : "Double tap to \(action.title.lowercased())")
     }

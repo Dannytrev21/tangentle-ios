@@ -89,13 +89,21 @@ Use this template:
 | Integration | {what to integration test} | TangentleTests/Integration/... | {Required/Optional} |
 | UI | {what to UI test} | TangentleUITests/... | {Required/Optional} |
 
+## Technique Matrix
+
+| Step | Problem Type | Planning | Implementation | Verification | Risk |
+|------|--------------|----------|----------------|--------------|------|
+| 1 | {step_type} | {technique} | {technique(s)} | {technique} | {low/medium/high} |
+| 2 | {step_type} | {technique} | {technique(s)} | {technique} | {low/medium/high} |
+| ... | ... | ... | ... | ... | ... |
+
 ## Implementation Steps
 
-| Step | Name | Description | Status |
-|------|------|-------------|--------|
-| 1 | {name} | {description} | Pending |
-| 2 | {name} | {description} | Pending |
-| ... | ... | ... | ... |
+| Step | Name | Description | Type | Risk | Status |
+|------|------|-------------|------|------|--------|
+| 1 | {name} | {description} | {problem_type} | {risk_level} | Pending |
+| 2 | {name} | {description} | {problem_type} | {risk_level} | Pending |
+| ... | ... | ... | ... | ... | ... |
 
 ## Files to Create
 - {path}: {description}
@@ -143,11 +151,116 @@ Proposed
 - {how to address negatives}
 ```
 
+### Step 6.5: Assign Techniques to Steps
+
+For each step identified in the plan, determine the optimal prompt engineering techniques:
+
+#### 1. Classify Step Problem Type
+
+The step's problem type may differ from the overall plan type:
+- A "new-feature" plan may have "test-setup", "ui", and "service-impl" steps
+- A "debug" plan may have "refactor" and "documentation" steps
+- Analyze each step's description to determine its specific type
+
+```bash
+# For each step, classify using CLI:
+cd .claude/scripts && python3 tangentle_plan.py classify "{step description}"
+```
+
+If Python unavailable, use keyword matching:
+- Creates entities/models → `data-modeling`
+- Creates services/repositories → `service-impl`
+- Sets up infrastructure/config → `infrastructure`
+- Creates/modifies UI → `ui`
+- Writes tests → `unit-test` or `integration-test`
+- Fixes bugs → `debug`
+- Restructures code → `refactor`
+- Default → same as overall plan type
+
+#### 2. Select Techniques Per Phase
+
+```bash
+# For each step, get techniques:
+cd .claude/scripts && python3 -c "
+from technique_selector import TechniqueSelector, Phase
+s = TechniqueSelector()
+
+step_type = '{step_problem_type}'
+for phase in [Phase.PLANNING, Phase.IMPLEMENTATION, Phase.VERIFICATION]:
+    tech = s.select_techniques(step_type, phase)
+    print(f'{phase.value}: {tech.primary} (retry: {tech.retry_budget})')
+"
+```
+
+If Python unavailable, use this technique reference table:
+
+| Problem Type | Planning | Implementation | Verification |
+|--------------|----------|----------------|--------------|
+| infrastructure | ps-plus | least-to-most | self-refine |
+| data-modeling | ps-plus | self-refine | tdd |
+| service-impl | ps-plus | tdd, self-refine | reflexion |
+| ui | ps-plus | self-refine | manual |
+| unit-test | ps-plus | tdd | self-refine |
+| debug | react | reflexion | self-refine |
+| algorithm | self-consistency | tdd | reflexion |
+| refactor | ps-plus | self-refine | tdd |
+| documentation | ps-plus | self-refine | got |
+
+#### 3. Assess Risk Per Step
+
+```bash
+# Assess risk for each step:
+cd .claude/scripts && python3 -c "
+from risk_assessor import RiskAssessor, StepInfo
+a = RiskAssessor()
+
+step = StepInfo(
+    problem_type='{step_type}',
+    files_to_modify={file_count},
+    has_data_migration={True|False},
+    affects_persistence={True|False},
+    has_breaking_change={True|False}
+)
+result = a.assess_risk(step)
+print(f'Risk Level: {result.level.value}')
+print(f'Retry Budget: {result.retry_config.max_total}')
+"
+```
+
+Risk level determines retry configuration:
+- **Low**: 3 total retries (2 same, 1 alternative)
+- **Medium**: 5 total retries (3 same, 2 alternative)
+- **High**: 7 total retries (3 same, 3 alternative)
+- **Critical**: 10 total retries (4 same, 4 alternative) + escalation
+
+#### 4. Document Technique Rationale
+
+For each step, note why these techniques were selected:
+- What about the step's requirements led to this technique?
+- What alternatives were considered?
+- What risk factors influenced the selection?
+
 ### Step 7: Create Individual Step Files
 For each implementation step, create `.claude/plans/{NNN}-{slug}/steps/{NN}-{step-name}.md`:
 
 ```markdown
 # Step {N}: {Step Name}
+
+## Problem Type
+`{step_problem_type}`
+
+## Technique Selection
+- **Planning**: {technique} - {rationale for this technique}
+- **Implementation**: {technique(s)} - {rationale}
+- **Verification**: {technique} - {rationale}
+
+## Risk Level
+**{low|medium|high|critical}** - {explanation of risk factors}
+
+## Retry Configuration
+- Same technique: {n} attempts
+- Alternative technique: {n} attempts
+- Escalation: After {n} total failures
 
 ## Context
 {Why this step is needed, what it builds on}
@@ -240,24 +353,46 @@ If verification fails:
   "name": "{feature-slug}",
   "title": "{Feature Name}",
   "description": "{Brief description}",
+  "problemType": "{overall_problem_type}",
+  "problemCategory": "{FOUNDATION|DATA|ARCHITECTURE|UI_UX|TESTING|LOGIC|DOCUMENTATION|META}",
   "createdAt": "{ISO date}",
   "updatedAt": "{ISO date}",
   "status": "not_started",
   "currentStep": 0,
   "totalSteps": {N},
+  "techniqueProfile": {
+    "defaultPlanning": "{technique}",
+    "defaultImplementation": "{technique}",
+    "defaultVerification": "{technique}"
+  },
   "steps": [
     {
       "id": 1,
       "name": "{step-slug}",
       "title": "{Step Title}",
+      "problemType": "{step_problem_type}",
       "status": "pending",
+      "techniques": {
+        "planning": "{technique}",
+        "implementation": ["{technique}", "{optional_secondary}"],
+        "verification": "{technique}"
+      },
+      "techniqueRationale": "{why these techniques were selected}",
+      "riskLevel": "{low|medium|high|critical}",
+      "riskScore": 0.0,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
       "promptGenerated": false,
       "startedAt": null,
       "completedAt": null,
       "verificationPassed": null,
       "testsPassed": null,
       "testsWritten": [],
-      "attempts": 0,
       "notes": ""
     }
   ],

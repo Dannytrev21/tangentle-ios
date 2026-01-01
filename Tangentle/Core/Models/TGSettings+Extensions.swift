@@ -101,15 +101,17 @@ extension TGSettings {
         }
     }
 
-    // MARK: - Convenience Initializer
+    // MARK: - Core Data Lifecycle
 
-    convenience init(context: NSManagedObjectContext) {
-        self.init(context: context)
+    /// Called automatically when a new TGSettings entity is created.
+    /// Sets up default values for the singleton settings object.
+    public override func awakeFromInsert() {
+        super.awakeFromInsert()
         self.id = UUID()
-        self.schedule = .default
-        self.tasks = .default
-        self.display = .default
-        self.coaching = .default
+        self.scheduleSettings = try? JSONEncoder().encode(ScheduleSettings.default)
+        self.taskSettings = try? JSONEncoder().encode(TaskSettings.default)
+        self.displaySettings = try? JSONEncoder().encode(DisplaySettings.default)
+        self.coachingSettings = try? JSONEncoder().encode(CoachingSettings.default)
         self.updatedAt = Date()
     }
 

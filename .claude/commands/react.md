@@ -8,6 +8,7 @@ I will interleave reasoning with actions, observing results and adjusting my app
 
 ---
 
+<!-- SECTION:PLANNING -->
 ## ReAct Loop
 
 ### Cycle 1
@@ -23,8 +24,11 @@ I will interleave reasoning with actions, observing results and adjusting my app
 **Observation 1**: 
 [Results of the action]
 
+<!-- /SECTION:PLANNING -->
+
 ---
 
+<!-- SECTION:IMPLEMENTATION -->
 ### Cycle 2
 
 **Thought 2**: Based on what I observed...
@@ -72,8 +76,11 @@ I will interleave reasoning with actions, observing results and adjusting my app
 **Observation N**:
 [Final results]
 
+<!-- /SECTION:IMPLEMENTATION -->
+
 ---
 
+<!-- SECTION:VERIFICATION -->
 ## Summary
 
 **Journey**:
@@ -84,3 +91,15 @@ I will interleave reasoning with actions, observing results and adjusting my app
 
 **What I would do differently next time**:
 [Lessons learned for similar tasks]
+<!-- /SECTION:VERIFICATION -->
+
+<!-- SECTION:ERROR_RECOVERY -->
+## Error Recovery
+
+If an action produces unexpected results:
+1. Re-evaluate assumptions in the reasoning
+2. Try alternative actions to gather more information
+3. Adjust the strategy based on new observations
+4. Consider if the goal needs clarification
+5. Backtrack to an earlier cycle with new insight
+<!-- /SECTION:ERROR_RECOVERY -->

@@ -8,6 +8,7 @@ I will first understand the problem completely, devise a detailed plan, then exe
 
 ---
 
+<!-- SECTION:PLANNING -->
 ## Phase 1: Problem Understanding
 
 **Problem Statement** (in my own words):
@@ -64,8 +65,11 @@ I will first understand the problem completely, devise a detailed plan, then exe
 
 **Final Step**: [How to produce final output]
 
+<!-- /SECTION:PLANNING -->
+
 ---
 
+<!-- SECTION:IMPLEMENTATION -->
 ## Phase 3: Execution with Intermediate Verification
 
 ### Executing Step 1
@@ -96,8 +100,11 @@ I will first understand the problem completely, devise a detailed plan, then exe
 
 [Continue for all steps...]
 
+<!-- /SECTION:IMPLEMENTATION -->
+
 ---
 
+<!-- SECTION:VERIFICATION -->
 ## Phase 4: Final Verification
 
 **Complete Solution**:
@@ -119,3 +126,15 @@ I will first understand the problem completely, devise a detailed plan, then exe
 - Space: O(?)
 
 **Final Confidence**: [High/Medium/Low] because [reason]
+<!-- /SECTION:VERIFICATION -->
+
+<!-- SECTION:ERROR_RECOVERY -->
+## Error Recovery
+
+If intermediate verification fails:
+1. Identify which step produced incorrect results
+2. Check the inputs to that step
+3. Review the operation being performed
+4. Consider if the plan needs adjustment
+5. Re-execute from the failed step
+<!-- /SECTION:ERROR_RECOVERY -->

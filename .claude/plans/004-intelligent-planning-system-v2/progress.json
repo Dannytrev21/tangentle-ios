@@ -6,9 +6,9 @@
   "problemType": "system-design",
   "problemCategory": "ARCHITECTURE",
   "createdAt": "2025-12-24T00:00:00Z",
-  "updatedAt": "2025-12-31T09:00:00Z",
+  "updatedAt": "2025-12-31T14:00:00Z",
   "status": "in_progress",
-  "currentStep": 7,
+  "currentStep": "8b",
   "totalSteps": 15,
   "techniqueProfile": {
     "defaultPlanning": "tot",
@@ -212,7 +212,7 @@
       "name": "update-plan-feature",
       "title": "Update plan-feature",
       "problemType": "refactor",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["self-refine"],
@@ -226,21 +226,24 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": []
+      "startedAt": "2025-12-31T09:30:00Z",
+      "completedAt": "2025-12-31T10:00:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [],
+      "notes": "No unit tests needed - command file modification verified via grep commands. Added Step 6.5, technique matrix, updated step template, extended progress.json schema"
     },
     {
       "id": "8a",
       "name": "technique-template-extraction",
       "title": "Technique Template Extraction",
       "problemType": "data-modeling",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["self-refine"],
@@ -254,14 +257,18 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1},
+        {"technique": "tdd", "phase": "verification", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": []
+      "startedAt": "2025-12-31T13:00:00Z",
+      "completedAt": "2025-12-31T14:00:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [".claude/scripts/test_template_parser.py"],
+      "notes": "22 unit tests passing. Section markers added to all 10 technique files. Parser handles both marked and legacy templates."
     },
     {
       "id": "8b",
@@ -498,19 +505,33 @@
       ".claude/scripts/test_risk_assessor.py",
       ".claude/scripts/utils.py",
       ".claude/scripts/tangentle_plan.py",
-      ".claude/scripts/test_tangentle_plan.py"
+      ".claude/scripts/test_tangentle_plan.py",
+      ".claude/scripts/template_parser.py",
+      ".claude/scripts/test_template_parser.py"
     ],
     "filesModified": [
       ".claude/technique-config.json",
       ".claude/scripts/__init__.py",
-      ".claude/commands/plan-feature-initial.md"
+      ".claude/commands/plan-feature-initial.md",
+      ".claude/commands/plan-feature.md",
+      ".claude/commands/tdd.md",
+      ".claude/commands/tot.md",
+      ".claude/commands/reflexion.md",
+      ".claude/commands/self-refine.md",
+      ".claude/commands/self-consistency.md",
+      ".claude/commands/react.md",
+      ".claude/commands/ps-plus.md",
+      ".claude/commands/chain-of-code.md",
+      ".claude/commands/got.md",
+      ".claude/commands/least-to-most.md"
     ],
     "testsCreated": [
       ".claude/scripts/test_technique_config.py",
       ".claude/scripts/test_problem_classifier.py",
       ".claude/scripts/test_technique_selector.py",
       ".claude/scripts/test_risk_assessor.py",
-      ".claude/scripts/test_tangentle_plan.py"
+      ".claude/scripts/test_tangentle_plan.py",
+      ".claude/scripts/test_template_parser.py"
     ],
     "keyDecisions": [
       "Classification step inserted as Step 1.5 (before Step 2 analysis)",
@@ -533,7 +554,10 @@
       "Score-to-level thresholds aligned with base scores (<0.35=LOW, <0.6=MEDIUM, <0.85=HIGH, >=0.85=CRITICAL)",
       "CLI uses argparse with subcommand pattern",
       "PlanOrchestrator integrates classifier, selector, and assessor",
-      "Formatted output with progress bars and status indicators"
+      "Formatted output with progress bars and status indicators",
+      "HTML comment markers for section delimiters (<!-- SECTION:NAME -->)",
+      "TechniqueTemplate dataclass with 7 fields: id, name, description, planning_section, implementation_section, verification_section, error_recovery_section, placeholders",
+      "Heuristic parsing for legacy templates via keyword patterns per technique"
     ],
     "blockers": [],
     "learnings": [
@@ -543,7 +567,9 @@
       "Phase enum must use .value for string comparison with config keys",
       "Secondary techniques limited to 2 for composition sanity",
       "Score-to-level thresholds must align with base risk scores from config to avoid unexpected level jumps",
-      "CLI needs to handle working directory changes when run from scripts dir"
+      "CLI needs to handle working directory changes when run from scripts dir",
+      "Technique-specific section patterns needed for heuristic parsing - each technique has unique header styles",
+      "pytest not available in environment - used unittest module instead"
     ]
   }
 }

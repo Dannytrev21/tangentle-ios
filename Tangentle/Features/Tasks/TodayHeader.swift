@@ -27,6 +27,7 @@ struct TodayHeader: View {
                 .accessibilityHidden(true)
         }
         .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("TodayHeader")
         .accessibilityLabel("\(greeting), \(formattedDate)")
     }
 

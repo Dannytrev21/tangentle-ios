@@ -32,6 +32,7 @@ struct TaskSection<Content: View>: View {
             }
             .padding(.horizontal, Spacing.xs)
             .accessibilityElement(children: .combine)
+            .accessibilityIdentifier("\(title)Section")
             .accessibilityLabel("\(title) section, \(count) \(count == 1 ? "task" : "tasks")")
 
             // Section content

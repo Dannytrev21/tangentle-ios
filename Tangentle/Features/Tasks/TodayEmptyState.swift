@@ -29,6 +29,7 @@ struct TodayEmptyState: View {
         .padding(.vertical, Spacing.xxl)
         .frame(maxWidth: .infinity)
         .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("EmptyStateMessage")
         .accessibilityLabel("All clear! No tasks scheduled for today. Enjoy your free time!")
     }
 }

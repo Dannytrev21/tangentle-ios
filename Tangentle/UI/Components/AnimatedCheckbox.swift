@@ -81,7 +81,9 @@ struct AnimatedCheckbox: View {
                     }
                 }
         )
+        .accessibilityIdentifier("Checkbox")
         .accessibilityLabel(isCompleted ? "Completed" : "Not completed")
+        .accessibilityValue(isCompleted ? "checked" : "unchecked")
         .accessibilityHint("Double tap to \(isCompleted ? "uncomplete" : "complete")")
         .accessibilityAddTraits(isCompleted ? .isSelected : [])
         .onChange(of: isCompleted) { _, newValue in

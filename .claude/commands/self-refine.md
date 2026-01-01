@@ -8,6 +8,7 @@ I will generate an initial solution, provide multi-aspect feedback to myself, th
 
 ---
 
+<!-- SECTION:PLANNING -->
 ## Iteration 0: Initial Generation
 
 **First Attempt**:
@@ -15,8 +16,11 @@ I will generate an initial solution, provide multi-aspect feedback to myself, th
 [Initial implementation - don't overthink, just produce something]
 ```
 
+<!-- /SECTION:PLANNING -->
+
 ---
 
+<!-- SECTION:IMPLEMENTATION -->
 ## Iteration 1: Feedback → Refinement
 
 ### Self-Feedback on Iteration 0
@@ -102,8 +106,11 @@ I will generate an initial solution, provide multi-aspect feedback to myself, th
 
 **Is further refinement needed?**: [YES → continue / NO → done]
 
+<!-- /SECTION:IMPLEMENTATION -->
+
 ---
 
+<!-- SECTION:VERIFICATION -->
 ## Stopping Criteria Met
 
 **Final Implementation**:
@@ -124,3 +131,15 @@ I will generate an initial solution, provide multi-aspect feedback to myself, th
 1. [Improvement 1]
 2. [Improvement 2]
 3. [Improvement 3]
+<!-- /SECTION:VERIFICATION -->
+
+<!-- SECTION:ERROR_RECOVERY -->
+## Error Recovery
+
+If refinement is not converging:
+1. Check if feedback is too vague - be more specific
+2. Consider if initial approach is fundamentally flawed
+3. Reset to iteration 0 with a different starting point
+4. Focus on one aspect at a time (correctness first)
+5. Set maximum iteration limit to avoid infinite loops
+<!-- /SECTION:ERROR_RECOVERY -->

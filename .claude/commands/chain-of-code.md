@@ -8,6 +8,7 @@ I will solve this by writing code that mixes executable logic with "LMulator" se
 
 ---
 
+<!-- SECTION:PLANNING -->
 ## Phase 1: Problem Analysis
 
 **What parts require**:
@@ -15,8 +16,11 @@ I will solve this by writing code that mixes executable logic with "LMulator" se
 - **Semantic reasoning** (LMulator): [List - understanding intent, classifying sentiment, interpreting meaning]
 - **Mixed**: [List - parts that need both]
 
+<!-- /SECTION:PLANNING -->
+
 ---
 
+<!-- SECTION:IMPLEMENTATION -->
 ## Phase 2: Code Structure with LMulator Annotations
 
 ```python
@@ -141,8 +145,11 @@ def solve_problem(input_data):
         return generate_general_response(parsed)
 ```
 
+<!-- /SECTION:IMPLEMENTATION -->
+
 ---
 
+<!-- SECTION:VERIFICATION -->
 ## Phase 5: Verification
 
 **Test with examples**:
@@ -166,3 +173,15 @@ def solve_problem(input_data):
 ```
 
 **Key insight**: The power of Chain of Code is recognizing which parts need semantic LLM reasoning vs. which parts need precise computation, and weaving them together seamlessly.
+<!-- /SECTION:VERIFICATION -->
+
+<!-- SECTION:ERROR_RECOVERY -->
+## Error Recovery
+
+If LMulator reasoning produces incorrect results:
+1. Add more explicit reasoning steps
+2. Provide more context to the semantic reasoning
+3. Consider if executable heuristics can approximate the reasoning
+4. Break down complex semantic reasoning into smaller steps
+5. Verify boundary between executable and semantic is correct
+<!-- /SECTION:ERROR_RECOVERY -->

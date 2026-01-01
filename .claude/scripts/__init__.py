@@ -29,6 +29,13 @@ from .utils import (
     format_risk_level,
     format_status
 )
+from .template_parser import (
+    TechniqueTemplate,
+    parse_technique_template,
+    load_all_templates,
+    get_template_section,
+    template_has_section
+)
 
 __all__ = [
     # Problem Classifier
@@ -59,4 +66,10 @@ __all__ = [
     'format_progress_bar',
     'format_risk_level',
     'format_status',
+    # Template Parser
+    'TechniqueTemplate',
+    'parse_technique_template',
+    'load_all_templates',
+    'get_template_section',
+    'template_has_section',
 ]
