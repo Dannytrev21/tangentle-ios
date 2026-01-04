@@ -1,0 +1,60 @@
+# Plan {{PLAN_NUMBER}} Context
+
+This file maintains context for resuming work on this plan from a fresh terminal or after conversation compacting.
+
+## Quick Status
+- **Plan**: {{PLAN_TITLE}}
+- **Current Step**: {{CURRENT_STEP}} - {{CURRENT_STEP_TITLE}}
+- **Last Updated**: {{UPDATED_DATE}}
+- **Progress**: {{COMPLETED_STEPS}}/{{TOTAL_STEPS}} steps complete ({{PROGRESS_PERCENT}}%)
+
+## What's Been Done
+{{DONE_SUMMARY}}
+
+## Files Created
+| File | Purpose |
+|------|---------|
+{{FILES_CREATED_TABLE}}
+
+## Files Modified
+| File | Changes |
+|------|---------|
+{{FILES_MODIFIED_TABLE}}
+
+## Tests Created
+| Test File | Test Cases | Status |
+|-----------|------------|--------|
+{{TESTS_TABLE}}
+
+## Key Decisions Made
+{{KEY_DECISIONS}}
+
+## Current State
+{{CURRENT_STATE}}
+
+## Next Actions
+{{NEXT_ACTIONS}}
+
+---
+
+## Things to Remember
+{{REMEMBER}}
+
+## Blockers
+{{BLOCKERS}}
+
+## Learnings
+{{LEARNINGS}}
+
+---
+
+## Implementation Notes
+
+### Step Dependencies
+{{STEP_DEPENDENCIES}}
+
+### Technique Distribution
+{{TECHNIQUE_DISTRIBUTION}}
+
+### Risk Profile
+{{RISK_PROFILE}}

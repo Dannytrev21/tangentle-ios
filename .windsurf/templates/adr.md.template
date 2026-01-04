@@ -1,0 +1,29 @@
+# Architecture Decision Record: {{PLAN_TITLE}}
+
+## Status
+{{ADR_STATUS}}
+
+## Context
+{{ADR_CONTEXT}}
+
+## Tree of Thought Analysis
+
+{{DECISIONS}}
+
+## Decision Summary
+
+{{DECISION_SUMMARY_TABLE}}
+
+## Consequences
+
+### Positive
+{{CONSEQUENCES_POSITIVE}}
+
+### Negative
+{{CONSEQUENCES_NEGATIVE}}
+
+### Mitigations
+{{MITIGATIONS}}
+
+## Related Decisions
+{{RELATED_DECISIONS}}

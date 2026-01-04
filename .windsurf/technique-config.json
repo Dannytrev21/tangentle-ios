@@ -1,0 +1,492 @@
+{
+  "version": "1.0.0",
+  "problemTypes": {
+    "FOUNDATION": {
+      "description": "Infrastructure, scaffolding, and configuration tasks",
+      "subtypes": {
+        "infrastructure": {
+          "description": "Core infrastructure setup (build systems, CI/CD, tooling)",
+          "keywords": ["infrastructure", "setup", "foundation", "bootstrap", "init", "scaffold"],
+          "riskLevel": "low",
+          "techniques": {
+            "planning": "ps-plus",
+            "implementation": ["least-to-most"],
+            "verification": "self-refine"
+          }
+        },
+        "scaffolding": {
+          "description": "Project structure and boilerplate generation",
+          "keywords": ["scaffolding", "boilerplate", "template", "structure", "skeleton"],
+          "riskLevel": "low",
+          "techniques": {
+            "planning": "ps-plus",
+            "implementation": ["chain-of-code"],
+            "verification": "self-refine"
+          }
+        },
+        "configuration": {
+          "description": "Config files, settings, environment setup",
+          "keywords": ["config", "configuration", "settings", "environment", "env", "plist", "json config"],
+          "riskLevel": "low",
+          "techniques": {
+            "planning": "react",
+            "implementation": ["self-refine"],
+            "verification": "tdd"
+          }
+        }
+      }
+    },
+    "DATA": {
+      "description": "Data modeling, access, and state management tasks",
+      "subtypes": {
+        "data-modeling": {
+          "description": "Core Data models, entity relationships, schemas",
+          "keywords": ["model", "entity", "schema", "core data", "coredata", "relationship", "data model"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "tot",
+            "implementation": ["least-to-most"],
+            "verification": "self-consistency"
+          }
+        },
+        "data-access": {
+          "description": "Repository pattern, CRUD operations, queries",
+          "keywords": ["repository", "crud", "fetch", "query", "database", "persistence", "save", "delete"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "ps-plus",
+            "implementation": ["tdd"],
+            "verification": "reflexion"
+          }
+        },
+        "migration": {
+          "description": "Data migrations, schema updates, data transformations",
+          "keywords": ["migration", "migrate", "upgrade", "schema change", "data transform", "version"],
+          "riskLevel": "high",
+          "techniques": {
+            "planning": "least-to-most",
+            "implementation": ["chain-of-code"],
+            "verification": "reflexion"
+          },
+          "notes": "High risk due to potential data loss"
+        },
+        "state-mgmt": {
+          "description": "State management, observable patterns, data flow",
+          "keywords": ["state", "observable", "@Observable", "binding", "published", "store", "redux"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "tot",
+            "implementation": ["tdd"],
+            "verification": "reflexion"
+          }
+        }
+      }
+    },
+    "ARCHITECTURE": {
+      "description": "System design, protocols, and service implementation",
+      "subtypes": {
+        "system-design": {
+          "description": "High-level architecture, component design, system structure",
+          "keywords": ["architecture", "system design", "design", "structure", "module", "component design"],
+          "riskLevel": "high",
+          "techniques": {
+            "planning": "tot",
+            "implementation": ["self-consistency"],
+            "verification": "got"
+          }
+        },
+        "protocol-design": {
+          "description": "Protocol definitions, interfaces, contracts",
+          "keywords": ["protocol", "interface", "contract", "api design", "abstraction"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "got",
+            "implementation": ["self-refine"],
+            "verification": "self-consistency"
+          }
+        },
+        "di-setup": {
+          "description": "Dependency injection container and setup",
+          "keywords": ["dependency injection", "di", "container", "inject", "resolve", "factory"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "ps-plus",
+            "implementation": ["least-to-most"],
+            "verification": "tdd"
+          }
+        },
+        "service-impl": {
+          "description": "Service layer implementation, business logic services",
+          "keywords": ["service", "business logic", "use case", "interactor", "manager"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "ps-plus",
+            "implementation": ["tdd", "self-refine"],
+            "verification": "reflexion"
+          }
+        },
+        "refactor": {
+          "description": "Code refactoring, restructuring, cleanup",
+          "keywords": ["refactor", "restructure", "cleanup", "reorganize", "extract", "rename"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "ps-plus",
+            "implementation": ["self-refine"],
+            "verification": "tdd"
+          }
+        }
+      }
+    },
+    "UI_UX": {
+      "description": "User interface and experience implementation",
+      "subtypes": {
+        "ui": {
+          "description": "General UI implementation, views, screens",
+          "keywords": ["ui", "view", "screen", "interface", "layout", "swiftui", "uikit"],
+          "riskLevel": "low",
+          "techniques": {
+            "planning": "ps-plus",
+            "implementation": ["self-refine"],
+            "verification": "self-refine"
+          }
+        },
+        "component-lib": {
+          "description": "Reusable component library, design system components",
+          "keywords": ["component", "reusable", "library", "design system", "atomic"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "tot",
+            "implementation": ["self-refine"],
+            "verification": "self-refine"
+          }
+        },
+        "design-tokens": {
+          "description": "Colors, typography, spacing, theme tokens",
+          "keywords": ["color", "typography", "font", "spacing", "theme", "token", "style"],
+          "riskLevel": "low",
+          "techniques": {
+            "planning": "ps-plus",
+            "implementation": ["self-refine"],
+            "verification": "self-refine"
+          }
+        },
+        "animation": {
+          "description": "Animations, transitions, motion design",
+          "keywords": ["animation", "animate", "transition", "motion", "spring", "withAnimation"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "got",
+            "implementation": ["self-refine"],
+            "verification": "self-refine"
+          }
+        },
+        "gesture": {
+          "description": "Gesture handlers, touch interactions, swipe actions",
+          "keywords": ["gesture", "swipe", "tap", "drag", "pan", "touch", "interaction"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "tot",
+            "implementation": ["chain-of-code"],
+            "verification": "self-refine"
+          }
+        },
+        "accessibility": {
+          "description": "Accessibility features, VoiceOver, dynamic type",
+          "keywords": ["accessibility", "a11y", "voiceover", "dynamic type", "accessible"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "ps-plus",
+            "implementation": ["tdd"],
+            "verification": "reflexion"
+          }
+        },
+        "polish": {
+          "description": "UI polish, refinements, visual improvements",
+          "keywords": ["polish", "refine", "improve", "tweak", "adjust", "visual"],
+          "riskLevel": "low",
+          "techniques": {
+            "planning": "react",
+            "implementation": ["self-refine"],
+            "verification": "self-refine"
+          }
+        }
+      }
+    },
+    "TESTING": {
+      "description": "Test implementation and testing infrastructure",
+      "subtypes": {
+        "test-setup": {
+          "description": "Test infrastructure, mocks, fixtures, helpers",
+          "keywords": ["test setup", "mock", "fixture", "test helper", "test infrastructure"],
+          "riskLevel": "low",
+          "techniques": {
+            "planning": "ps-plus",
+            "implementation": ["chain-of-code"],
+            "verification": "self-refine"
+          }
+        },
+        "unit-test": {
+          "description": "Unit tests for individual functions/classes",
+          "keywords": ["unit test", "test case", "test function", "assert", "expect"],
+          "riskLevel": "low",
+          "techniques": {
+            "planning": "ps-plus",
+            "implementation": ["tdd"],
+            "verification": "self-refine"
+          }
+        },
+        "integration-test": {
+          "description": "Integration tests across components",
+          "keywords": ["integration test", "integration", "end to end", "workflow test"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "least-to-most",
+            "implementation": ["tdd"],
+            "verification": "reflexion"
+          }
+        },
+        "snapshot-test": {
+          "description": "UI snapshot tests for visual regression",
+          "keywords": ["snapshot", "screenshot", "visual test", "ui test"],
+          "riskLevel": "low",
+          "techniques": {
+            "planning": "ps-plus",
+            "implementation": ["self-refine"],
+            "verification": "self-refine"
+          }
+        },
+        "e2e-test": {
+          "description": "End-to-end tests with full app simulation",
+          "keywords": ["e2e", "end-to-end", "ui test", "xcuitest", "automation"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "least-to-most",
+            "implementation": ["chain-of-code"],
+            "verification": "reflexion"
+          }
+        },
+        "performance-test": {
+          "description": "Performance and benchmark tests",
+          "keywords": ["performance", "benchmark", "measure", "profile", "optimize"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "tot",
+            "implementation": ["tdd"],
+            "verification": "self-consistency"
+          }
+        }
+      }
+    },
+    "LOGIC": {
+      "description": "Algorithms, validation, and debugging",
+      "subtypes": {
+        "algorithm": {
+          "description": "Algorithm implementation, data structures, sorting, searching",
+          "keywords": ["algorithm", "sort", "search", "binary", "tree", "graph", "optimize"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "self-consistency",
+            "implementation": ["tdd"],
+            "verification": "reflexion"
+          }
+        },
+        "validation": {
+          "description": "Input validation, form validation, data validation",
+          "keywords": ["validation", "validate", "check", "verify", "sanitize", "form"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "ps-plus",
+            "implementation": ["tdd"],
+            "verification": "self-refine"
+          }
+        },
+        "api-integration": {
+          "description": "API client implementation, network calls, data parsing",
+          "keywords": ["api", "network", "http", "rest", "request", "response", "fetch", "oauth", "auth"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "react",
+            "implementation": ["chain-of-code"],
+            "verification": "reflexion"
+          }
+        },
+        "debug": {
+          "description": "Bug fixing, debugging, issue resolution",
+          "keywords": ["bug", "fix", "debug", "issue", "crash", "error", "problem", "broken"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "react",
+            "implementation": ["reflexion"],
+            "verification": "self-refine"
+          }
+        }
+      }
+    },
+    "DOCUMENTATION": {
+      "description": "Documentation and changelog tasks",
+      "subtypes": {
+        "documentation": {
+          "description": "README, guides, API docs, inline documentation",
+          "keywords": ["document", "readme", "guide", "docs", "comment", "docstring"],
+          "riskLevel": "low",
+          "techniques": {
+            "planning": "ps-plus",
+            "implementation": ["self-refine"],
+            "verification": "got"
+          }
+        },
+        "changelog": {
+          "description": "Changelog updates, release notes",
+          "keywords": ["changelog", "release", "version", "notes", "history"],
+          "riskLevel": "low",
+          "techniques": {
+            "planning": "ps-plus",
+            "implementation": ["self-refine"],
+            "verification": "self-refine"
+          }
+        }
+      }
+    },
+    "META": {
+      "description": "Meta-level planning and new feature ideation",
+      "subtypes": {
+        "ideation": {
+          "description": "Brainstorming, exploration, concept development",
+          "keywords": ["idea", "brainstorm", "explore", "concept", "think", "consider"],
+          "riskLevel": "low",
+          "techniques": {
+            "planning": "tot",
+            "implementation": ["self-consistency"],
+            "verification": "got"
+          }
+        },
+        "new-feature": {
+          "description": "New feature implementation (default for unclassified)",
+          "keywords": ["feature", "new", "add", "implement", "create", "build"],
+          "riskLevel": "medium",
+          "techniques": {
+            "planning": "tot",
+            "implementation": ["tdd", "self-refine"],
+            "verification": "reflexion"
+          }
+        }
+      }
+    }
+  },
+  "techniques": {
+    "tot": {
+      "name": "Tree of Thoughts",
+      "description": "Explore multiple reasoning paths as a tree, evaluate each branch, prune unpromising ones",
+      "promptTemplate": ".windsurf/knowledge/techniques/tot.md",
+      "costLevel": "high",
+      "bestFor": ["complex decisions", "system design", "exploration", "multiple valid approaches"]
+    },
+    "got": {
+      "name": "Graph of Thoughts",
+      "description": "Build a graph of ideas, merge compatible thoughts, refine through aggregation",
+      "promptTemplate": ".windsurf/knowledge/techniques/got.md",
+      "costLevel": "high",
+      "bestFor": ["merging ideas", "refinement", "documentation review", "protocol design"]
+    },
+    "reflexion": {
+      "name": "Reflexion",
+      "description": "Attempt, evaluate, reflect on failures, store lessons in memory bank, retry with wisdom",
+      "promptTemplate": ".windsurf/knowledge/techniques/reflexion.md",
+      "costLevel": "medium",
+      "bestFor": ["learning from failures", "self-correction", "debugging", "verification"]
+    },
+    "self-consistency": {
+      "name": "Self-Consistency",
+      "description": "Generate multiple independent solutions, select the most consistent answer",
+      "promptTemplate": ".windsurf/knowledge/techniques/self-consistency.md",
+      "costLevel": "high",
+      "bestFor": ["algorithm verification", "system design validation", "correctness checking"]
+    },
+    "self-refine": {
+      "name": "Self-Refine",
+      "description": "Generate, get feedback, refine iteratively until quality threshold met",
+      "promptTemplate": ".windsurf/knowledge/techniques/self-refine.md",
+      "costLevel": "medium",
+      "bestFor": ["UI polish", "code quality", "documentation", "iterative improvement"]
+    },
+    "tdd": {
+      "name": "Test-Driven Development",
+      "description": "Write failing tests first, implement just enough to pass, then refactor",
+      "promptTemplate": ".windsurf/knowledge/techniques/tdd.md",
+      "costLevel": "medium",
+      "bestFor": ["algorithm implementation", "validation logic", "data access", "service implementation"]
+    },
+    "react": {
+      "name": "ReAct",
+      "description": "Reason about actions, take action, observe results, iterate",
+      "promptTemplate": ".windsurf/knowledge/techniques/react.md",
+      "costLevel": "medium",
+      "bestFor": ["debugging", "interactive problem-solving", "API integration", "configuration"]
+    },
+    "ps-plus": {
+      "name": "Plan-and-Solve Plus",
+      "description": "Structured planning with problem decomposition and step extraction",
+      "promptTemplate": ".windsurf/knowledge/techniques/ps-plus.md",
+      "costLevel": "low",
+      "bestFor": ["structured planning", "straightforward implementation", "documentation"]
+    },
+    "chain-of-code": {
+      "name": "Chain of Code",
+      "description": "Mix semantic reasoning with code execution for complex logic",
+      "promptTemplate": ".windsurf/knowledge/techniques/chain-of-code.md",
+      "costLevel": "medium",
+      "bestFor": ["mixed logic/semantic tasks", "scaffolding", "migration", "E2E tests"]
+    },
+    "least-to-most": {
+      "name": "Least-to-Most",
+      "description": "Decompose into subproblems, solve simplest first, build up to complex",
+      "promptTemplate": ".windsurf/knowledge/techniques/least-to-most.md",
+      "costLevel": "low",
+      "bestFor": ["decomposition", "infrastructure setup", "data modeling", "integration tests"]
+    }
+  },
+  "riskLevels": {
+    "low": {
+      "description": "Low-risk tasks like documentation, configuration, simple UI",
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      }
+    },
+    "medium": {
+      "description": "Medium-risk tasks like service implementation, data access, refactoring",
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      }
+    },
+    "high": {
+      "description": "High-risk tasks like migrations, system design, complex algorithms",
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 3,
+        "maxTotal": 7
+      }
+    },
+    "critical": {
+      "description": "Critical tasks requiring maximum self-correction (data migrations, security)",
+      "retryConfig": {
+        "maxSameTechnique": 5,
+        "maxAlternative": 5,
+        "maxTotal": 10
+      }
+    }
+  },
+  "defaults": {
+    "unknownProblemType": "new-feature",
+    "unknownCategory": "META",
+    "defaultRiskLevel": "medium",
+    "defaultTechniques": {
+      "planning": "tot",
+      "implementation": ["self-refine"],
+      "verification": "reflexion"
+    }
+  }
+}

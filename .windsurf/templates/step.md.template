@@ -1,0 +1,67 @@
+# Step {{STEP_NUMBER}}: {{STEP_TITLE}}
+
+## Problem Type
+`{{PROBLEM_TYPE}}`
+
+## Technique Selection
+- **Planning**: {{TECHNIQUE_PLANNING}} - {{TECHNIQUE_PLANNING_RATIONALE}}
+- **Implementation**: {{TECHNIQUE_IMPLEMENTATION}} - {{TECHNIQUE_IMPLEMENTATION_RATIONALE}}
+- **Verification**: {{TECHNIQUE_VERIFICATION}} - {{TECHNIQUE_VERIFICATION_RATIONALE}}
+
+## Risk Level
+**{{RISK_LEVEL}}** - {{RISK_RATIONALE}}
+
+## Retry Configuration
+- Same technique: {{RETRY_SAME}} attempts
+- Alternative technique: {{RETRY_ALT}} attempts
+- Escalation: After {{RETRY_TOTAL}} total failures
+
+## Context
+{{STEP_CONTEXT}}
+
+## Goal
+{{STEP_GOAL}}
+
+## Prerequisites
+{{PREREQUISITES}}
+
+## High-Level Steps
+{{HIGH_LEVEL_STEPS}}
+
+## Detailed Requirements
+{{DETAILED_REQUIREMENTS}}
+
+## Files to Create
+{{FILES_TO_CREATE}}
+
+## Files to Modify
+{{FILES_TO_MODIFY}}
+
+## Patterns to Follow
+{{PATTERNS}}
+
+## Acceptance Criteria
+{{ACCEPTANCE_CRITERIA}}
+
+## Testing Requirements
+
+### Unit Tests
+{{UNIT_TESTS}}
+
+### Integration Tests
+{{INTEGRATION_TESTS}}
+
+### Manual Verification
+{{MANUAL_VERIFICATION}}
+
+## Verification Commands
+{{VERIFICATION_COMMANDS}}
+
+## Documentation Updates
+{{DOC_UPDATES}}
+
+## Error Recovery
+{{ERROR_RECOVERY}}
+
+## Do NOT
+{{DO_NOT}}

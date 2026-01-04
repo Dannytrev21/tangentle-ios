@@ -6,9 +6,10 @@
   "problemType": "system-design",
   "problemCategory": "ARCHITECTURE",
   "createdAt": "2025-12-24T00:00:00Z",
-  "updatedAt": "2025-12-31T14:00:00Z",
-  "status": "in_progress",
-  "currentStep": "8b",
+  "updatedAt": "2026-01-02T13:00:00Z",
+  "status": "completed",
+  "currentStep": 15,
+  "completedAt": "2026-01-02T13:00:00Z",
   "totalSteps": 15,
   "techniqueProfile": {
     "defaultPlanning": "tot",
@@ -275,7 +276,7 @@
       "name": "prompt-embedding",
       "title": "Prompt Embedding",
       "problemType": "system-design",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "tot",
         "implementation": ["self-refine"],
@@ -289,21 +290,24 @@
         "maxAlternative": 3,
         "maxTotal": 7
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": []
+      "startedAt": "2026-01-01T12:00:00Z",
+      "completedAt": "2026-01-01T13:00:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [".claude/scripts/test_prompt_composer.py"],
+      "notes": "26 unit tests passing. Prompt composer handles single/multi-technique, placeholder substitution, and length management."
     },
     {
       "id": 9,
       "name": "update-plan-next",
       "title": "Update plan-next",
       "problemType": "service-impl",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["chain-of-code"],
@@ -317,21 +321,25 @@
         "maxAlternative": 3,
         "maxTotal": 7
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "chain-of-code", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": []
+      "startedAt": "2026-01-01T14:00:00Z",
+      "completedAt": "2026-01-01T14:30:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [],
+      "notes": "No unit tests needed - command file modification verified via grep commands. Added technique display, phase execution, self-correction with retry config, and technique tracking."
     },
     {
       "id": 10,
       "name": "update-plan-verify",
       "title": "Update plan-verify",
       "problemType": "refactor",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["self-refine"],
@@ -345,21 +353,24 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": []
+      "startedAt": "2026-01-01T14:45:00Z",
+      "completedAt": "2026-01-01T15:00:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [],
+      "notes": "No unit tests needed - command file modification verified via grep commands. Added technique-specific verification, failure analysis, and technique switch suggestions."
     },
     {
       "id": 11,
       "name": "update-plan-rollback",
       "title": "Update plan-rollback",
       "problemType": "refactor",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["self-refine"],
@@ -373,21 +384,24 @@
         "maxAlternative": 1,
         "maxTotal": 3
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": []
+      "startedAt": "2026-01-01T15:30:00Z",
+      "completedAt": "2026-01-01T15:45:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [],
+      "notes": "No unit tests needed - command file modification verified via grep commands. Added technique execution history display, preserve lessons option, technique state reset, and context.md technique details."
     },
     {
       "id": 12,
       "name": "update-plan-feature-review",
       "title": "Update plan-feature-review",
       "problemType": "refactor",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "tot",
         "implementation": ["self-refine"],
@@ -401,21 +415,25 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1},
+        {"technique": "got", "phase": "verification", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": []
+      "startedAt": "2026-01-02T09:30:00Z",
+      "completedAt": "2026-01-02T10:00:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [],
+      "notes": "No unit tests needed - command file modification verified via grep commands. Added Branch 6: Technique Appropriateness, scoring criteria, technique change recommendations, updated total to /60."
     },
     {
       "id": 13,
       "name": "self-correction-engine",
       "title": "Self-Correction Engine",
       "problemType": "algorithm",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "tot",
         "implementation": ["reflexion"],
@@ -429,21 +447,25 @@
         "maxAlternative": 3,
         "maxTotal": 7
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "reflexion", "phase": "implementation", "attempts": 1},
+        {"technique": "self-consistency", "phase": "verification", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": []
+      "startedAt": "2026-01-02T10:30:00Z",
+      "completedAt": "2026-01-02T11:00:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [".claude/scripts/test_self_correction.py"],
+      "notes": "37 unit tests passing. Created MemoryBank for lesson persistence, SelfCorrectionEngine with failure analysis, technique rotation, and escalation logic."
     },
     {
       "id": 14,
       "name": "documentation-testing",
       "title": "Documentation & Testing",
       "problemType": "documentation",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["self-refine"],
@@ -457,14 +479,19 @@
         "maxAlternative": 1,
         "maxTotal": 3
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1},
+        {"technique": "got", "phase": "verification", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": []
+      "startedAt": "2026-01-02T11:30:00Z",
+      "completedAt": "2026-01-02T12:00:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [".claude/scripts/test_integration.py"],
+      "notes": "21 integration tests, 106 total tests passing. CLAUDE.md and scripts README.md created."
     }
   ],
   "reviews": [
@@ -507,7 +534,14 @@
       ".claude/scripts/tangentle_plan.py",
       ".claude/scripts/test_tangentle_plan.py",
       ".claude/scripts/template_parser.py",
-      ".claude/scripts/test_template_parser.py"
+      ".claude/scripts/test_template_parser.py",
+      ".claude/scripts/prompt_composer.py",
+      ".claude/scripts/test_prompt_composer.py",
+      ".claude/scripts/memory_bank.py",
+      ".claude/scripts/self_correction.py",
+      ".claude/scripts/test_self_correction.py",
+      ".claude/scripts/README.md",
+      ".claude/scripts/test_integration.py"
     ],
     "filesModified": [
       ".claude/technique-config.json",
@@ -523,7 +557,8 @@
       ".claude/commands/ps-plus.md",
       ".claude/commands/chain-of-code.md",
       ".claude/commands/got.md",
-      ".claude/commands/least-to-most.md"
+      ".claude/commands/least-to-most.md",
+      "CLAUDE.md"
     ],
     "testsCreated": [
       ".claude/scripts/test_technique_config.py",
@@ -531,7 +566,10 @@
       ".claude/scripts/test_technique_selector.py",
       ".claude/scripts/test_risk_assessor.py",
       ".claude/scripts/test_tangentle_plan.py",
-      ".claude/scripts/test_template_parser.py"
+      ".claude/scripts/test_template_parser.py",
+      ".claude/scripts/test_prompt_composer.py",
+      ".claude/scripts/test_self_correction.py",
+      ".claude/scripts/test_integration.py"
     ],
     "keyDecisions": [
       "Classification step inserted as Step 1.5 (before Step 2 analysis)",

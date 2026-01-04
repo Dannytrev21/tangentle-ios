@@ -1,0 +1,51 @@
+# Plan {{PLAN_NUMBER}}: {{PLAN_TITLE}}
+
+## Overview
+{{OVERVIEW}}
+
+## Status
+- **Created**: {{CREATED_DATE}}
+- **Status**: {{STATUS}}
+- **Current Step**: {{CURRENT_STEP}} of {{TOTAL_STEPS}}
+- **Problem Type**: {{PROBLEM_TYPE}} (Category: {{PROBLEM_CATEGORY}})
+- **Risk Level**: {{RISK_LEVEL}} ({{RISK_SCORE}})
+
+## Tree of Thought Analysis
+
+### What are we building?
+{{TOT_WHAT}}
+
+### Why are we building it?
+{{TOT_WHY}}
+
+### Key Decisions
+{{DECISIONS_SUMMARY}}
+
+### Testing Strategy
+{{TESTING_STRATEGY}}
+
+## Technique Matrix
+
+{{TECHNIQUES_TABLE}}
+
+## Implementation Steps
+
+{{STEPS_TABLE}}
+
+## Files to Create
+{{FILES_TO_CREATE}}
+
+## Files to Modify
+{{FILES_TO_MODIFY}}
+
+## Dependencies
+{{DEPENDENCIES}}
+
+## Success Criteria
+{{SUCCESS_CRITERIA}}
+
+## Rollback Plan
+{{ROLLBACK_PLAN}}
+
+## Constraints
+{{CONSTRAINTS}}

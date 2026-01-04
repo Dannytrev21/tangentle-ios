@@ -1,0 +1,27 @@
+{
+  "planId": {{PLAN_NUMBER}},
+  "name": {{PLAN_SLUG}},
+  "title": {{PLAN_TITLE}},
+  "description": {{DESCRIPTION}},
+  "problemType": {{PROBLEM_TYPE}},
+  "problemCategory": {{PROBLEM_CATEGORY}},
+  "createdAt": {{CREATED_DATE}},
+  "updatedAt": {{UPDATED_DATE}},
+  "status": {{STATUS}},
+  "currentStep": {{CURRENT_STEP}},
+  "totalSteps": {{TOTAL_STEPS}},
+  "techniqueProfile": {
+    "defaultPlanning": {{DEFAULT_PLANNING}},
+    "defaultImplementation": {{DEFAULT_IMPLEMENTATION}},
+    "defaultVerification": {{DEFAULT_VERIFICATION}}
+  },
+  "steps": {{STEPS_ARRAY}},
+  "context": {
+    "filesCreated": [],
+    "filesModified": [],
+    "testsCreated": [],
+    "keyDecisions": [],
+    "blockers": [],
+    "learnings": []
+  }
+}

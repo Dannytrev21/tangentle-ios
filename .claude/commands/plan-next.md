@@ -84,13 +84,91 @@ Ready to proceed? Starting implementation...
 ═══════════════════════════════════════════════════════════════
 ```
 
-### Step 6: Load and Execute Prompt
+### Step 5.5: Display Technique Information
+
+If the step has technique assignments in progress.json (technique-aware plans), display before execution:
+
+```
+═══════════════════════════════════════════════════════════════
+  STEP EXECUTION: {N} of {Total} - {Step Name}
+═══════════════════════════════════════════════════════════════
+
+  Problem Type: {step.problemType}
+  Risk Level: {step.riskLevel}
+
+  Techniques:
+  ┌─────────────────┬────────────────────────────────────────┐
+  │ Planning        │ {step.techniques.planning}             │
+  │ Implementation  │ {step.techniques.implementation}       │
+  │ Verification    │ {step.techniques.verification}         │
+  └─────────────────┴────────────────────────────────────────┘
+
+  Retry Budget:
+  - Same technique: {step.retryConfig.maxSameTechnique} attempts
+  - Alternative: {step.retryConfig.maxAlternative} attempts
+  - Total budget: {step.retryConfig.maxTotal}
+
+═══════════════════════════════════════════════════════════════
+```
+
+**Note**: For plans without technique metadata (legacy plans), skip this section and proceed with standard execution.
+
+### Step 6: Load and Execute Prompt with Technique Phases
 Read the prompt file:
 ```bash
 cat $PLAN_DIR/prompts/{NN}-{step-name}.prompt.md
 ```
 
-Then execute the prompt contents:
+Then execute the prompt contents using technique phases (if technique-aware plan):
+
+#### Phase A: Planning
+
+If the step has a planning technique assigned:
+
+1. Locate the **Planning Methodology** section in the prompt
+2. Execute the planning steps as described by the technique:
+   - **ToT (Tree of Thoughts)**: Generate multiple approaches, evaluate each, select best
+   - **PS+ (Plan-and-Solve Plus)**: Break down problem, create structured plan
+   - **Self-Consistency**: Generate multiple plans, find consensus
+3. Document planning decisions in your notes
+4. **Log**: "Planning phase complete using {technique}"
+
+For steps without a planning methodology section, proceed to implementation.
+
+#### Phase B: Implementation
+
+Execute using the assigned implementation technique(s):
+
+1. Load the **Implementation Methodology** section from the prompt
+2. For single technique:
+   - Execute according to technique methodology
+   - **TDD**: Write tests first, then implementation
+   - **Self-Refine**: Implement, generate feedback, refine
+   - **Reflexion**: Implement with reflection on past failures
+   - **Chain-of-Code**: Mix executable logic with semantic reasoning
+3. For multi-technique steps (e.g., ["tdd", "self-refine"]):
+   - Execute primary technique first (TDD: write tests, implement)
+   - Apply secondary technique (Self-Refine: polish implementation)
+4. Track which techniques were actually used
+5. **Log**: "Implementation complete using {technique(s)}"
+
+#### Phase C: Verification
+
+Apply the verification technique:
+
+1. Load the **Verification Methodology** section from prompt
+2. Execute based on assigned technique:
+   - **Reflexion**: Set up memory bank for lessons, track what worked/failed
+   - **Self-Consistency**: Run verification multiple ways, check agreement
+   - **TDD**: Run test suite, all tests must pass
+   - **Self-Refine**: Generate quality feedback, iterate if needed
+   - **GoT (Graph of Thoughts)**: Aggregate findings from multiple paths
+3. Record verification outcome
+4. **Log**: "Verification using {technique}"
+
+#### Standard Execution (Legacy Plans)
+
+For plans without technique metadata, use the standard flow:
 
 1. **Pre-Implementation Checklist**
    - Read all required files
@@ -117,7 +195,9 @@ Then execute the prompt contents:
    - Update context.md
    - Update documentation if required
 
-### Step 7: Handle Verification Results
+### Step 7: Handle Verification Results with Self-Correction
+
+For technique-aware plans, use the step's retry configuration for self-correction. For legacy plans, use the default 2-attempt limit.
 
 #### Pre-Completion Check: Tests Required
 Before marking any step complete, verify:
@@ -134,20 +214,91 @@ xcodebuild test -scheme Tangentle -sdk iphonesimulator \
 
 **If tests are missing or failing, the step is NOT complete.**
 
+#### Self-Correction Protocol (Technique-Aware Plans)
+
+If verification fails, apply self-correction based on retry configuration:
+
+##### Attempt 1 of {maxSameTechnique} (Same Technique)
+```
+Current: Attempt 1 of {step.retryConfig.maxSameTechnique}
+Technique: {current_technique}
+```
+
+1. Read error/failure details carefully
+2. Apply technique-specific recovery:
+   - **Reflexion**: Add failure to memory bank, consult lessons learned
+   - **TDD**: Analyze failing tests, fix implementation to match
+   - **Self-Refine**: Generate feedback on what went wrong, apply refinement
+   - **Chain-of-Code**: Check if LMulator/executable boundary is correct
+3. Retry implementation with same technique
+4. Record: "Attempt {n}: {what was tried} → {outcome}"
+
+##### If Same Technique Exhausted → Rotate Technique
+```
+Switching technique: {current} → {alternative}
+Attempt 1 of {step.retryConfig.maxAlternative}
+```
+
+1. Load alternative technique from rotation (e.g., Self-Refine → Reflexion)
+2. Regenerate approach using new technique methodology
+3. Retry implementation with new technique
+4. Record: "Rotated from {old} to {new}: {rationale}"
+
+##### If All Retries Exhausted → Escalate
+```
+═══════════════════════════════════════════════════════════════
+  ⚠️ ESCALATION REQUIRED
+  All {step.retryConfig.maxTotal} attempts exhausted.
+═══════════════════════════════════════════════════════════════
+
+  Techniques tried:
+  - {technique1}: {attempts} attempts
+  - {technique2}: {attempts} attempts
+
+  Last error: {error_summary}
+
+  Options:
+  1. Review error details and provide guidance
+  2. Modify step requirements
+  3. Mark as blocked and continue with next step
+  4. Manual intervention needed
+═══════════════════════════════════════════════════════════════
+```
+
+1. Document all attempts and failures
+2. Save partial progress to progress.json
+3. Update context.md with detailed failure log
+4. **Do NOT mark step as failed without user input**
+
 #### If ALL Acceptance Criteria AND Tests Pass:
 
-1. **Update progress.json**:
+1. **Update progress.json** with technique tracking:
 ```javascript
 // Read current progress
 const progress = JSON.parse(fs.readFileSync('progress.json'));
 
-// Update current step
+// Update current step - Standard fields
 progress.steps[currentStep - 1].status = 'completed';
 progress.steps[currentStep - 1].completedAt = new Date().toISOString();
 progress.steps[currentStep - 1].verificationPassed = true;
 progress.steps[currentStep - 1].testsPassed = true;
-progress.steps[currentStep - 1].testsWritten = ['TestFile1.swift', 'TestFile2.swift']; // actual test files
+progress.steps[currentStep - 1].testsWritten = ['TestFile1.swift', 'TestFile2.swift'];
 progress.steps[currentStep - 1].attempts = (progress.steps[currentStep - 1].attempts || 0) + 1;
+
+// Technique tracking (for technique-aware plans)
+progress.steps[currentStep - 1].techniquesUsed = [
+  // Record actual techniques used in each phase
+  {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+  {"technique": "chain-of-code", "phase": "implementation", "attempts": 1},
+  {"technique": "reflexion", "phase": "verification", "attempts": 2}
+];
+progress.steps[currentStep - 1].finalAttempt = 2;
+progress.steps[currentStep - 1].techniqueRotations = 0;  // How many times we switched techniques
+progress.steps[currentStep - 1].selfCorrectionNotes = [
+  // If any retries occurred, document what happened
+  "Attempt 1: Failed due to missing edge case",
+  "Attempt 2: Added nil check, succeeded"
+];
 
 // Advance to next step
 progress.currentStep = currentStep + 1;
@@ -167,8 +318,9 @@ if (progress.currentStep > progress.totalSteps) {
 fs.writeFileSync('progress.json', JSON.stringify(progress, null, 2));
 ```
 
-2. **Update context.md**:
-Add a new section:
+2. **Update context.md** with technique execution log:
+
+For technique-aware plans, include the technique execution log:
 ```markdown
 ---
 
@@ -176,6 +328,14 @@ Add a new section:
 
 ### Summary
 {What was accomplished}
+
+### Technique Execution Log
+- **Planning**: {technique} - success on attempt 1
+- **Implementation**: {technique} - success on attempt 1
+- **Verification**: {technique} - success on attempt {n}
+  - Attempt 1: Failed due to {reason}
+  - Lesson learned: {lesson}
+  - Attempt 2: Applied {fix}, succeeded
 
 ### Files Created
 - `{path}`: {purpose}
@@ -203,6 +363,8 @@ Add a new section:
 Step {N+1}: {Next step name}
 Prerequisites met: {yes/no}
 ```
+
+For legacy plans without technique metadata, omit the "Technique Execution Log" section.
 
 3. **Output Success**:
 ```

@@ -241,23 +241,133 @@ This project uses an automated planning system for complex features.
 ### Commands
 | Command | Description |
 |---------|-------------|
-| `/plan-feature {description}` | Create implementation plan |
+| `/plan-feature-initial {desc}` | Gather requirements (auto-detects problem type) |
+| `/plan-feature {description}` | Create full implementation plan |
 | `/plan-prompts {plan#}` | Generate AI prompts for steps |
-| `/plan-next {plan#}` | Execute next step |
+| `/plan-next {plan#}` | Execute next step (phase-based) |
 | `/plan-status {plan#}` | Check progress |
-| `/plan-verify {plan#}` | Re-run verification |
-| `/plan-rollback {plan#}` | Rollback failed step |
+| `/plan-verify {plan#}` | Re-run verification (technique-aware) |
+| `/plan-rollback {plan#}` | Rollback step (preserves memory bank) |
+| `/plan-feature-review {plan#}` | Review plan quality |
 
 ### Plan Structure
 ```
 .claude/plans/{NNN}-{feature-slug}/
-├── plan.md           # Main plan with Tree of Thought
+├── plan.md           # Main plan with technique matrix
 ├── adr.md            # Architecture Decision Record
-├── steps/            # Step specifications
-├── prompts/          # AI prompts
-├── progress.json     # Progress tracking
+├── steps/            # Step specifications (with techniques)
+├── prompts/          # AI prompts (technique-embedded)
+├── progress.json     # Progress tracking (with technique metadata)
 └── context.md        # Session context
 ```
+
+## Intelligent Planning System v2
+
+The planning system automatically selects optimal prompt engineering techniques based on problem type and workflow phase.
+
+### Problem Type Taxonomy
+
+| Category | Problem Types |
+|----------|---------------|
+| FOUNDATION | infrastructure, scaffolding, configuration |
+| DATA | data-modeling, data-access, migration, state-mgmt |
+| ARCHITECTURE | system-design, protocol-design, di-setup, service-impl, refactor |
+| UI/UX | ui, component-lib, design-tokens, animation, gesture, accessibility, polish |
+| TESTING | test-setup, unit-test, integration-test, snapshot-test, e2e-test, performance-test |
+| LOGIC | algorithm, validation, api-integration, debug |
+| DOCUMENTATION | documentation, changelog |
+| META | ideation, new-feature |
+
+### Prompt Engineering Techniques
+
+| Technique | Best For | Cost |
+|-----------|----------|------|
+| ToT (Tree of Thoughts) | Complex decisions, exploration | High |
+| GoT (Graph of Thoughts) | Merging ideas, refinement | High |
+| Self-Consistency | Algorithm verification | High |
+| Reflexion | Learning from failures | Medium-High |
+| Self-Refine | Iterative improvement | Medium |
+| TDD | Implementation with tests | Medium |
+| ReAct | Interactive problem-solving | Medium |
+| Chain-of-Code | Mixed logic/semantic tasks | Medium |
+| PS+ (Plan-and-Solve Plus) | Structured planning | Low |
+| Least-to-Most | Decomposition | Low |
+
+### Phase-Based Technique Selection
+
+Each step is executed in three phases, each with an assigned technique:
+
+| Phase | Purpose | Common Techniques |
+|-------|---------|-------------------|
+| Planning | Understand and design | PS+, ToT, ReAct |
+| Implementation | Write code | TDD, Self-Refine, Reflexion |
+| Verification | Validate correctness | TDD, Self-Consistency, GoT |
+
+### CLI Tool
+
+The planning system includes Python scripts for automation:
+
+```bash
+# Classify a problem description
+python3 .claude/scripts/tangentle_plan.py classify "Fix the login bug"
+
+# Show techniques for a problem type
+python3 .claude/scripts/tangentle_plan.py techniques debug
+
+# Assess risk for a step
+python3 .claude/scripts/tangentle_plan.py risk migration
+
+# Check plan status
+python3 .claude/scripts/tangentle_plan.py status 004
+
+# List all plans
+python3 .claude/scripts/tangentle_plan.py list
+```
+
+### Configuration
+
+Technique mappings can be customized in `.claude/technique-config.json`:
+
+```json
+{
+  "problemTypes": {
+    "LOGIC": {
+      "subtypes": {
+        "debug": {
+          "techniques": {
+            "planning": "react",
+            "implementation": ["reflexion"],
+            "verification": "self-refine"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Self-Correction Engine
+
+High-risk steps use Reflexion-based self-correction with memory bank:
+
+| Risk Level | Same Technique Retries | Alternative Retries | Total Budget |
+|------------|------------------------|---------------------|--------------|
+| Low | 2 | 1 | 3 |
+| Medium | 3 | 2 | 5 |
+| High | 3 | 3 | 7 |
+| Critical | 5 | 5 | 10 |
+
+**Memory Bank**: Lessons learned from failures persist across retries and can be preserved during rollback.
+
+**Technique Rotation**: When same-technique retries fail, the engine rotates to alternative techniques based on failure patterns:
+
+| Failure Pattern | Suggested Technique |
+|-----------------|---------------------|
+| Edge case, missing case | TDD |
+| Not converging, iteration | Self-Consistency |
+| Architecture, complex | ToT |
+| Async, timing | ReAct |
+| Memory, repeat mistakes | Reflexion |
 
 ## Current Plans
 
@@ -270,6 +380,14 @@ Creates the base project with:
 - AI service integration
 - Minimal UI shell
 - Testing infrastructure
+
+### Plan 004: Intelligent Planning System v2 (In Progress)
+Upgrades the planning system with:
+- Automatic problem type classification
+- Phase-based technique selection
+- Risk assessment with retry budgets
+- Self-correction with memory bank
+- Technique-aware prompts and verification
 
 ## Communication Style
 

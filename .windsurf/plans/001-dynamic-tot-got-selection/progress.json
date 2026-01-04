@@ -1,0 +1,243 @@
+{
+  "planId": "001",
+  "name": "dynamic-tot-got-selection",
+  "title": "Dynamic ToT/GoT Selection & Windsurf Rules Integration",
+  "description": "Enhance the Windsurf planning system with dynamic selection between Tree of Thoughts (ToT) and Graph of Thoughts (GoT) based on problem characteristics, plus Windsurf rules to offload workflow content",
+  "problemType": "refactor",
+  "problemCategory": "ARCHITECTURE",
+  "createdAt": "2026-01-04T13:00:00Z",
+  "updatedAt": "2026-01-04T13:00:00Z",
+  "status": "not_started",
+  "currentStep": 0,
+  "totalSteps": 6,
+  "techniqueProfile": {
+    "defaultPlanning": "ps-plus",
+    "defaultImplementation": "self-refine",
+    "defaultVerification": "got"
+  },
+  "steps": [
+    {
+      "id": 1,
+      "name": "python-reasoning-selector",
+      "title": "Python Reasoning Technique Selector",
+      "problemType": "service-impl",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["tdd"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "TDD for testable selection logic; Reflexion to learn from test failures",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": ""
+    },
+    {
+      "id": 2,
+      "name": "update-plan-feature-initial",
+      "title": "Update plan-feature-initial Workflow",
+      "problemType": "service-impl",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "tdd"
+      },
+      "techniqueRationale": "Self-Refine for iterative workflow updates; TDD for character count validation",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": ""
+    },
+    {
+      "id": 3,
+      "name": "update-plan-feature",
+      "title": "Update plan-feature Workflow",
+      "problemType": "service-impl",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "tdd"
+      },
+      "techniqueRationale": "Self-Refine for iterative workflow updates; TDD for character count validation",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "name": "create-windsurf-rules",
+      "title": "Create Windsurf Rules",
+      "problemType": "infrastructure",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["least-to-most"],
+        "verification": "self-refine"
+      },
+      "techniqueRationale": "Least-to-Most for incremental rule creation; Self-Refine for content iteration",
+      "riskLevel": "low",
+      "riskScore": 0.2,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": ""
+    },
+    {
+      "id": 5,
+      "name": "update-knowledge-base",
+      "title": "Update Knowledge Base",
+      "problemType": "infrastructure",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["least-to-most"],
+        "verification": "self-refine"
+      },
+      "techniqueRationale": "Least-to-Most for building from existing docs; Self-Refine for clarity",
+      "riskLevel": "low",
+      "riskScore": 0.2,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": ""
+    },
+    {
+      "id": 6,
+      "name": "integration-testing",
+      "title": "Integration Testing",
+      "problemType": "integration-test",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["tdd"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "TDD for integration test scenarios; Reflexion to learn from failures",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": ""
+    }
+  ],
+  "context": {
+    "filesCreated": [],
+    "filesModified": [],
+    "testsCreated": [],
+    "keyDecisions": [
+      "Hybrid Python + rules approach for selection logic",
+      "Category defaults with characteristic overrides",
+      "Three focused rules: conventions, technique-selection, no-staging",
+      "Offload common patterns to rules for character budget"
+    ],
+    "blockers": [],
+    "learnings": []
+  }
+}

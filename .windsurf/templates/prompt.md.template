@@ -1,0 +1,70 @@
+# Prompt: Step {{STEP_NUMBER}} - {{STEP_TITLE}}
+
+## Mission
+{{MISSION}}
+
+## Context
+You are implementing step {{STEP_NUMBER}} of {{TOTAL_STEPS}} in the "{{PLAN_TITLE}}" plan.
+
+**Plan Summary**: {{PLAN_SUMMARY}}
+
+**This Step**: {{STEP_PURPOSE}}
+
+**Dependencies**:
+- Requires: {{REQUIRES}}
+- Enables: {{ENABLES}}
+
+## Technique Assignment
+
+| Phase | Technique | Why |
+|-------|-----------|-----|
+| Planning | {{TECHNIQUE_PLANNING}} | {{TECHNIQUE_PLANNING_RATIONALE}} |
+| Implementation | {{TECHNIQUE_IMPLEMENTATION}} | {{TECHNIQUE_IMPLEMENTATION_RATIONALE}} |
+| Verification | {{TECHNIQUE_VERIFICATION}} | {{TECHNIQUE_VERIFICATION_RATIONALE}} |
+
+{{TECHNIQUE_INSTRUCTIONS}}
+
+## Pre-Implementation Checklist
+
+### 1. Read Required Files
+{{READ_FILES_TABLE}}
+
+### 2. Verify Prerequisites
+{{PREREQUISITE_COMMANDS}}
+
+## Specification
+
+### Goal
+{{GOAL}}
+
+### Requirements
+{{REQUIREMENTS}}
+
+## Implementation Guide
+{{IMPLEMENTATION_GUIDE}}
+
+## Acceptance Criteria
+{{ACCEPTANCE_CRITERIA}}
+
+## Verification Protocol
+{{VERIFICATION_PROTOCOL}}
+
+## Testing Requirements
+
+### Unit Tests
+{{UNIT_TESTS}}
+
+### Integration Tests
+{{INTEGRATION_TESTS}}
+
+### Manual Verification
+{{MANUAL_VERIFICATION}}
+
+## Error Recovery
+{{ERROR_RECOVERY}}
+
+## Completion Protocol
+{{COMPLETION_PROTOCOL}}
+
+## Do NOT
+{{DO_NOT}}

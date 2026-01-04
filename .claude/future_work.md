@@ -12,6 +12,12 @@
 
 Use Graph of Thoughts instead of Tree of Thought
 
+- Use google gemini where possible
+
+- Plan initial should have a document that can be referenced for the idea of my plan and once I answer all the question it is updated, I will copy and paste this into the plan-feature, it will also be referenced by the plan-review. 
+
+- After the end of each plan next compact the conversation but keep necessry stuff.
+
 - another prompt like called /plan-feature-quality this is performed after /plan-feature-review. This should look at the steps created and the plan and come up with a testing plan for each step and add a final comphrenesive testing and code quality step. You also need to remove the testing portion of /plan-feature and /plan-feature-review (if any) and mention that this will be done in a later phase. Help me update the rest of the `/plan-feature-*` and `/plan-next` and /plan-prompt` system as well. This command will help provide feedback for each step to the AI agent so that it catches it's mistakes fast and writes high quality code using best practices. 
 
 - Help me figure out what else my app/project needs to shift left and be well managed write high quality code, catch bugs, etc. things like swiftlinting, pipeline automated testing, github actions, precommit clang static analyzer, Automated PR reviews, debug logging etc. 

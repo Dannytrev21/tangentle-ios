@@ -65,6 +65,33 @@ Analyze the plan across 5 critical dimensions:
 │  ├── Is there adequate testing coverage planned?                │
 │  └── Are there assumptions that need validation?                │
 │                                                                  │
+│  Branch 6: TECHNIQUE APPROPRIATENESS                             │
+│  ├── 6.1 Problem Type Alignment                                 │
+│  │   ├── Does the classified problem type fit the step?         │
+│  │   ├── Would a different type be more accurate?               │
+│  │   └── Are subtypes used when appropriate?                    │
+│  │                                                               │
+│  ├── 6.2 Technique Selection Quality                            │
+│  │   ├── Is the planning technique appropriate?                 │
+│  │   ├── Is the implementation technique appropriate?           │
+│  │   ├── Is the verification technique appropriate?             │
+│  │   └── Are expensive techniques justified by risk?            │
+│  │                                                               │
+│  ├── 6.3 Technique Composition                                  │
+│  │   ├── Do multi-technique steps make sense?                   │
+│  │   ├── Is there technique redundancy?                         │
+│  │   └── Are techniques compatible with each other?             │
+│  │                                                               │
+│  ├── 6.4 Risk-Technique Alignment                               │
+│  │   ├── Do high-risk steps have appropriate retry budgets?     │
+│  │   ├── Are low-risk steps over-engineered?                    │
+│  │   └── Is Reflexion used for genuinely risky steps?           │
+│  │                                                               │
+│  └── 6.5 Technique Coverage                                     │
+│      ├── Are any steps missing technique assignments?           │
+│      ├── Are default techniques overused?                       │
+│      └── Is there variety where appropriate?                    │
+│                                                                  │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -99,6 +126,43 @@ For each dimension, rate and document:
 | Finding | Severity | Recommendation |
 |---------|----------|----------------|
 | {issue} | 🔴/🟡/🟢 | {fix} |
+
+### 6. Technique Appropriateness: {score}/10
+| Step | Issue | Severity | Recommendation |
+|------|-------|----------|----------------|
+| {N} | {issue description} | 🔴/🟡/🟢 | {recommended change} |
+```
+
+### Technique Appropriateness Scoring
+
+| Criterion | Weight | Scoring Guide |
+|-----------|--------|---------------|
+| Problem type accuracy | 20% | Correct=10, Close=7, Wrong=3 |
+| Planning technique fit | 15% | Optimal=10, Reasonable=7, Poor=4 |
+| Implementation technique fit | 25% | Optimal=10, Reasonable=7, Poor=4 |
+| Verification technique fit | 15% | Optimal=10, Reasonable=7, Poor=4 |
+| Risk alignment | 15% | Matched=10, Over-eng=6, Under-eng=3 |
+| Composition quality | 10% | Clean=10, Redundant=5, Conflicting=2 |
+
+**Score Interpretation**:
+- 9-10: Excellent technique selection
+- 7-8: Good, minor improvements possible
+- 5-6: Adequate, some misalignments
+- 3-4: Poor, significant issues
+- 1-2: Critical, complete mismatch
+
+### Technique Changes Recommended
+
+```markdown
+#### Steps to Adjust Techniques
+| Step | Current | Recommended | Phase | Reason |
+|------|---------|-------------|-------|--------|
+| {N} | {current technique} | {recommended technique} | {Planning/Implementation/Verification} | {reason for change} |
+
+#### Overall Technique Assessment
+- {X}% of steps have optimal technique selection
+- {Y}% have reasonable but improvable selection
+- {Z}% have problematic selection (need change)
 ```
 
 Severity levels:
@@ -143,6 +207,13 @@ Create an actionable change list:
 | {N} | Add verification | {specific commands} |
 | {N} | Add error handling | {specific scenarios} |
 | {N} | Add details | {specific requirements} |
+
+### Steps to Adjust Techniques
+| Step | Phase | Current | Recommended | Reason |
+|------|-------|---------|-------------|--------|
+| {N} | Planning | {technique} | {technique} | {reason} |
+| {N} | Implementation | {technique} | {technique} | {reason} |
+| {N} | Verification | {technique} | {technique} | {reason} |
 ```
 
 #### ADR Changes
@@ -196,6 +267,25 @@ After documenting changes, apply them to the plan files:
    - Add review findings to "Things to Remember"
    - Update current state description
 
+6. **Apply Technique Changes** (if any)
+   When technique adjustments are recommended:
+
+   a. **Update step files**
+      - Replace technique sections with new technique methodologies
+      - Update technique rationale
+      - Update risk level if affected
+
+   b. **Update progress.json**
+      - Change technique assignments in step entries
+      - Reset `promptGenerated: false` for affected steps
+      - Update `techniqueProfile` if overall defaults change
+
+   c. **Regenerate prompts**
+      ```
+      ⚠️ Technique changes detected in {N} steps.
+      Run `/plan-prompts {NNN}` to regenerate affected prompts.
+      ```
+
 ### Step 6: Create Review Log
 
 Create `.claude/plans/{NNN}-{slug}/reviews/review-{date}.md`:
@@ -204,8 +294,8 @@ Create `.claude/plans/{NNN}-{slug}/reviews/review-{date}.md`:
 # Plan Review: {date}
 
 ## Overall Assessment
-- **Previous Score**: {X}/50
-- **New Score**: {Y}/50
+- **Previous Score**: {X}/60
+- **New Score**: {Y}/60
 - **Improvement**: +{delta}
 
 ## Summary of Changes
@@ -221,6 +311,11 @@ Create `.claude/plans/{NNN}-{slug}/reviews/review-{date}.md`:
 
 ### Steps Reordered
 {previous order → new order}
+
+### Techniques Adjusted
+| Step | Phase | Before | After | Reason |
+|------|-------|--------|-------|--------|
+| {N} | {phase} | {old technique} | {new technique} | {reason} |
 
 ### ADR Updates
 {what changed}
@@ -245,7 +340,8 @@ Create `.claude/plans/{NNN}-{slug}/reviews/review-{date}.md`:
 | Granularity | {X} | {Y} |
 | Technical | {X} | {Y} |
 | Robustness | {X} | {Y} |
-| **Total** | **{X}/50** | **{Y}/50** |
+| **Technique** | **{X}** | **{Y}** |
+| **Total** | **{X}/60** | **{Y}/60** |
 
 ### Changes Applied
 - Steps added: {N}
@@ -253,12 +349,18 @@ Create `.claude/plans/{NNN}-{slug}/reviews/review-{date}.md`:
 - Steps modified: {N}
 - Steps reordered: Yes/No
 - ADR updated: Yes/No
+- Techniques adjusted: {N} steps
+
+### Technique Changes Applied
+- Problem type corrections: {N}
+- Risk level adjustments: {N}
+- Prompts need regeneration: {Yes/No}
 
 ### Critical Issues Fixed
 {list of 🔴 items addressed}
 
 ### Next Commands
-1. `/plan-prompts {NNN}` - Regenerate prompts if steps changed significantly
+1. `/plan-prompts {NNN}` - **REQUIRED** if techniques changed
 2. `/plan-status {NNN}` - View updated plan status
 3. `/plan-next {NNN}` - Begin implementation
 ```

@@ -123,3 +123,6 @@ APIKeys.swift
 # Python
 __pycache__/
 *.pyc
+
+# Windsurf IDE (local planning system)
+#.windsurf/**

@@ -36,6 +36,28 @@ from .template_parser import (
     get_template_section,
     template_has_section
 )
+from .prompt_composer import (
+    compose_prompt,
+    compose_from_step_file,
+    substitute_placeholders,
+    truncate_with_summary,
+    validate_techniques,
+    get_technique_names,
+    StepInfo as PromptStepInfo,
+    PlanInfo
+)
+from .memory_bank import (
+    MemoryBank,
+    MemoryBankEntry,
+    create_entry_from_failure
+)
+from .self_correction import (
+    SelfCorrectionEngine,
+    FailureInfo,
+    RetryDecision,
+    TECHNIQUE_ALTERNATIVES,
+    FAILURE_PATTERN_TECHNIQUES
+)
 
 __all__ = [
     # Problem Classifier
@@ -72,4 +94,23 @@ __all__ = [
     'load_all_templates',
     'get_template_section',
     'template_has_section',
+    # Prompt Composer
+    'compose_prompt',
+    'compose_from_step_file',
+    'substitute_placeholders',
+    'truncate_with_summary',
+    'validate_techniques',
+    'get_technique_names',
+    'PromptStepInfo',
+    'PlanInfo',
+    # Memory Bank
+    'MemoryBank',
+    'MemoryBankEntry',
+    'create_entry_from_failure',
+    # Self Correction
+    'SelfCorrectionEngine',
+    'FailureInfo',
+    'RetryDecision',
+    'TECHNIQUE_ALTERNATIVES',
+    'FAILURE_PATTERN_TECHNIQUES',
 ]

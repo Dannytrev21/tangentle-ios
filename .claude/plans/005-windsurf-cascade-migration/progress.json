@@ -1,0 +1,889 @@
+{
+  "planId": "005",
+  "name": "windsurf-cascade-migration",
+  "title": "Windsurf Cascade Plan Command System",
+  "description": "Migrate the Claude Code intelligent planning system to Windsurf IDE Cascade with 8 workflow commands, Python scripts, templates, and full self-correction support",
+  "problemType": "migration",
+  "problemCategory": "DATA",
+  "createdAt": "2026-01-02T00:00:00Z",
+  "updatedAt": "2026-01-02T25:30:00Z",
+  "status": "in_progress",
+  "currentStep": 17,
+  "totalSteps": 18,
+  "techniqueProfile": {
+    "defaultPlanning": "least-to-most",
+    "defaultImplementation": "chain-of-code",
+    "defaultVerification": "reflexion"
+  },
+  "steps": [
+    {
+      "id": 1,
+      "name": "directory-structure",
+      "title": "Directory Structure & Initialization",
+      "problemType": "infrastructure",
+      "status": "completed",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["least-to-most"],
+        "verification": "self-refine"
+      },
+      "techniqueRationale": "Simple directory creation benefits from structured planning and incremental building",
+      "riskLevel": "low",
+      "riskScore": 0.2,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "least-to-most", "phase": "implementation", "attempts": 1},
+        {"technique": "self-refine", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-02T12:00:00Z",
+      "completedAt": "2026-01-02T12:15:00Z",
+      "verificationPassed": true,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [
+          ".windsurf/",
+          ".windsurf/workflows/.gitkeep",
+          ".windsurf/plans/.gitkeep",
+          ".windsurf/scripts/__init__.py",
+          ".windsurf/scripts/tests/__init__.py",
+          ".windsurf/templates/.gitkeep",
+          ".windsurf/knowledge/.gitkeep",
+          ".windsurf/knowledge/techniques/.gitkeep",
+          ".windsurf/memory-bank/.gitkeep",
+          ".windsurf/rules/.gitkeep"
+        ],
+        "modified": [
+          ".gitignore"
+        ],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": "All 10 directories created, .gitignore updated with .windsurf/** exclusion (not staged)"
+    },
+    {
+      "id": 2,
+      "name": "python-foundation",
+      "title": "Python Foundation Scripts",
+      "problemType": "infrastructure",
+      "status": "completed",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["least-to-most"],
+        "verification": "self-refine"
+      },
+      "techniqueRationale": "Porting existing scripts benefits from building simpler utilities first",
+      "riskLevel": "low",
+      "riskScore": 0.3,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "least-to-most", "phase": "implementation", "attempts": 1},
+        {"technique": "self-refine", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-02T13:00:00Z",
+      "completedAt": "2026-01-02T14:00:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [
+        ".windsurf/scripts/tests/test_utils.py",
+        ".windsurf/scripts/tests/test_problem_classifier.py",
+        ".windsurf/scripts/tests/test_technique_selector.py",
+        ".windsurf/scripts/tests/test_risk_assessor.py"
+      ],
+      "files": {
+        "created": [
+          ".windsurf/scripts/utils.py",
+          ".windsurf/scripts/problem_classifier.py",
+          ".windsurf/scripts/technique_selector.py",
+          ".windsurf/scripts/risk_assessor.py",
+          ".windsurf/scripts/windsurf_plan.py",
+          ".windsurf/scripts/tests/test_utils.py",
+          ".windsurf/scripts/tests/test_problem_classifier.py",
+          ".windsurf/scripts/tests/test_technique_selector.py",
+          ".windsurf/scripts/tests/test_risk_assessor.py"
+        ],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": "Ported 5 Python scripts with 76 unit tests. All tests pass. CLI works with classify, techniques, risk, status, and list commands."
+    },
+    {
+      "id": 3,
+      "name": "templates-foundation",
+      "title": "Templates Foundation",
+      "problemType": "scaffolding",
+      "status": "completed",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["chain-of-code"],
+        "verification": "self-refine"
+      },
+      "techniqueRationale": "Template creation involves mixed markdown/JSON structures",
+      "riskLevel": "low",
+      "riskScore": 0.2,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "chain-of-code", "phase": "implementation", "attempts": 1},
+        {"technique": "self-refine", "phase": "verification", "attempts": 2}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-02T14:30:00Z",
+      "completedAt": "2026-01-02T15:00:00Z",
+      "verificationPassed": true,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [
+          ".windsurf/templates/plan.md.template",
+          ".windsurf/templates/adr.md.template",
+          ".windsurf/templates/step.md.template",
+          ".windsurf/templates/progress.json.template",
+          ".windsurf/templates/context.md.template",
+          ".windsurf/templates/prompt.md.template"
+        ],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": "Created 6 template files with {{PLACEHOLDER}} syntax. JSON template validated with sed substitution. Self-refine fixed unquoted numeric placeholders in JSON."
+    },
+    {
+      "id": 4,
+      "name": "knowledge-techniques",
+      "title": "Knowledge Base - Technique Documentation",
+      "problemType": "migration",
+      "status": "completed",
+      "techniques": {
+        "planning": "least-to-most",
+        "implementation": ["chain-of-code"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Content migration requires incremental porting with learning from issues",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "least-to-most", "phase": "planning", "attempts": 1},
+        {"technique": "chain-of-code", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-02T15:00:00Z",
+      "completedAt": "2026-01-02T16:00:00Z",
+      "verificationPassed": true,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [
+          ".windsurf/knowledge/techniques/ps-plus.md",
+          ".windsurf/knowledge/techniques/least-to-most.md",
+          ".windsurf/knowledge/techniques/tdd.md",
+          ".windsurf/knowledge/techniques/self-refine.md",
+          ".windsurf/knowledge/techniques/chain-of-code.md",
+          ".windsurf/knowledge/techniques/react.md",
+          ".windsurf/knowledge/techniques/tot.md",
+          ".windsurf/knowledge/techniques/got.md",
+          ".windsurf/knowledge/techniques/self-consistency.md",
+          ".windsurf/knowledge/techniques/reflexion.md",
+          ".windsurf/knowledge/architecture.md",
+          ".windsurf/technique-config.json"
+        ],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": "Created 10 technique files, architecture.md overview, and technique-config.json. All acceptance criteria passed: 10 technique files with 4 required sections each, valid JSON config, no .claude references, reflexion.md includes memory bank format."
+    },
+    {
+      "id": 5,
+      "name": "self-correction-engine",
+      "title": "Self-Correction Engine",
+      "problemType": "migration",
+      "status": "completed",
+      "techniques": {
+        "planning": "least-to-most",
+        "implementation": ["chain-of-code"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Complex stateful logic benefits from reflexion to learn from issues",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "least-to-most", "phase": "planning", "attempts": 1},
+        {"technique": "chain-of-code", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-02T17:00:00Z",
+      "completedAt": "2026-01-02T18:00:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [
+        ".windsurf/scripts/tests/test_memory_bank.py",
+        ".windsurf/scripts/tests/test_self_correction.py"
+      ],
+      "files": {
+        "created": [
+          ".windsurf/scripts/memory_bank.py",
+          ".windsurf/scripts/self_correction.py",
+          ".windsurf/scripts/tests/test_memory_bank.py",
+          ".windsurf/scripts/tests/test_self_correction.py"
+        ],
+        "modified": [
+          ".windsurf/scripts/windsurf_plan.py"
+        ],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": "Created memory_bank.py with FIFO eviction (max 10 entries) and self_correction.py with retry logic and technique rotation. Added 55 unit tests (27 memory bank, 28 self-correction). Updated CLI with memory, retry, and budget commands. All 131 tests pass."
+    },
+    {
+      "id": 6,
+      "name": "workflow-plan-feature-initial",
+      "title": "Workflow - /plan-feature-initial",
+      "problemType": "migration",
+      "status": "completed",
+      "techniques": {
+        "planning": "least-to-most",
+        "implementation": ["chain-of-code"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "First workflow sets patterns; reflexion helps learn from execution issues",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "least-to-most", "phase": "planning", "attempts": 1},
+        {"technique": "chain-of-code", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-02T19:00:00Z",
+      "completedAt": "2026-01-02T19:15:00Z",
+      "verificationPassed": true,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [".windsurf/workflows/plan-feature-initial.md"],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": "Created /plan-feature-initial workflow for requirements analysis. Workflow is 6,709 chars (44% of 12K limit). Includes 5-branch Tree of Thought analysis, severity-based question grouping, and hybrid confirm flow."
+    },
+    {
+      "id": 7,
+      "name": "workflow-plan-feature",
+      "title": "Workflow - /plan-feature",
+      "problemType": "migration",
+      "status": "completed",
+      "techniques": {
+        "planning": "least-to-most",
+        "implementation": ["chain-of-code"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Core workflow generating multiple artifacts",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "least-to-most", "phase": "planning", "attempts": 1},
+        {"technique": "chain-of-code", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-02T19:30:00Z",
+      "completedAt": "2026-01-02T19:45:00Z",
+      "verificationPassed": true,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [".windsurf/workflows/plan-feature.md"],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": "Created /plan-feature workflow for generating implementation plans. Workflow is 7,960 chars (66% of 12K limit). Includes ToT analysis, technique assignment per step, directory creation, and all 5 core artifacts."
+    },
+    {
+      "id": 8,
+      "name": "workflow-plan-prompts",
+      "title": "Workflow - /plan-prompts",
+      "problemType": "service-impl",
+      "status": "completed",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["tdd"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Prompt generation quality is critical; TDD ensures correctness",
+      "riskLevel": "high",
+      "riskScore": 0.7,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 3,
+        "maxTotal": 7
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "tdd", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-02T20:00:00Z",
+      "completedAt": "2026-01-02T20:15:00Z",
+      "verificationPassed": true,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [".windsurf/workflows/plan-prompts.md"],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": "Created /plan-prompts workflow for generating technique-embedded prompts. Workflow is 6,404 chars (53% of 12K limit). Includes full technique content embedding, promptGenerated flag updates, and summary output."
+    },
+    {
+      "id": 9,
+      "name": "workflow-plan-next",
+      "title": "Workflow - /plan-next",
+      "problemType": "service-impl",
+      "status": "completed",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["tdd"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Core execution engine; high risk requires TDD and reflexion",
+      "riskLevel": "high",
+      "riskScore": 0.8,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 3,
+        "maxTotal": 7
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "tdd", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-02T21:00:00Z",
+      "completedAt": "2026-01-02T21:20:00Z",
+      "verificationPassed": true,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [".windsurf/workflows/plan-next.md"],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": "Created /plan-next workflow for step execution. Workflow is 8,413 chars (70% of 12K limit). Includes 3-phase execution, file tracking, self-correction with retry/rotate/escalate, test enforcement, and commit prompting."
+    },
+    {
+      "id": 10,
+      "name": "workflow-plan-status",
+      "title": "Workflow - /plan-status",
+      "problemType": "service-impl",
+      "status": "completed",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Display formatting benefits from iteration; no testable logic",
+      "riskLevel": "high",
+      "riskScore": 0.6,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 3,
+        "maxTotal": 7
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-02T22:00:00Z",
+      "completedAt": "2026-01-02T22:15:00Z",
+      "verificationPassed": true,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [".windsurf/workflows/plan-status.md"],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": "Created /plan-status workflow for progress visibility. Workflow is 7,884 chars (66% of 12K limit). Includes two modes (list all/detail), progress bar, status icons, step table, context summary, and contextual next commands."
+    },
+    {
+      "id": 11,
+      "name": "workflow-plan-verify",
+      "title": "Workflow - /plan-verify",
+      "problemType": "service-impl",
+      "status": "completed",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["tdd"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Verification accuracy is critical",
+      "riskLevel": "high",
+      "riskScore": 0.7,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 3,
+        "maxTotal": 7
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "tdd", "phase": "implementation", "attempts": 2},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-02T23:00:00Z",
+      "completedAt": "2026-01-02T23:20:00Z",
+      "verificationPassed": true,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [".windsurf/workflows/plan-verify.md"],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": "Created /plan-verify workflow for re-running verification. Workflow is 9,699 chars (81% of 12K limit). Self-correction applied: first implementation exceeded 12K, trimmed technique failure analysis section. Includes technique-specific verification, self-correction trigger, and progress update."
+    },
+    {
+      "id": 12,
+      "name": "workflow-plan-rollback",
+      "title": "Workflow - /plan-rollback",
+      "problemType": "service-impl",
+      "status": "completed",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["tdd"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Data loss risk; must be thoroughly tested",
+      "riskLevel": "high",
+      "riskScore": 0.8,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 3,
+        "maxTotal": 7
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "tdd", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-02T23:30:00Z",
+      "completedAt": "2026-01-02T23:45:00Z",
+      "verificationPassed": true,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [".windsurf/workflows/plan-rollback.md"],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": "Created /plan-rollback workflow for safe step recovery. Workflow is 9,399 chars (78% of 12K limit). Includes commit state checking, mixed state handling, preview/confirmation, four rollback operations, and memory bank preserve/reset options."
+    },
+    {
+      "id": 13,
+      "name": "workflow-plan-feature-review",
+      "title": "Workflow - /plan-feature-review",
+      "problemType": "service-impl",
+      "status": "completed",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["tdd"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Review quality affects plan quality; agentic reasoning required",
+      "riskLevel": "high",
+      "riskScore": 0.7,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 3,
+        "maxTotal": 7
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "tdd", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-02T23:50:00Z",
+      "completedAt": "2026-01-02T24:05:00Z",
+      "verificationPassed": true,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [".windsurf/workflows/plan-feature-review.md"],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": "Created /plan-feature-review workflow for agentic plan quality analysis. Workflow is 8,255 chars (69% of 12K limit). Includes 6 dimension ToT analysis, GoT merging, weighted scoring, user confirmation before changes, and prompt regeneration warning."
+    },
+    {
+      "id": 14,
+      "name": "helper-workflows",
+      "title": "Internal Helper Workflows",
+      "problemType": "service-impl",
+      "status": "completed",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["tdd"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Helpers used by multiple workflows; bugs affect everything",
+      "riskLevel": "high",
+      "riskScore": 0.7,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 3,
+        "maxTotal": 7
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "tdd", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-02T24:10:00Z",
+      "completedAt": "2026-01-02T24:25:00Z",
+      "verificationPassed": true,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [
+          ".windsurf/workflows/_internal-init.md",
+          ".windsurf/workflows/_internal-verify.md",
+          ".windsurf/workflows/_internal-commit.md"
+        ],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": "Created 3 internal helper workflows for shared operations. _internal-init: 3,104 chars (26%). _internal-verify: 3,429 chars (29%). _internal-commit: 4,758 chars (40%). All under 12K limit."
+    },
+    {
+      "id": 15,
+      "name": "commit-staging",
+      "title": "Commit Staging System",
+      "problemType": "service-impl",
+      "status": "completed",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["tdd"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Staging wrong files could expose .windsurf/; critical testing needed",
+      "riskLevel": "high",
+      "riskScore": 0.8,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 3,
+        "maxTotal": 7
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "tdd", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-02T24:30:00Z",
+      "completedAt": "2026-01-02T24:45:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [
+        ".windsurf/scripts/tests/test_file_tracker.py"
+      ],
+      "files": {
+        "created": [
+          ".windsurf/scripts/file_tracker.py",
+          ".windsurf/scripts/tests/test_file_tracker.py"
+        ],
+        "modified": [
+          ".windsurf/scripts/windsurf_plan.py"
+        ],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": "Created file_tracker.py with FileTracker class and 30 unit tests. Added stage CLI command to windsurf_plan.py. All 6 AC passed: file exclusion patterns work correctly, .windsurf/** never staged."
+    },
+    {
+      "id": 16,
+      "name": "project-context-system",
+      "title": "Project Context System",
+      "problemType": "documentation",
+      "status": "completed",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "got"
+      },
+      "techniqueRationale": "Documentation benefits from iteration; GoT ensures coherence",
+      "riskLevel": "low",
+      "riskScore": 0.2,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1},
+        {"technique": "got", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-02T25:21:00Z",
+      "completedAt": "2026-01-02T25:30:00Z",
+      "verificationPassed": true,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [
+          ".windsurf/PROJECT_CONTEXT.md",
+          ".windsurf/memory-bank/productContext.md",
+          ".windsurf/memory-bank/activeContext.md",
+          ".windsurf/memory-bank/progress.md",
+          ".windsurf/memory-bank/decisionLog.md",
+          ".windsurf/memory-bank/systemPatterns.md",
+          ".windsurf/knowledge/repo-commands.md"
+        ],
+        "modified": [
+          ".windsurf/workflows/_internal-init.md"
+        ],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": "Created project context system with 8 template files. All files have update triggers documented. _internal-init updated to create files with complete templates."
+    },
+    {
+      "id": 17,
+      "name": "end-to-end-testing",
+      "title": "End-to-End Testing",
+      "problemType": "integration-test",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["tdd"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Testing may reveal issues; reflexion helps learn from failures",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": ""
+    },
+    {
+      "id": 18,
+      "name": "migration-guide",
+      "title": "Migration Guide Documentation",
+      "problemType": "documentation",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "got"
+      },
+      "techniqueRationale": "Documentation benefits from iteration; GoT ensures completeness",
+      "riskLevel": "low",
+      "riskScore": 0.2,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "files": {
+        "created": [],
+        "modified": [],
+        "deleted": [],
+        "renamed": []
+      },
+      "notes": ""
+    }
+  ],
+  "context": {
+    "filesCreated": [
+      ".windsurf/",
+      ".windsurf/workflows/.gitkeep",
+      ".windsurf/plans/.gitkeep",
+      ".windsurf/scripts/__init__.py",
+      ".windsurf/scripts/tests/__init__.py",
+      ".windsurf/templates/.gitkeep",
+      ".windsurf/knowledge/.gitkeep",
+      ".windsurf/knowledge/techniques/.gitkeep",
+      ".windsurf/memory-bank/.gitkeep",
+      ".windsurf/rules/.gitkeep",
+      ".windsurf/scripts/utils.py",
+      ".windsurf/scripts/problem_classifier.py",
+      ".windsurf/scripts/technique_selector.py",
+      ".windsurf/scripts/risk_assessor.py",
+      ".windsurf/scripts/windsurf_plan.py",
+      ".windsurf/scripts/tests/test_utils.py",
+      ".windsurf/scripts/tests/test_problem_classifier.py",
+      ".windsurf/scripts/tests/test_technique_selector.py",
+      ".windsurf/scripts/tests/test_risk_assessor.py",
+      ".windsurf/templates/plan.md.template",
+      ".windsurf/templates/adr.md.template",
+      ".windsurf/templates/step.md.template",
+      ".windsurf/templates/progress.json.template",
+      ".windsurf/templates/context.md.template",
+      ".windsurf/templates/prompt.md.template",
+      ".windsurf/knowledge/techniques/ps-plus.md",
+      ".windsurf/knowledge/techniques/least-to-most.md",
+      ".windsurf/knowledge/techniques/tdd.md",
+      ".windsurf/knowledge/techniques/self-refine.md",
+      ".windsurf/knowledge/techniques/chain-of-code.md",
+      ".windsurf/knowledge/techniques/react.md",
+      ".windsurf/knowledge/techniques/tot.md",
+      ".windsurf/knowledge/techniques/got.md",
+      ".windsurf/knowledge/techniques/self-consistency.md",
+      ".windsurf/knowledge/techniques/reflexion.md",
+      ".windsurf/knowledge/architecture.md",
+      ".windsurf/technique-config.json",
+      ".windsurf/scripts/memory_bank.py",
+      ".windsurf/scripts/self_correction.py",
+      ".windsurf/scripts/tests/test_memory_bank.py",
+      ".windsurf/scripts/tests/test_self_correction.py",
+      ".windsurf/workflows/plan-feature-initial.md",
+      ".windsurf/workflows/plan-feature.md",
+      ".windsurf/workflows/plan-prompts.md",
+      ".windsurf/workflows/plan-next.md",
+      ".windsurf/workflows/plan-status.md",
+      ".windsurf/workflows/plan-verify.md",
+      ".windsurf/workflows/plan-rollback.md",
+      ".windsurf/workflows/plan-feature-review.md",
+      ".windsurf/workflows/_internal-init.md",
+      ".windsurf/workflows/_internal-verify.md",
+      ".windsurf/workflows/_internal-commit.md",
+      ".windsurf/scripts/file_tracker.py",
+      ".windsurf/scripts/tests/test_file_tracker.py",
+      ".windsurf/PROJECT_CONTEXT.md",
+      ".windsurf/memory-bank/productContext.md",
+      ".windsurf/memory-bank/activeContext.md",
+      ".windsurf/memory-bank/progress.md",
+      ".windsurf/memory-bank/decisionLog.md",
+      ".windsurf/memory-bank/systemPatterns.md",
+      ".windsurf/knowledge/repo-commands.md"
+    ],
+    "filesModified": [
+      ".gitignore",
+      ".windsurf/scripts/windsurf_plan.py"
+    ],
+    "testsCreated": [
+      ".windsurf/scripts/tests/test_utils.py",
+      ".windsurf/scripts/tests/test_problem_classifier.py",
+      ".windsurf/scripts/tests/test_technique_selector.py",
+      ".windsurf/scripts/tests/test_risk_assessor.py",
+      ".windsurf/scripts/tests/test_memory_bank.py",
+      ".windsurf/scripts/tests/test_self_correction.py",
+      ".windsurf/scripts/tests/test_file_tracker.py"
+    ],
+    "keyDecisions": [
+      "Hybrid Python + Workflow architecture",
+      "Main + Helper workflow decomposition",
+      "Full inline technique embedding in prompts",
+      "All 4 file operations tracked per step",
+      "Deep inspection for command discovery",
+      "Full initialization on first run",
+      "Hybrid memory bank (file + Windsurf Memories)",
+      "Standard library only - no pip dependencies",
+      "Built-in problem types and techniques (no config file required)"
+    ],
+    "blockers": [],
+    "learnings": [
+      "Python 3.13 compatible with all scripts",
+      "Scripts can run standalone or be imported",
+      "CLI uses structured output for workflow parsing",
+      "JSON templates need unquoted placeholders for sed validation test"
+    ]
+  }
+}
