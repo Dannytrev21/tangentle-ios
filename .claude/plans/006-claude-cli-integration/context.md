@@ -4,10 +4,10 @@ This file maintains context for resuming work on this plan from a fresh terminal
 
 ## Quick Status
 - **Plan**: Claude CLI System Full Integration
-- **Current Step**: 2 - CLAUDE.md Streamlining
+- **Current Step**: 3 - Thinking Keywords Config & Utility
 - **Last Updated**: 2026-01-21
 - **Prompts Generated**: 2026-01-21 (13 prompts)
-- **Steps Completed**: 1/13
+- **Steps Completed**: 2/13
 
 ## What's Been Done
 - Plan created and structured
@@ -15,6 +15,7 @@ This file maintains context for resuming work on this plan from a fresh terminal
 - 13 steps defined with technique assignments
 - Progress.json initialized
 - **Step 1 Complete**: Knowledge base created
+- **Step 2 Complete**: CLAUDE.md streamlined
 
 ## Integration Decisions Summary
 
@@ -40,7 +41,7 @@ This file maintains context for resuming work on this plan from a fresh terminal
 ## Files to Modify
 | File | Changes | Status |
 |------|---------|--------|
-| `CLAUDE.md` | Streamline to ~250 lines | Pending |
+| `CLAUDE.md` | Streamline to ~250 lines | **Done** (239 lines) |
 | `.claude/commands/plan-prompts.md` | Add thinking keywords section | Pending |
 | `.claude/commands/plan-next.md` | Add context guidance | Pending |
 | `.claude/commands/plan-feature-initial.md` | Add explore substep | Pending |
@@ -92,10 +93,10 @@ This file maintains context for resuming work on this plan from a fresh terminal
 | None yet | - | - |
 
 ## Current State
-Step 1 complete. Knowledge base created with 5 modular reference documents.
+Steps 1-2 complete. Knowledge base created, CLAUDE.md streamlined with @imports.
 
 ## Next Actions
-1. Run `/plan-next 006` to start Step 2: CLAUDE.md Streamlining
+1. Run `/plan-next 006` to start Step 3: Thinking Keywords Config & Utility
 
 ## Things to Remember
 - This plan modifies the planning system itself (meta-level)
@@ -148,3 +149,47 @@ Created knowledge base with 5 modular reference documents extracted from claude_
 ### Ready for Next Step
 Step 2: CLAUDE.md Streamlining
 Prerequisites met: Yes (knowledge base files exist for @import references)
+
+---
+
+## Step 2 Complete - 2026-01-21
+
+### Summary
+Streamlined CLAUDE.md from 432 lines to 239 lines with @imports to knowledge base.
+
+### Technique Execution Log
+- **Planning**: ps-plus - success on attempt 1
+- **Implementation**: self-refine - success on attempt 1
+- **Verification**: self-refine - success on attempt 1
+
+### Files Modified
+- `CLAUDE.md`: Reduced from 432 to 239 lines (45% reduction)
+
+### Changes Made
+- Removed verbose Intelligent Planning System v2 section (~107 lines)
+- Removed detailed technique tables (now in knowledge base)
+- Removed Current Plans section (tracked in plan files)
+- Added @imports to knowledge base files
+- Kept all essential sections: Project Overview, Tech Stack, Architecture, Conventions, Build, Do NOT
+
+### Verification Results
+- [x] AC1: Line count 239 (target 230-270)
+- [x] AC2: Project Overview section exists
+- [x] AC3: Technology Stack table exists
+- [x] AC4: Core Principles section exists
+- [x] AC5: Coding Conventions section exists
+- [x] AC6: Build & Run section exists
+- [x] AC7: @imports reference existing knowledge files
+- [x] AC8: All referenced knowledge files exist
+- [x] AC9: Do NOT section preserved
+
+### Key Decisions
+- Consolidated project structure tree (removed verbose details)
+- Shortened entity table (removed supporting entities)
+- Made enums more compact (single-line)
+- Reduced problem types table (5 most important)
+- Kept CLI tool section but abbreviated
+
+### Ready for Next Step
+Step 3: Thinking Keywords Config & Utility
+Prerequisites met: Yes

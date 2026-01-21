@@ -6,10 +6,10 @@
   "problemType": "system-design",
   "problemCategory": "ARCHITECTURE",
   "createdAt": "2026-01-21T00:00:00Z",
-  "updatedAt": "2026-01-21T15:00:00Z",
+  "updatedAt": "2026-01-21T15:15:00Z",
   "promptsGeneratedAt": "2026-01-21T14:30:00Z",
   "status": "in_progress",
-  "currentStep": 2,
+  "currentStep": 3,
   "totalSteps": 13,
   "techniqueProfile": {
     "defaultPlanning": "ps-plus",
@@ -65,7 +65,7 @@
       "name": "claude-md-streamlining",
       "title": "CLAUDE.md Streamlining",
       "problemType": "refactor",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["self-refine"],
@@ -80,15 +80,19 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1},
+        {"technique": "self-refine", "phase": "verification", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
+      "startedAt": "2026-01-21T15:05:00Z",
+      "completedAt": "2026-01-21T15:15:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
       "testsWritten": [],
-      "notes": ""
+      "notes": "CLAUDE.md reduced from 432 to 239 lines. Added @imports to knowledge base. All essential sections preserved."
     },
     {
       "id": 3,
@@ -429,7 +433,9 @@
       ".claude/knowledge/context-management.md",
       ".claude/knowledge/tdd-patterns.md"
     ],
-    "filesModified": [],
+    "filesModified": [
+      "CLAUDE.md"
+    ],
     "testsCreated": [],
     "keyDecisions": [
       "Full integration selected (knowledge base + prompts + commands)",
