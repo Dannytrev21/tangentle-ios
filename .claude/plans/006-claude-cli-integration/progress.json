@@ -1,0 +1,435 @@
+{
+  "planId": "006",
+  "name": "claude-cli-integration",
+  "title": "Claude CLI System Full Integration",
+  "description": "Comprehensive integration of Claude Code CLI mastery guide into the intelligent planning system with thinking keywords, explore phase, TDD emphasis, and streamlined CLAUDE.md",
+  "problemType": "system-design",
+  "problemCategory": "ARCHITECTURE",
+  "createdAt": "2026-01-21T00:00:00Z",
+  "updatedAt": "2026-01-21T12:00:00Z",
+  "status": "not_started",
+  "currentStep": 0,
+  "totalSteps": 13,
+  "techniqueProfile": {
+    "defaultPlanning": "ps-plus",
+    "defaultImplementation": "self-refine",
+    "defaultVerification": "self-refine"
+  },
+  "integrationOptions": {
+    "integrationDepth": "full",
+    "claudeMdStrategy": "streamline-with-imports",
+    "thinkingKeywords": "risk-mapped",
+    "explorePhase": "substep-in-initial",
+    "contextManagement": "guidance-only",
+    "subagents": "deferred-phase-2",
+    "backwardCompatibility": false
+  },
+  "steps": [
+    {
+      "id": 1,
+      "name": "knowledge-base-creation",
+      "title": "Knowledge Base Creation",
+      "problemType": "documentation",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "got"
+      },
+      "techniqueRationale": "Documentation task with multiple related files that need coherent structure (GoT for verification)",
+      "thinkingKeyword": "think about",
+      "riskLevel": "low",
+      "riskScore": 0.2,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 2,
+      "name": "claude-md-streamlining",
+      "title": "CLAUDE.md Streamlining",
+      "problemType": "refactor",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "self-refine"
+      },
+      "techniqueRationale": "Refactoring existing file with iterative improvement to meet size target",
+      "thinkingKeyword": "think hard about",
+      "riskLevel": "medium",
+      "riskScore": 0.4,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 3,
+      "name": "thinking-keywords-config-utility",
+      "title": "Thinking Keywords Config & Utility",
+      "problemType": "configuration",
+      "status": "pending",
+      "techniques": {
+        "planning": "react",
+        "implementation": ["self-refine"],
+        "verification": "tdd"
+      },
+      "techniqueRationale": "Configuration with tests to verify mapping correctness",
+      "thinkingKeyword": "think about",
+      "riskLevel": "low",
+      "riskScore": 0.2,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "name": "prompt-template-enhancement",
+      "title": "Prompt Template Enhancement",
+      "problemType": "documentation",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "got"
+      },
+      "techniqueRationale": "Major template update requiring coherent integration of multiple concepts",
+      "thinkingKeyword": "think hard about",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 5,
+      "name": "plan-prompts-integration",
+      "title": "Plan-Prompts Integration",
+      "problemType": "refactor",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "tdd"
+      },
+      "techniqueRationale": "Command refactor with verification that output includes thinking keywords",
+      "thinkingKeyword": "think hard about",
+      "riskLevel": "medium",
+      "riskScore": 0.4,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 6,
+      "name": "plan-next-enhancement",
+      "title": "Plan-Next Enhancement",
+      "problemType": "refactor",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "tdd"
+      },
+      "techniqueRationale": "Command refactor adding context management guidance",
+      "thinkingKeyword": "think hard about",
+      "riskLevel": "medium",
+      "riskScore": 0.4,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 7,
+      "name": "plan-feature-initial-explore",
+      "title": "Plan-Feature-Initial Explore Phase",
+      "problemType": "refactor",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "tdd"
+      },
+      "techniqueRationale": "Adding formal explore substep to existing command",
+      "thinkingKeyword": "think hard about",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 8,
+      "name": "plan-feature-tdd-emphasis",
+      "title": "Plan-Feature TDD Emphasis",
+      "problemType": "refactor",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "tdd"
+      },
+      "techniqueRationale": "Strengthening TDD as default technique in plan creation",
+      "thinkingKeyword": "think hard about",
+      "riskLevel": "medium",
+      "riskScore": 0.4,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 9,
+      "name": "plan-rollback-recovery",
+      "title": "Plan-Rollback Recovery Enhancement",
+      "problemType": "refactor",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "self-refine"
+      },
+      "techniqueRationale": "Adding recovery guidance to existing command",
+      "thinkingKeyword": "think about",
+      "riskLevel": "low",
+      "riskScore": 0.3,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 10,
+      "name": "plan-verify-enhancement",
+      "title": "Plan-Verify Enhancement",
+      "problemType": "refactor",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "self-refine"
+      },
+      "techniqueRationale": "Enhancing verification with guide principles",
+      "thinkingKeyword": "think about",
+      "riskLevel": "low",
+      "riskScore": 0.3,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 11,
+      "name": "thinking-cli-command-integration",
+      "title": "Thinking CLI Command & Integration",
+      "problemType": "service-impl",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["tdd", "self-refine"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Service implementation with TDD for correctness, Reflexion for thorough verification",
+      "thinkingKeyword": "think hard about",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 12,
+      "name": "git-workflow-guidance",
+      "title": "Git Workflow Guidance",
+      "problemType": "documentation",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": ["self-refine"],
+        "verification": "self-refine"
+      },
+      "techniqueRationale": "Documentation of git patterns in prompts",
+      "thinkingKeyword": "think about",
+      "riskLevel": "low",
+      "riskScore": 0.2,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 13,
+      "name": "integration-verification",
+      "title": "Integration Verification",
+      "problemType": "integration-test",
+      "status": "pending",
+      "techniques": {
+        "planning": "least-to-most",
+        "implementation": ["tdd"],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Integration testing decomposed from simple to complex, with learning from any failures",
+      "thinkingKeyword": "ultrathink about",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": false,
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    }
+  ],
+  "context": {
+    "filesCreated": [],
+    "filesModified": [],
+    "testsCreated": [],
+    "keyDecisions": [
+      "Full integration selected (knowledge base + prompts + commands)",
+      "CLAUDE.md streamlined with @imports",
+      "Thinking keywords mapped to risk levels automatically",
+      "Explore phase as substep in plan-feature-initial",
+      "Context guidance in prompts only (no tracking)",
+      "Subagents deferred to Phase 2",
+      "No backward compatibility required"
+    ],
+    "blockers": [],
+    "learnings": []
+  }
+}

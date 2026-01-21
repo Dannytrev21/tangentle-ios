@@ -6,9 +6,9 @@
   "problemType": "migration",
   "problemCategory": "DATA",
   "createdAt": "2026-01-02T00:00:00Z",
-  "updatedAt": "2026-01-02T25:30:00Z",
-  "status": "in_progress",
-  "currentStep": 17,
+  "updatedAt": "2026-01-04T12:50:00Z",
+  "status": "completed",
+  "currentStep": 18,
   "totalSteps": 18,
   "techniqueProfile": {
     "defaultPlanning": "least-to-most",
@@ -724,7 +724,7 @@
       "name": "end-to-end-testing",
       "title": "End-to-End Testing",
       "problemType": "integration-test",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["tdd"],
@@ -738,28 +738,37 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "tdd", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": [],
+      "startedAt": "2026-01-04T12:30:00Z",
+      "completedAt": "2026-01-04T12:40:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [
+        ".windsurf/scripts/tests/test_e2e.py"
+      ],
       "files": {
-        "created": [],
+        "created": [
+          ".windsurf/scripts/tests/test_e2e.py",
+          ".claude/plans/005-windsurf-cascade-migration/reviews/test-results-2026-01-04.md"
+        ],
         "modified": [],
         "deleted": [],
         "renamed": []
       },
-      "notes": ""
+      "notes": "Created comprehensive E2E test suite with 32 tests covering 11 test classes. Combined with 161 unit tests for 193 total tests. All pass. Fixed 7 API mismatches in tests (not in code). Verified .windsurf exclusion from git staging."
     },
     {
       "id": 18,
       "name": "migration-guide",
       "title": "Migration Guide Documentation",
       "problemType": "documentation",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["self-refine"],
@@ -773,21 +782,32 @@
         "maxAlternative": 1,
         "maxTotal": 3
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1},
+        {"technique": "got", "phase": "verification", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
+      "startedAt": "2026-01-04T12:45:00Z",
+      "completedAt": "2026-01-04T12:50:00Z",
+      "verificationPassed": true,
       "testsPassed": null,
       "testsWritten": [],
       "files": {
-        "created": [],
+        "created": [
+          ".windsurf/INSTALL.md",
+          ".windsurf/QUICK_START.md",
+          ".windsurf/COMMAND_REFERENCE.md",
+          ".windsurf/MIGRATION_FROM_CLAUDE.md",
+          ".windsurf/TROUBLESHOOTING.md",
+          ".windsurf/README.md"
+        ],
         "modified": [],
         "deleted": [],
         "renamed": []
       },
-      "notes": ""
+      "notes": "Created 6 comprehensive documentation files: INSTALL.md (421 words), QUICK_START.md (604 words), COMMAND_REFERENCE.md (1048 words), MIGRATION_FROM_CLAUDE.md (770 words), TROUBLESHOOTING.md (812 words), README.md (486 words). Total: 4,141 words of user documentation."
     }
   ],
   "context": {
@@ -852,7 +872,15 @@
       ".windsurf/memory-bank/progress.md",
       ".windsurf/memory-bank/decisionLog.md",
       ".windsurf/memory-bank/systemPatterns.md",
-      ".windsurf/knowledge/repo-commands.md"
+      ".windsurf/knowledge/repo-commands.md",
+      ".windsurf/scripts/tests/test_e2e.py",
+      ".claude/plans/005-windsurf-cascade-migration/reviews/test-results-2026-01-04.md",
+      ".windsurf/INSTALL.md",
+      ".windsurf/QUICK_START.md",
+      ".windsurf/COMMAND_REFERENCE.md",
+      ".windsurf/MIGRATION_FROM_CLAUDE.md",
+      ".windsurf/TROUBLESHOOTING.md",
+      ".windsurf/README.md"
     ],
     "filesModified": [
       ".gitignore",
@@ -865,7 +893,8 @@
       ".windsurf/scripts/tests/test_risk_assessor.py",
       ".windsurf/scripts/tests/test_memory_bank.py",
       ".windsurf/scripts/tests/test_self_correction.py",
-      ".windsurf/scripts/tests/test_file_tracker.py"
+      ".windsurf/scripts/tests/test_file_tracker.py",
+      ".windsurf/scripts/tests/test_e2e.py"
     ],
     "keyDecisions": [
       "Hybrid Python + Workflow architecture",
@@ -883,7 +912,9 @@
       "Python 3.13 compatible with all scripts",
       "Scripts can run standalone or be imported",
       "CLI uses structured output for workflow parsing",
-      "JSON templates need unquoted placeholders for sed validation test"
+      "JSON templates need unquoted placeholders for sed validation test",
+      "E2E tests verify full integration: 32 tests, 11 classes, 193 total with unit tests",
+      "API naming: ClassificationResult.primary_type, TechniqueSelector needs Phase, RiskAssessor.assess_risk, config uses snake_case"
     ]
   }
 }

@@ -12,6 +12,8 @@
 
 Use Graph of Thoughts instead of Tree of Thought
 
+- In my windsurf planning system it needs to be edited. The /plan-feature-initial and /plan-feature should both use either Graph of Thoughts or Tree of Thoughts depending on the problem/feature. If it makes the workflow longer than 12000 characters, consider using a template. Also help me figure out if using windsurf rules could be useful to the planning system. 
+
 - Use google gemini where possible
 
 - Plan initial should have a document that can be referenced for the idea of my plan and once I answer all the question it is updated, I will copy and paste this into the plan-feature, it will also be referenced by the plan-review. 
