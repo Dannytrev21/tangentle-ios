@@ -323,3 +323,54 @@ def write_json_file(path: Path, data: Any, indent: int = 2) -> bool:
         return True
     except IOError:
         return False
+
+
+# Thinking Keywords Mapping
+_THINKING_KEYWORD_MAPPING = {
+    "low": "Think about",
+    "medium": "Think hard about",
+    "high": "Ultrathink about",
+    "critical": "Ultrathink about"
+}
+
+_THINKING_KEYWORD_DESCRIPTIONS = {
+    "Think about": "Standard reasoning depth for routine tasks",
+    "Think hard about": "Increased reasoning allocation for moderate complexity",
+    "Ultrathink about": "Maximum reasoning budget (~31,999 tokens) for critical decisions"
+}
+
+
+def get_thinking_keyword(risk_level: str) -> str:
+    """
+    Map risk level to appropriate thinking keyword.
+
+    Args:
+        risk_level: One of "low", "medium", "high", "critical"
+
+    Returns:
+        Thinking keyword phrase for prompt embedding
+
+    Examples:
+        >>> get_thinking_keyword("low")
+        "Think about"
+        >>> get_thinking_keyword("HIGH")
+        "Ultrathink about"
+        >>> get_thinking_keyword("unknown")
+        "Think hard about"
+    """
+    if not risk_level:
+        return "Think hard about"
+    return _THINKING_KEYWORD_MAPPING.get(risk_level.lower(), "Think hard about")
+
+
+def get_thinking_keyword_description(keyword: str) -> str:
+    """
+    Get description for a thinking keyword.
+
+    Args:
+        keyword: A thinking keyword (e.g., "Think about")
+
+    Returns:
+        Description of what the keyword means
+    """
+    return _THINKING_KEYWORD_DESCRIPTIONS.get(keyword, "")

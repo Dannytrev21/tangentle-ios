@@ -12,6 +12,8 @@ from typing import Optional
 import json
 import logging
 
+from utils import get_thinking_keyword
+
 logger = logging.getLogger(__name__)
 
 
@@ -428,6 +430,46 @@ class TechniqueSelector:
                 result[phase.value] = ["ps-plus"]
 
         return result
+
+    def get_thinking_keyword(self, risk_level: str) -> str:
+        """
+        Get thinking keyword for a risk level.
+
+        Args:
+            risk_level: One of "low", "medium", "high", "critical"
+
+        Returns:
+            Thinking keyword phrase for prompt embedding
+        """
+        return get_thinking_keyword(risk_level)
+
+    def get_thinking_keyword_for_step(self, step_info: dict) -> str:
+        """
+        Get thinking keyword based on step's risk level.
+
+        Args:
+            step_info: Step information dictionary containing riskLevel
+
+        Returns:
+            Thinking keyword phrase for prompt embedding
+        """
+        risk_level = step_info.get("riskLevel", "medium")
+        return self.get_thinking_keyword(risk_level)
+
+    def get_risk_for_problem_type(self, problem_type: str) -> str:
+        """
+        Get risk level for a problem type.
+
+        Args:
+            problem_type: The problem type to look up
+
+        Returns:
+            Risk level string ("low", "medium", "high", "critical")
+        """
+        _, subtype = self._find_problem_type(problem_type)
+        if not subtype:
+            return self.defaults.get("defaultRiskLevel", "medium")
+        return subtype.get("riskLevel", "medium")
 
 
 # CLI entry point for testing

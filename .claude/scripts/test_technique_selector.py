@@ -333,6 +333,123 @@ class TestTechniqueSelector:
         assert 'tdd' in result.rationale.lower() or 'implementation' in result.rationale.lower()
 
 
+class TestThinkingKeywords:
+    """Test suite for thinking keyword functionality."""
+
+    @classmethod
+    def setup_class(cls):
+        """Set up test fixtures."""
+        cls.original_cwd = os.getcwd()
+        project_root = Path(__file__).parent.parent.parent
+        os.chdir(project_root)
+        cls.selector = TechniqueSelector()
+
+    @classmethod
+    def teardown_class(cls):
+        """Clean up after tests."""
+        os.chdir(cls.original_cwd)
+
+    # ==================== get_thinking_keyword Tests ====================
+
+    def test_get_thinking_keyword_low(self):
+        """Test thinking keyword for low risk level."""
+        result = self.selector.get_thinking_keyword("low")
+        assert result == "Think about", \
+            f"Expected 'Think about' for low, got '{result}'"
+
+    def test_get_thinking_keyword_medium(self):
+        """Test thinking keyword for medium risk level."""
+        result = self.selector.get_thinking_keyword("medium")
+        assert result == "Think hard about", \
+            f"Expected 'Think hard about' for medium, got '{result}'"
+
+    def test_get_thinking_keyword_high(self):
+        """Test thinking keyword for high risk level."""
+        result = self.selector.get_thinking_keyword("high")
+        assert result == "Ultrathink about", \
+            f"Expected 'Ultrathink about' for high, got '{result}'"
+
+    def test_get_thinking_keyword_critical(self):
+        """Test thinking keyword for critical risk level."""
+        result = self.selector.get_thinking_keyword("critical")
+        assert result == "Ultrathink about", \
+            f"Expected 'Ultrathink about' for critical, got '{result}'"
+
+    def test_get_thinking_keyword_case_insensitive(self):
+        """Test that thinking keyword lookup is case insensitive."""
+        assert self.selector.get_thinking_keyword("LOW") == "Think about"
+        assert self.selector.get_thinking_keyword("Medium") == "Think hard about"
+        assert self.selector.get_thinking_keyword("HIGH") == "Ultrathink about"
+        assert self.selector.get_thinking_keyword("CRITICAL") == "Ultrathink about"
+
+    def test_get_thinking_keyword_unknown_returns_default(self):
+        """Test that unknown risk level returns default (Think hard about)."""
+        result = self.selector.get_thinking_keyword("unknown")
+        assert result == "Think hard about", \
+            f"Expected 'Think hard about' for unknown, got '{result}'"
+
+    def test_get_thinking_keyword_empty_returns_default(self):
+        """Test that empty risk level returns default."""
+        result = self.selector.get_thinking_keyword("")
+        assert result == "Think hard about", \
+            f"Expected 'Think hard about' for empty, got '{result}'"
+
+    # ==================== get_thinking_keyword_for_step Tests ====================
+
+    def test_get_thinking_keyword_for_step_low_risk(self):
+        """Test getting thinking keyword from step info with low risk."""
+        step_info = {"riskLevel": "low", "name": "documentation"}
+        result = self.selector.get_thinking_keyword_for_step(step_info)
+        assert result == "Think about", \
+            f"Expected 'Think about' for low risk step, got '{result}'"
+
+    def test_get_thinking_keyword_for_step_high_risk(self):
+        """Test getting thinking keyword from step info with high risk."""
+        step_info = {"riskLevel": "high", "name": "migration"}
+        result = self.selector.get_thinking_keyword_for_step(step_info)
+        assert result == "Ultrathink about", \
+            f"Expected 'Ultrathink about' for high risk step, got '{result}'"
+
+    def test_get_thinking_keyword_for_step_missing_risk_level(self):
+        """Test that missing riskLevel defaults to medium."""
+        step_info = {"name": "some-step"}
+        result = self.selector.get_thinking_keyword_for_step(step_info)
+        assert result == "Think hard about", \
+            f"Expected 'Think hard about' for missing risk level, got '{result}'"
+
+    def test_get_thinking_keyword_for_step_empty_dict(self):
+        """Test empty step info defaults to medium."""
+        result = self.selector.get_thinking_keyword_for_step({})
+        assert result == "Think hard about", \
+            f"Expected 'Think hard about' for empty dict, got '{result}'"
+
+    # ==================== get_risk_for_problem_type Tests ====================
+
+    def test_get_risk_for_problem_type_low_risk(self):
+        """Test risk level for low risk problem types."""
+        result = self.selector.get_risk_for_problem_type("documentation")
+        assert result == "low", \
+            f"Expected 'low' for documentation, got '{result}'"
+
+    def test_get_risk_for_problem_type_medium_risk(self):
+        """Test risk level for medium risk problem types."""
+        result = self.selector.get_risk_for_problem_type("algorithm")
+        assert result == "medium", \
+            f"Expected 'medium' for algorithm, got '{result}'"
+
+    def test_get_risk_for_problem_type_high_risk(self):
+        """Test risk level for high risk problem types."""
+        result = self.selector.get_risk_for_problem_type("migration")
+        assert result == "high", \
+            f"Expected 'high' for migration, got '{result}'"
+
+    def test_get_risk_for_problem_type_unknown_returns_default(self):
+        """Test that unknown problem type returns default risk level."""
+        result = self.selector.get_risk_for_problem_type("unknown-xyz")
+        assert result == "medium", \
+            f"Expected 'medium' for unknown type, got '{result}'"
+
+
 class TestIntegration:
     """Integration tests for the selector."""
 
@@ -396,7 +513,7 @@ def run_tests():
     print("Running Technique Selector Tests...")
     print("=" * 60)
 
-    test_classes = [TestTechniqueSelector, TestIntegration]
+    test_classes = [TestTechniqueSelector, TestThinkingKeywords, TestIntegration]
     total_passed = 0
     total_failed = 0
     failures = []

@@ -495,5 +495,16 @@
       "implementation": ["self-refine"],
       "verification": "reflexion"
     }
+  },
+  "thinkingKeywords": {
+    "low": "Think about",
+    "medium": "Think hard about",
+    "high": "Ultrathink about",
+    "critical": "Ultrathink about"
+  },
+  "thinkingKeywordDescriptions": {
+    "Think about": "Standard reasoning depth for routine tasks",
+    "Think hard about": "Increased reasoning allocation for moderate complexity",
+    "Ultrathink about": "Maximum reasoning budget (~31,999 tokens) for critical decisions"
   }
 }
