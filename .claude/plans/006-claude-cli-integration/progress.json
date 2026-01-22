@@ -6,10 +6,10 @@
   "problemType": "system-design",
   "problemCategory": "ARCHITECTURE",
   "createdAt": "2026-01-21T00:00:00Z",
-  "updatedAt": "2026-01-22T10:00:00Z",
+  "updatedAt": "2026-01-22T10:30:00Z",
   "promptsGeneratedAt": "2026-01-21T14:30:00Z",
   "status": "in_progress",
-  "currentStep": 5,
+  "currentStep": 6,
   "totalSteps": 13,
   "techniqueProfile": {
     "defaultPlanning": "ps-plus",
@@ -170,7 +170,7 @@
       "name": "plan-prompts-integration",
       "title": "Plan-Prompts Integration",
       "problemType": "refactor",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["self-refine"],
@@ -185,15 +185,19 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1},
+        {"technique": "tdd", "phase": "verification", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
+      "startedAt": "2026-01-22T10:15:00Z",
+      "completedAt": "2026-01-22T10:30:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
       "testsWritten": [],
-      "notes": ""
+      "notes": "Added Step 4.1 (risk level reading) and Step 4.2 (placeholder replacement) to plan-prompts.md. Updated output summary to show risk/keyword mapping. No code tests - command documentation step."
     },
     {
       "id": 6,

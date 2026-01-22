@@ -30,6 +30,41 @@ mkdir -p {plan-dir}/prompts
 ### Step 4: Generate Prompt for Each Step
 For each step file in `{plan-dir}/steps/`, create a corresponding prompt file in `{plan-dir}/prompts/`.
 
+#### Step 4.1: Determine Thinking Keyword for Each Step
+
+For each step, determine the appropriate reasoning depth by reading from progress.json:
+
+1. **Read risk level** from progress.json:
+   ```bash
+   risk_level=$(cat {plan-dir}/progress.json | jq -r ".steps[{step-index}].riskLevel")
+   ```
+
+2. **Map to thinking keyword**:
+   | Risk Level | Thinking Keyword | When to Use |
+   |------------|------------------|-------------|
+   | low | Think about | Routine tasks, documentation |
+   | medium | Think hard about | Standard complexity, some risk |
+   | high | Ultrathink about | Critical code, complex decisions |
+   | critical | Ultrathink about | Maximum reasoning required |
+
+3. **Default handling**:
+   - If riskLevel is null/missing: use "Think hard about"
+   - If riskLevel is unknown: use "Think hard about"
+   - Handle case insensitively: "Low", "LOW", "low" all map to "Think about"
+
+#### Step 4.2: Replace Thinking Keyword Placeholder
+
+When generating each prompt from the template, replace `{THINKING_KEYWORD}` with the mapped keyword:
+
+**Example transformation**:
+- Step with riskLevel="low" → "Think about"
+- Step with riskLevel="medium" → "Think hard about"
+- Step with riskLevel="high" → "Ultrathink about"
+
+**Important**: Replace ALL instances of `{THINKING_KEYWORD}` in the prompt.
+
+**Verification**: After replacement, grep for `{THINKING_KEYWORD}` should return no matches.
+
 Use this optimized prompt template:
 
 ```markdown
@@ -359,11 +394,12 @@ Mark prompts as generated:
 **Prompts Created**: {N} prompts in .claude/plans/{NNN}-{slug}/prompts/
 
 ### Prompt Files
-| Step | File | Ready |
-|------|------|-------|
-| 1 | 01-{name}.prompt.md | Yes |
-| 2 | 02-{name}.prompt.md | Yes |
-| ... | ... | ... |
+| Step | File | Risk | Thinking Keyword |
+|------|------|------|------------------|
+| 1 | 01-{name}.prompt.md | low | Think about |
+| 2 | 02-{name}.prompt.md | medium | Think hard about |
+| 3 | 03-{name}.prompt.md | high | Ultrathink about |
+| ... | ... | ... | ... |
 
 ### Next Command
 `/plan-next {NNN}` - Start implementing step 1

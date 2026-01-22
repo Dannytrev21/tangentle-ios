@@ -4,10 +4,10 @@ This file maintains context for resuming work on this plan from a fresh terminal
 
 ## Quick Status
 - **Plan**: Claude CLI System Full Integration
-- **Current Step**: 5 - Plan-Prompts Integration
+- **Current Step**: 6 - Plan-Next Enhancement
 - **Last Updated**: 2026-01-22
 - **Prompts Generated**: 2026-01-21 (13 prompts)
-- **Steps Completed**: 4/13
+- **Steps Completed**: 5/13
 
 ## What's Been Done
 - Plan created and structured
@@ -18,6 +18,7 @@ This file maintains context for resuming work on this plan from a fresh terminal
 - **Step 2 Complete**: CLAUDE.md streamlined
 - **Step 3 Complete**: Thinking keywords config & utility
 - **Step 4 Complete**: Prompt template enhancement
+- **Step 5 Complete**: Plan-prompts integration
 
 ## Integration Decisions Summary
 
@@ -96,10 +97,10 @@ This file maintains context for resuming work on this plan from a fresh terminal
 | `.claude/scripts/test_technique_selector.py` | 51 tests (includes 15 thinking keyword tests) | **Passing** |
 
 ## Current State
-Steps 1-4 complete. Knowledge base created, CLAUDE.md streamlined, thinking keywords integrated, prompt template enhanced.
+Steps 1-5 complete. Knowledge base created, CLAUDE.md streamlined, thinking keywords integrated, prompt template enhanced, plan-prompts command updated.
 
 ## Next Actions
-1. Run `/plan-next 006` to start Step 5: Plan-Prompts Integration
+1. Run `/plan-next 006` to start Step 6: Plan-Next Enhancement
 
 ## Things to Remember
 - This plan modifies the planning system itself (meta-level)
@@ -244,6 +245,47 @@ Enhanced the master prompt template (`plan-prompts.md`) with guide patterns for 
 ### Ready for Next Step
 Step 5: Plan-Prompts Integration
 Prerequisites met: Yes (template has {THINKING_KEYWORD} placeholder)
+
+---
+
+## Step 5 Complete - 2026-01-22
+
+### Summary
+Updated plan-prompts.md command to read risk levels and replace {THINKING_KEYWORD} placeholder with appropriate thinking keywords.
+
+### Technique Execution Log
+- **Planning**: ps-plus - success on attempt 1
+- **Implementation**: self-refine - success on attempt 1
+- **Verification**: tdd - success on attempt 1 (grep tests passed)
+
+### Files Modified
+- `.claude/commands/plan-prompts.md`: Added Step 4.1 (risk level reading) and Step 4.2 (placeholder replacement)
+
+### Changes Made
+1. **Step 4.1**: Determine Thinking Keyword for Each Step
+   - Read riskLevel from progress.json
+   - Mapping table: low → "Think about", medium → "Think hard about", high/critical → "Ultrathink about"
+   - Default handling for missing/unknown risk levels
+2. **Step 4.2**: Replace Thinking Keyword Placeholder
+   - Instructions to replace ALL instances of {THINKING_KEYWORD}
+   - Verification step to ensure no placeholders remain
+3. **Output Summary**: Updated table to show Risk and Thinking Keyword columns
+
+### Verification Results
+- [x] AC1: Command reads riskLevel from progress.json
+- [x] AC2: Mapping table documented in command
+- [x] AC3: Default handling documented
+- [x] AC4: Placeholder replacement instruction present
+- Note: AC5-AC7 verify generated prompts - would be tested when /plan-prompts is run
+
+### Key Decisions
+- Added as sub-steps (4.1, 4.2) to maintain existing step numbering
+- Case-insensitive risk level handling documented
+- Default to "Think hard about" for robustness
+
+### Ready for Next Step
+Step 6: Plan-Next Enhancement
+Prerequisites met: Yes
 
 ---
 
