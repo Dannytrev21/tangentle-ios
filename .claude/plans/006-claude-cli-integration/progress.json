@@ -6,10 +6,10 @@
   "problemType": "system-design",
   "problemCategory": "ARCHITECTURE",
   "createdAt": "2026-01-21T00:00:00Z",
-  "updatedAt": "2026-01-22T10:30:00Z",
+  "updatedAt": "2026-01-22T11:00:00Z",
   "promptsGeneratedAt": "2026-01-21T14:30:00Z",
   "status": "in_progress",
-  "currentStep": 6,
+  "currentStep": 7,
   "totalSteps": 13,
   "techniqueProfile": {
     "defaultPlanning": "ps-plus",
@@ -204,7 +204,7 @@
       "name": "plan-next-enhancement",
       "title": "Plan-Next Enhancement",
       "problemType": "refactor",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["self-refine"],
@@ -219,15 +219,19 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1},
+        {"technique": "tdd", "phase": "verification", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
+      "startedAt": "2026-01-22T10:45:00Z",
+      "completedAt": "2026-01-22T11:00:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
       "testsWritten": [],
-      "notes": ""
+      "notes": "Plan-next enhanced with context management guidance. Added: Context Awareness (pre-step), Context Warning Signs (mid-step), Post-Step Context Management, Document and Clear Pattern. No code tests - command documentation step."
     },
     {
       "id": 7,
@@ -454,7 +458,8 @@
       ".claude/scripts/utils.py",
       ".claude/scripts/technique_selector.py",
       ".claude/scripts/test_technique_selector.py",
-      ".claude/commands/plan-prompts.md"
+      ".claude/commands/plan-prompts.md",
+      ".claude/commands/plan-next.md"
     ],
     "testsCreated": [
       ".claude/scripts/test_utils.py"

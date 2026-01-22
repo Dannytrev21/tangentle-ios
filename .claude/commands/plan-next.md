@@ -119,6 +119,25 @@ Read the prompt file:
 cat $PLAN_DIR/prompts/{NN}-{step-name}.prompt.md
 ```
 
+### Context Awareness
+Before starting this step, check your context usage:
+```bash
+# Run /context to see current usage
+```
+
+| Current Usage | Recommendation |
+|---------------|----------------|
+| Under 70% | Proceed normally |
+| 70-84% | Consider `/compact` after step completion |
+| 85%+ | `/compact` now before starting |
+| 93%+ | `/clear` and read context.md to resume |
+
+**Step Position Consideration**:
+- Step 1: Full context available
+- Steps 2-4: Normal context usage expected
+- Steps 5+: Monitor context more carefully
+- Long plans (8+ steps): Consider fresh sessions
+
 Then execute the prompt contents using technique phases (if technique-aware plan):
 
 #### Phase A: Planning
@@ -594,12 +613,45 @@ If context.md exists with recent session data:
 - [ ] No debug code left
 - [ ] Writing tests alongside implementation
 
+**Context Warning Signs**:
+If you notice:
+- Responses becoming shorter or less detailed
+- Missing context from earlier in conversation
+- Confusion about previously discussed topics
+- Repeated questions about things already established
+
+**Stop and check**: Run `/context` to verify usage.
+
+**If context is high** (85%+):
+1. Write current progress to context.md
+2. Commit all changes: `git add -A && git commit -m "progress: step {N} in progress"`
+3. Run `/clear`
+4. Resume: "Read .claude/plans/{NNN}/context.md and continue step {N}"
+
 ### After Each Step
 - [ ] All AC verified
 - [ ] **Tests written and passing** (MANDATORY)
 - [ ] Progress updated (including testsWritten)
 - [ ] Context updated (including tests created)
 - [ ] Ready for next step
+
+### Post-Step Context Management
+After completing this step:
+
+1. **Update context.md** with:
+   - What was completed
+   - Files created/modified
+   - Key decisions made
+   - Any learnings
+
+2. **Check context usage**:
+   - If 70%+: Consider `/compact` before next step
+   - If multi-step session: Commit progress
+
+3. **For long plans (8+ steps)**:
+   - Consider fresh session for next step
+   - context.md preserves state across sessions
+   - Each step can be executed independently
 
 ### Testing Checklist
 - [ ] Unit tests for new functions/methods
@@ -608,3 +660,38 @@ If context.md exists with recent session data:
 - [ ] Edge cases covered
 - [ ] Error handling tested
 - [ ] All tests pass: `xcodebuild test -scheme Tangentle ...`
+
+## Document and Clear Pattern
+For multi-session work or when context is high:
+
+### Pattern
+1. **Document current state**:
+   Update `.claude/plans/{NNN}/context.md` with:
+   - Current step and status
+   - Work completed
+   - Key decisions
+   - Next actions
+
+2. **Commit everything**:
+   ```bash
+   git add -A && git commit -m "progress: step {N} documented for session break"
+   ```
+
+3. **Clear context**:
+   ```bash
+   /clear
+   ```
+
+4. **Resume in fresh session**:
+   ```
+   Read .claude/plans/{NNN}/context.md and continue from where we left off
+   ```
+
+### When to Use
+- Context usage approaching 85%
+- Taking a break from work
+- Switching to unrelated task
+- Before starting a complex step
+- At end of day
+
+This gives you fresh 200K context while preserving all progress.

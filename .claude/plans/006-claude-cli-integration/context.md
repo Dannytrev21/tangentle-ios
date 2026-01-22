@@ -4,10 +4,10 @@ This file maintains context for resuming work on this plan from a fresh terminal
 
 ## Quick Status
 - **Plan**: Claude CLI System Full Integration
-- **Current Step**: 6 - Plan-Next Enhancement
+- **Current Step**: 7 - Plan-Feature-Initial Explore Phase
 - **Last Updated**: 2026-01-22
 - **Prompts Generated**: 2026-01-21 (13 prompts)
-- **Steps Completed**: 5/13
+- **Steps Completed**: 6/13
 
 ## What's Been Done
 - Plan created and structured
@@ -46,7 +46,7 @@ This file maintains context for resuming work on this plan from a fresh terminal
 |------|---------|--------|
 | `CLAUDE.md` | Streamline to ~250 lines | **Done** (239 lines) |
 | `.claude/commands/plan-prompts.md` | Add thinking keywords section | **Done** |
-| `.claude/commands/plan-next.md` | Add context guidance | Pending |
+| `.claude/commands/plan-next.md` | Add context guidance | **Done** |
 | `.claude/commands/plan-feature-initial.md` | Add explore substep | Pending |
 | `.claude/commands/plan-feature.md` | Strengthen TDD | Pending |
 | `.claude/commands/plan-rollback.md` | Add recovery patterns | Pending |
@@ -97,10 +97,10 @@ This file maintains context for resuming work on this plan from a fresh terminal
 | `.claude/scripts/test_technique_selector.py` | 51 tests (includes 15 thinking keyword tests) | **Passing** |
 
 ## Current State
-Steps 1-5 complete. Knowledge base created, CLAUDE.md streamlined, thinking keywords integrated, prompt template enhanced, plan-prompts command updated.
+Steps 1-6 complete. Knowledge base created, CLAUDE.md streamlined, thinking keywords integrated, prompt template enhanced, plan-prompts command updated, plan-next command enhanced with context management.
 
 ## Next Actions
-1. Run `/plan-next 006` to start Step 6: Plan-Next Enhancement
+1. Run `/plan-next 006` to start Step 7: Plan-Feature-Initial Explore Phase
 
 ## Things to Remember
 - This plan modifies the planning system itself (meta-level)
@@ -285,6 +285,45 @@ Updated plan-prompts.md command to read risk levels and replace {THINKING_KEYWOR
 
 ### Ready for Next Step
 Step 6: Plan-Next Enhancement
+Prerequisites met: Yes
+
+---
+
+## Step 6 Complete - 2026-01-22
+
+### Summary
+Enhanced plan-next command with context management guidance for session longevity.
+
+### Technique Execution Log
+- **Planning**: ps-plus - success on attempt 1
+- **Implementation**: self-refine - success on attempt 1
+- **Verification**: tdd - success on attempt 1 (grep tests passed)
+
+### Files Modified
+- `.claude/commands/plan-next.md`: Added 4 new context management sections
+
+### Changes Made
+1. **Context Awareness section** (after prompt loading): Pre-step check with threshold table
+2. **Context Warning Signs** (in During Implementation): Mid-step reminder for context issues
+3. **Post-Step Context Management** (after step completion): Guidance on next steps
+4. **Document and Clear Pattern** (reference section): Full pattern for multi-session work
+
+### Verification Results
+- [x] AC1: Context Awareness section exists
+- [x] AC2: Threshold table with 70-84%, 85%+, 93%+
+- [x] AC3: Mid-step reminder section exists (During Implementation)
+- [x] AC4: Post-step context guidance exists
+- [x] AC5: Document and Clear pattern documented
+- [x] AC6: Command structure remains intact
+
+### Key Decisions
+- Kept as guidance only (no automatic tracking per ADR decision)
+- Used exact guide thresholds (50-69%, 70-84%, 85-92%, 93%+)
+- Made guidance actionable and concise
+- Placed Document and Clear as reference section at end
+
+### Ready for Next Step
+Step 7: Plan-Feature-Initial Explore Phase
 Prerequisites met: Yes
 
 ---
