@@ -38,6 +38,13 @@ Use this optimized prompt template:
 ## Mission
 {One clear sentence describing what to accomplish}
 
+## Reasoning Depth
+{THINKING_KEYWORD} the following aspects before implementation:
+1. What are the potential failure modes?
+2. What existing patterns should be followed?
+3. What tests will verify success?
+4. What could go wrong and how to prevent it?
+
 ## Context
 You are implementing step {N} of {total} in the "{Plan Name}" plan.
 
@@ -92,6 +99,22 @@ cat {plan-dir}/progress.json | jq '.context'
 ```
 
 ## Implementation Guide
+
+### TDD Approach (Mandatory for Code Steps)
+**The robots LOVE TDD.** Follow this workflow:
+
+1. **Write failing tests first**: Define expected behavior in tests
+2. **Confirm tests fail**: Verify tests fail for the right reason
+3. **Commit the tests**: Lock in the specification
+4. **Implement to pass**: Write minimum code to pass
+5. **Refactor**: Clean up while tests stay green
+6. **Commit implementation**: Separate commit for implementation
+
+**If modifying existing code**:
+- Ensure a unit test exists first
+- Create one if none exists
+- Then modify the function
+- Then run tests to verify changes
 
 ### Step-by-Step Instructions
 1. **{Action 1}**
@@ -156,6 +179,21 @@ Expected: {expected behavior}
 ```
 Check that: {what to verify}
 
+### Dual Review Pattern (High-Risk Steps)
+For high-risk or complex steps:
+
+1. **Claude A** implements the code
+2. **Fresh context**: Use `/clear` or new terminal
+3. **Claude B** reviews the implementation
+4. **Address feedback** from review
+5. **Final verification** and commit
+
+When to use:
+- High-risk steps (data migrations, security code)
+- Complex algorithms
+- Steps that have failed verification before
+- Code that will be difficult to change later
+
 ## Error Recovery
 
 ### If Syntax Check Fails
@@ -183,6 +221,27 @@ Check that: {what to verify}
 2. Note specific failure in progress.json
 3. Create minimal fix rather than rewriting
 4. Re-run verification after fix
+
+## Context Management
+Monitor your context usage during this step:
+
+| Usage | Action |
+|-------|--------|
+| 50-69% | Work normally |
+| 70-84% | Consider `/compact` after this step |
+| 85-92% | Use `/compact` before continuing |
+| 93%+ | Use `/clear` and resume from context.md |
+
+**If this is a long step**:
+- Commit progress frequently
+- Update context.md with current state
+- Consider "Document and Clear" pattern for fresh context
+
+**Document and Clear Pattern**:
+1. Write current progress to context.md
+2. Commit all changes
+3. Run `/clear`
+4. Resume: "Read context.md and continue from where we left off"
 
 ## Completion Protocol
 
@@ -233,6 +292,26 @@ Add to `{plan-dir}/context.md`:
 git add {files}
 git commit -m "{commit message template}"
 ```
+
+### Git Checkpoints
+Git is your safety net. The robot REALLLLLY wants to commit - let it.
+
+**Before risky changes**:
+```bash
+git add -A && git commit -m "checkpoint: before {description}"
+```
+
+**After each acceptance criterion passes**:
+```bash
+git add -A && git commit -m "AC passed: {criterion description}"
+```
+
+**After full step completion**:
+```bash
+git add -A && git commit -m "step {N} complete: {step name}"
+```
+
+Commit frequently - don't batch up large changes.
 
 ## Do NOT
 - Do NOT skip reading required files first

@@ -4,10 +4,10 @@ This file maintains context for resuming work on this plan from a fresh terminal
 
 ## Quick Status
 - **Plan**: Claude CLI System Full Integration
-- **Current Step**: 4 - Prompt Template Enhancement
-- **Last Updated**: 2026-01-21
+- **Current Step**: 5 - Plan-Prompts Integration
+- **Last Updated**: 2026-01-22
 - **Prompts Generated**: 2026-01-21 (13 prompts)
-- **Steps Completed**: 3/13
+- **Steps Completed**: 4/13
 
 ## What's Been Done
 - Plan created and structured
@@ -17,6 +17,7 @@ This file maintains context for resuming work on this plan from a fresh terminal
 - **Step 1 Complete**: Knowledge base created
 - **Step 2 Complete**: CLAUDE.md streamlined
 - **Step 3 Complete**: Thinking keywords config & utility
+- **Step 4 Complete**: Prompt template enhancement
 
 ## Integration Decisions Summary
 
@@ -43,7 +44,7 @@ This file maintains context for resuming work on this plan from a fresh terminal
 | File | Changes | Status |
 |------|---------|--------|
 | `CLAUDE.md` | Streamline to ~250 lines | **Done** (239 lines) |
-| `.claude/commands/plan-prompts.md` | Add thinking keywords section | Pending |
+| `.claude/commands/plan-prompts.md` | Add thinking keywords section | **Done** |
 | `.claude/commands/plan-next.md` | Add context guidance | Pending |
 | `.claude/commands/plan-feature-initial.md` | Add explore substep | Pending |
 | `.claude/commands/plan-feature.md` | Strengthen TDD | Pending |
@@ -95,10 +96,10 @@ This file maintains context for resuming work on this plan from a fresh terminal
 | `.claude/scripts/test_technique_selector.py` | 51 tests (includes 15 thinking keyword tests) | **Passing** |
 
 ## Current State
-Steps 1-3 complete. Knowledge base created, CLAUDE.md streamlined, thinking keywords integrated.
+Steps 1-4 complete. Knowledge base created, CLAUDE.md streamlined, thinking keywords integrated, prompt template enhanced.
 
 ## Next Actions
-1. Run `/plan-next 006` to start Step 4: Prompt Template Enhancement
+1. Run `/plan-next 006` to start Step 5: Plan-Prompts Integration
 
 ## Things to Remember
 - This plan modifies the planning system itself (meta-level)
@@ -203,6 +204,46 @@ _THINKING_KEYWORD_MAPPING = {
 ### Ready for Next Step
 Step 4: Prompt Template Enhancement
 Prerequisites met: Yes (thinking keyword functions available)
+
+---
+
+## Step 4 Complete - 2026-01-22
+
+### Summary
+Enhanced the master prompt template (`plan-prompts.md`) with guide patterns for thinking keywords, TDD, context management, and git checkpoints.
+
+### Technique Execution Log
+- **Planning**: ps-plus - success on attempt 1
+- **Implementation**: self-refine - success on attempt 1
+- **Verification**: got - success on attempt 1 (verified section coherence across template)
+
+### Files Modified
+- `.claude/commands/plan-prompts.md`: Major template enhancement
+
+### Changes Made
+1. **Reasoning Depth section** (after Mission): Added `{THINKING_KEYWORD}` placeholder with 4 key questions
+2. **TDD Approach section** (in Implementation Guide): 6-step workflow with "The robots LOVE TDD" emphasis
+3. **Context Management section** (before Completion Protocol): Threshold table (50-93%+) and Document-and-Clear pattern
+4. **Git Checkpoints section** (in Completion Protocol): Before/after/completion commit patterns
+5. **Dual Review Pattern** (in Verification Protocol): 5-step pattern for high-risk steps
+
+### Verification Results
+- [x] AC1: Reasoning Depth section with {THINKING_KEYWORD} placeholder
+- [x] AC2: TDD section includes "robots LOVE TDD"
+- [x] AC3: TDD 6-step workflow documented
+- [x] AC4: Context Management with threshold table (50-69%, 70-84%, 85-92%, 93%+)
+- [x] AC5: Git Checkpoints section in Completion Protocol
+- [x] AC6: Dual Review Pattern documented
+- [x] AC7: Template flows logically (manual verification)
+
+### Key Decisions
+- Used `{THINKING_KEYWORD}` placeholder - Step 5 will implement replacement
+- Placed Dual Review in Verification section (not Implementation)
+- Added Document-and-Clear pattern for long steps
+
+### Ready for Next Step
+Step 5: Plan-Prompts Integration
+Prerequisites met: Yes (template has {THINKING_KEYWORD} placeholder)
 
 ---
 
