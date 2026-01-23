@@ -6,10 +6,10 @@
   "problemType": "system-design",
   "problemCategory": "ARCHITECTURE",
   "createdAt": "2026-01-21T00:00:00Z",
-  "updatedAt": "2026-01-22T11:00:00Z",
+  "updatedAt": "2026-01-22T11:30:00Z",
   "promptsGeneratedAt": "2026-01-21T14:30:00Z",
   "status": "in_progress",
-  "currentStep": 7,
+  "currentStep": 8,
   "totalSteps": 13,
   "techniqueProfile": {
     "defaultPlanning": "ps-plus",
@@ -238,7 +238,7 @@
       "name": "plan-feature-initial-explore",
       "title": "Plan-Feature-Initial Explore Phase",
       "problemType": "refactor",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["self-refine"],
@@ -253,15 +253,19 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1},
+        {"technique": "tdd", "phase": "verification", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
+      "startedAt": "2026-01-22T11:10:00Z",
+      "completedAt": "2026-01-22T11:30:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
       "testsWritten": [],
-      "notes": ""
+      "notes": "Plan-feature-initial now has formal explore phase. Added Key Principle, Step 1.5 (Explore), exploration documentation template, renumbered steps 2-6. No code tests - command documentation step."
     },
     {
       "id": 8,
@@ -459,7 +463,8 @@
       ".claude/scripts/technique_selector.py",
       ".claude/scripts/test_technique_selector.py",
       ".claude/commands/plan-prompts.md",
-      ".claude/commands/plan-next.md"
+      ".claude/commands/plan-next.md",
+      ".claude/commands/plan-feature-initial.md"
     ],
     "testsCreated": [
       ".claude/scripts/test_utils.py"

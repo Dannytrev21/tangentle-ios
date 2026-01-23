@@ -2,10 +2,28 @@
 
 You are a requirements analyst preparing a feature request for `/plan-feature`. Your job is to analyze the user's initial idea, identify gaps and assumptions, and return a structured prompt template they can fill out to give `/plan-feature` complete context.
 
+## Key Principle
+**Explore before you plan. Plan before you code.**
+
+This command follows the guide's recommended workflow:
+1. **Explore** - Read and understand relevant code
+2. **Plan** - Create structured implementation plan
+3. **Code** - Implement with clear direction
+4. **Commit** - Checkpoint frequently
+
+Never let Claude jump straight to planning without exploration.
+
 ## Input
 Initial feature description: $ARGUMENTS
 
 ## Process
+1. Understand the Project Context (read CLAUDE.md)
+2. **Explore the Codebase** (read relevant files, document findings)
+3. Classify Problem Type
+4. Analyze the Initial Request
+5. Identify Critical Gaps
+6. Generate Clarifying Questions
+7. Create the Optimized Prompt Template
 
 ### Step 1: Understand the Project Context
 Read `CLAUDE.md` and explore the codebase briefly to understand:
@@ -14,7 +32,63 @@ Read `CLAUDE.md` and explore the codebase briefly to understand:
 - Technology stack
 - Coding conventions
 
-### Step 1.5: Classify Problem Type
+### Step 1.5: Explore the Codebase
+**Never jump straight to planning. Explore first.**
+
+Before classifying the problem, gather context by reading relevant files.
+
+#### 1. Read Relevant Files (Don't Write Code Yet)
+Based on the feature description, identify and read files that might be affected:
+
+```
+Read the following without writing any code:
+- Files that implement similar features
+- Files that will be modified
+- Tests for related functionality
+- Configuration files that might be involved
+```
+
+**Be explicit**: "Read the [X] module and explain how [Y] is managed. Don't write any code yet."
+
+#### 2. Document Exploration Findings
+Before proceeding to classification, document what you learned:
+
+```markdown
+## Exploration Summary
+
+### Files Reviewed
+| File | Purpose | Relevance |
+|------|---------|-----------|
+| {path} | {what it does} | {why it matters for this feature} |
+
+### Existing Patterns Found
+- {pattern 1}: Found in {file}, could apply to this feature
+- {pattern 2}: {description}
+
+### Potential Impact Areas
+- {area 1}: {why it might be affected}
+- {area 2}: {why it might be affected}
+
+### Questions Raised
+- {question 1}
+- {question 2}
+
+### Initial Complexity Assessment
+{simple/medium/complex} - {rationale}
+```
+
+#### 3. Proceed to Classification
+Only after exploration is complete, proceed to classification.
+
+**If exploration reveals the feature is significantly different than initially described**:
+- Update understanding before classification
+- Note any scope changes
+- Flag potential risks discovered
+- Consider asking user for clarification
+
+### Step 2: Classify Problem Type
+
+> **Note**: Complete Step 1.5 (Explore) before classification. Exploration findings inform accurate classification.
 
 Before analyzing the request, classify the problem type to determine optimal techniques:
 
@@ -59,7 +133,7 @@ If Python scripts are not available, manually classify based on keywords:
 
 Use this classification to inform your analysis and include it in the output template.
 
-### Step 2: Analyze the Initial Request
+### Step 3: Analyze the Initial Request
 
 Apply **Tree of Thought Analysis** to the feature request:
 
@@ -107,7 +181,7 @@ For each branch, identify:
 - **Missing**: What critical information is absent
 - **Ambiguous**: What could be interpreted multiple ways
 
-### Step 3: Identify Critical Gaps
+### Step 4: Identify Critical Gaps
 
 Categorize gaps by severity:
 
@@ -117,14 +191,14 @@ Categorize gaps by severity:
 | 🟡 **Important** | Affects architecture decisions | Should be answered |
 | 🟢 **Optional** | Nice to have, can assume defaults | May be skipped |
 
-### Step 4: Generate Clarifying Questions
+### Step 5: Generate Clarifying Questions
 
 For each gap, create a specific question with:
 - Context for why it matters
 - Example answers or options where helpful
 - Default assumption if user skips
 
-### Step 5: Create the Optimized Prompt Template
+### Step 6: Create the Optimized Prompt Template
 
 Output a structured template in this format:
 
