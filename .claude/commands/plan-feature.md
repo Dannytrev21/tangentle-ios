@@ -5,6 +5,28 @@ You are creating a comprehensive implementation plan for a new feature. This pla
 ## Input
 Feature description: $ARGUMENTS
 
+## Core Principle: Test-Driven Development
+**The robots LOVE TDD.** Make it the default approach.
+
+Every implementation step should follow TDD unless there's a specific reason not to:
+1. **Write failing tests first**: Define expected behavior in tests
+2. **Confirm tests fail**: Verify tests fail for the right reason
+3. **Commit the tests**: Specification locked in
+4. **Implement to pass**: Write minimum code to pass
+5. **Refactor**: Clean up while tests stay green
+6. **Commit implementation**: Separate commit for implementation
+
+### Benefits
+- Provides Claude with verifiable objectives
+- Eliminates ambiguity about success criteria
+- Reduces hallucination significantly
+- Creates documentation via tests
+
+### When NOT to Use TDD
+- Documentation-only steps
+- Configuration without logic
+- Pure refactoring (tests already exist)
+
 ## Process
 
 ### Step 1: Analyze the Feature Request
@@ -91,11 +113,13 @@ Use this template:
 
 ## Technique Matrix
 
-| Step | Problem Type | Planning | Implementation | Verification | Risk |
-|------|--------------|----------|----------------|--------------|------|
-| 1 | {step_type} | {technique} | {technique(s)} | {technique} | {low/medium/high} |
-| 2 | {step_type} | {technique} | {technique(s)} | {technique} | {low/medium/high} |
-| ... | ... | ... | ... | ... | ... |
+**Default Implementation Technique: TDD** (unless noted otherwise in "Notes" column)
+
+| Step | Problem Type | Planning | Implementation | Verification | Risk | Notes |
+|------|--------------|----------|----------------|--------------|------|-------|
+| 1 | {step_type} | {technique} | {technique(s)} | {technique} | {low/medium/high} | |
+| 2 | {step_type} | {technique} | {technique(s)} | {technique} | {low/medium/high} | |
+| ... | ... | ... | ... | ... | ... | |
 
 ## Implementation Steps
 
@@ -205,6 +229,20 @@ If Python unavailable, use this technique reference table:
 | algorithm | self-consistency | tdd | reflexion |
 | refactor | ps-plus | self-refine | tdd |
 | documentation | ps-plus | self-refine | got |
+
+#### Implementation Technique Selection: Prefer TDD
+When selecting implementation techniques, **prefer TDD**:
+
+| Scenario | Primary Technique | Rationale |
+|----------|------------------|-----------|
+| Any code creation | **TDD** | Tests define success criteria |
+| Algorithm/logic | TDD + Self-Consistency | Verify correctness |
+| Service implementation | TDD + Self-Refine | Quality iteration |
+| UI components | Self-Refine + Manual | Visual verification needed |
+| Documentation only | Self-Refine | No testable code |
+| Bug fix | **TDD** | Reproduce bug in test first |
+
+**Default to TDD** unless the step creates no testable code.
 
 #### 3. Assess Risk Per Step
 
@@ -487,18 +525,36 @@ After creating all files, output:
 - Verification commands must be copy-pasteable
 - **Every step MUST include tests** - no exceptions
 
-### For Testing (MANDATORY)
+### Testing Requirements (MANDATORY)
+**No step is complete without tests.** This is non-negotiable for code changes.
+
+#### TDD Workflow
+```
+Tests FIRST → Fail → Commit Tests → Implement → Pass → Commit Code
+```
+
+#### Required Test Cases
+- **Happy path**: Normal expected behavior
+- **Edge cases**: Boundary conditions, empty inputs, maximum values
+- **Error cases**: Invalid input, failure scenarios
+- **Integration**: Component interactions (if applicable)
+
+#### Test Standards
 - Every step must define what tests to write
 - Unit tests for all new functions, methods, and computed properties
 - Integration tests when multiple components interact
 - UI tests for user-facing features and interactions
 - Tests must be written BEFORE marking a step complete
 - Test naming convention: `test{What}_when{Condition}_should{Expected}()`
-- Minimum test coverage goals:
-  - Services/Business Logic: 80%+ coverage
-  - ViewModels: 70%+ coverage
-  - Repositories: 60%+ coverage
-  - UI Components: UI tests for critical paths
+
+#### Coverage Targets
+| Code Type | Minimum | Target |
+|-----------|---------|--------|
+| Services | 70% | **80%+** |
+| ViewModels | 60% | **70%+** |
+| Repositories | 50% | **60%+** |
+| Utilities | 80% | **90%+** |
+| UI Components | UI tests for critical paths | |
 
 ### For Tree of Thought
 - Consider at least 3 options for each major decision
@@ -534,3 +590,21 @@ In rare cases where tests are genuinely not applicable (e.g., pure asset changes
 **N/A - Reason**: {explain why tests don't apply}
 **Manual Verification**: {what to check manually}
 ```
+
+## Pre-Commit Verification
+Consider pre-commit hooks to catch issues early:
+
+```bash
+# Example pre-commit runs:
+# - Lint check
+# - Type check
+# - Unit tests for changed files
+```
+
+"The robot REALLLLLY wants to commit" - hooks catch errors before they propagate.
+
+If pre-commit hooks fail:
+1. Read the error output
+2. Fix the specific issue
+3. Stage the fix
+4. Retry commit
