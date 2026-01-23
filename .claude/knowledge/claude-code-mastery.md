@@ -75,28 +75,35 @@ For monorepos, create nested files:
 ## Git Patterns
 
 ### Commit Frequently
-Git is your safety net. Before risky modifications:
-```bash
-git add -A && git commit -m "checkpoint before refactoring"
-# If Claude's changes don't work:
-git reset --hard HEAD
-```
+- Git is your safety net
+- Create checkpoints before risky operations
+- The robot REALLLLLY wants to commit - let it
 
-### Git Worktrees for Parallel Work
-Enable multiple Claude sessions on different features:
-```bash
-git worktree add ../project-feature-auth feature-auth
-git worktree add ../project-feature-dashboard feature-dashboard
+### Commit Message Convention
+Use semantic prefixes:
+- `checkpoint:` - Before risky operations
+- `progress:` - Partial completion
+- `feat:` - New feature
+- `fix:` - Bug fix
+- `refactor:` - Code restructuring
+- `test:` - Adding tests
+- `docs:` - Documentation
 
-# Launch separate Claude instances in each
-cd ../project-feature-auth && claude
-cd ../project-feature-dashboard && claude
-```
+### Pre-Commit Hooks
+- Use hooks to enforce quality
+- Catches errors before they propagate
+- Works well with Claude's commit enthusiasm
 
-Use cases:
-- Simultaneous frontend and backend development
-- Complex refactoring alongside feature work
-- One Claude writes code while another reviews
+### Worktrees for Parallel Work
+- Multiple Claude sessions on different branches
+- Useful for complex plans
+- Each worktree is isolated
+- Enables parallel frontend/backend development
+
+### Recovery Patterns
+- `/rewind` for conversation recovery
+- `git reset` for code recovery
+- Checkpoint commits enable easy rollback
 
 ### Dual Claude Review Pattern
 For higher quality:
@@ -104,6 +111,8 @@ For higher quality:
 2. `/clear` or open new terminal
 3. Claude B reviews the work
 4. Claude C implements review feedback
+
+See @.claude/commands/plan-prompts.md for full git workflow documentation including commands and worktree examples.
 
 ## Core Principles Summary
 

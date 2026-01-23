@@ -331,22 +331,95 @@ git commit -m "{commit message template}"
 ### Git Checkpoints
 Git is your safety net. The robot REALLLLLY wants to commit - let it.
 
-**Before risky changes**:
-```bash
-git add -A && git commit -m "checkpoint: before {description}"
-```
+**Checkpoint Strategy**:
+| When | Command | Purpose |
+|------|---------|---------|
+| Before risky changes | `git add -A && git commit -m "checkpoint: before {description}"` | Safety net |
+| After meaningful progress | `git add -A && git commit -m "progress: {what was completed}"` | Track work |
+| After AC passes | `git add -A && git commit -m "AC passed: {criterion}"` | Lock in success |
+| After step complete | `git add -A && git commit -m "step {N} complete: {name}"` | Mark milestone |
 
-**After each acceptance criterion passes**:
-```bash
-git add -A && git commit -m "AC passed: {criterion description}"
-```
-
-**After full step completion**:
-```bash
-git add -A && git commit -m "step {N} complete: {step name}"
-```
+**Commit Message Prefixes**:
+| Prefix | Use Case | Example |
+|--------|----------|---------|
+| `checkpoint:` | Before risky operations | `checkpoint: before refactoring auth` |
+| `progress:` | Partial completion | `progress: tests passing, impl next` |
+| `feat:` | New feature/functionality | `feat: add user login` |
+| `fix:` | Bug fix | `fix: null pointer in auth` |
+| `refactor:` | Code restructuring | `refactor: extract auth service` |
+| `test:` | Adding tests | `test: add auth unit tests` |
+| `docs:` | Documentation changes | `docs: update README` |
 
 Commit frequently - don't batch up large changes.
+
+### Git Recovery Commands
+```bash
+# Undo last commit, keep changes staged
+git reset --soft HEAD~1
+
+# Undo last commit, keep changes unstaged
+git reset HEAD~1
+
+# Undo last commit, discard changes
+git reset --hard HEAD~1
+
+# Restore specific file from last commit
+git checkout HEAD -- {file}
+
+# Restore file from specific commit
+git checkout {commit} -- {file}
+```
+
+### Pre-Commit Verification
+Consider pre-commit hooks to catch issues early:
+```bash
+# Example pre-commit runs:
+# - Lint check
+# - Type check
+# - Unit tests for changed files
+```
+
+"The robot REALLLLLY wants to commit" - hooks catch errors before they propagate.
+
+If pre-commit hooks fail:
+1. Read the error output
+2. Fix the specific issue
+3. Stage the fix
+4. Retry commit
+
+### Parallel Work with Git Worktrees
+For complex plans or when multiple streams of work are needed:
+
+**Creating Worktrees**:
+```bash
+# Create worktree for a feature branch
+git worktree add ../project-feature-auth feature-auth
+git worktree add ../project-feature-dashboard feature-dashboard
+```
+
+**Parallel Claude Sessions**:
+```bash
+# Terminal 1
+cd ../project-feature-auth && claude
+
+# Terminal 2
+cd ../project-feature-dashboard && claude
+```
+
+**Use Cases**:
+- Frontend and backend development simultaneously
+- Complex refactoring alongside feature work
+- One Claude writes code while another reviews
+- Different plan steps running in parallel
+
+**Cleanup**:
+```bash
+# List worktrees
+git worktree list
+
+# Remove worktree when done
+git worktree remove ../project-feature-auth
+```
 
 ## Do NOT
 - Do NOT skip reading required files first
