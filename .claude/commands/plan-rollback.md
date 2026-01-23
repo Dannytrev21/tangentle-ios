@@ -5,6 +5,141 @@ You are rolling back changes from a failed step in an implementation plan. This 
 - Step cannot be completed and changes should be discarded
 - Need to restart a step fresh
 
+## Recovery Patterns
+
+Claude Code provides multiple recovery mechanisms. Choose based on situation:
+
+### Quick Reference
+| Situation | Recovery Method |
+|-----------|-----------------|
+| Wrong direction, preserve context | Press Escape |
+| Undo recent conversation turns | /rewind |
+| Code changes need reverting | Git reset/checkout |
+| Step failed, need plan update | /plan-rollback (this command) |
+| Complete restart needed | /rewind (both) + git reset |
+
+### Immediate Interruption
+- **Press Escape**: Interrupts current operation, preserves context
+- **Double-tap Escape**: Access checkpoint history
+- Use when: Claude is going in wrong direction mid-response
+
+### Conversation Recovery
+- **`/rewind`**: Revert to previous conversation state
+  - Conversation only: Keep code changes
+  - Code only: Keep conversation, revert files
+  - Both: Full restore
+- Use when: Need to undo recent conversation turns
+
+### Code Recovery
+- **Git reset**: `git reset --hard HEAD`
+- **Git checkout**: `git checkout -- {file}`
+- **Previous commit**: `git reset --hard HEAD~1`
+- Use when: Code changes need reverting
+
+### Plan-Specific Recovery
+- **This command (`/plan-rollback`)**: Plan-aware rollback
+  - Updates progress.json
+  - Preserves memory bank learnings
+  - Optionally resets technique attempts
+
+## Git Checkpoint Strategy
+
+### Before Risky Steps
+Always checkpoint before high-risk operations:
+```bash
+git add -A && git commit -m "checkpoint: before step {N}"
+```
+
+### Recovery from Checkpoint
+If step fails badly:
+```bash
+# Find the checkpoint
+git log --oneline -10
+
+# Reset to checkpoint
+git reset --hard {checkpoint-commit}
+
+# Update progress.json to reflect rollback
+# (This is done automatically by /plan-rollback)
+```
+
+### Partial Recovery
+If some work is salvageable:
+```bash
+# Stash good changes
+git stash
+
+# Reset to checkpoint
+git reset --hard {checkpoint}
+
+# Re-apply good changes
+git stash pop
+
+# Resolve any conflicts
+# Commit the salvaged work
+```
+
+### Git Recovery Commands Reference
+| Command | Effect | When to Use |
+|---------|--------|-------------|
+| `git reset --soft HEAD~1` | Undo commit, keep changes staged | Wrong commit message |
+| `git reset --hard HEAD~1` | Undo commit, discard changes | Bad commit |
+| `git checkout -- {file}` | Discard file changes | Single file recovery |
+| `git reset --hard {commit}` | Reset to specific commit | Checkpoint recovery |
+| `git stash` | Save changes temporarily | Before risky operation |
+
+## Integration with /rewind
+
+`/rewind` offers three recovery modes:
+
+| Mode | Effect | Use Case |
+|------|--------|----------|
+| Conversation only | Rewind conversation, keep code | Wrong approach discussed, code is fine |
+| Code only | Keep conversation, revert files | Code broke, but conversation is valuable |
+| Both | Full restore | Complete restart needed |
+
+### When to Use /rewind vs /plan-rollback
+| Scenario | Use |
+|----------|-----|
+| Mid-step recovery | /rewind |
+| Conversation issues | /rewind |
+| Step completed but wrong | /plan-rollback |
+| Need to update plan state | /plan-rollback |
+| Code + conversation reset | /rewind (both) |
+
+### Combining Both
+For severe failures:
+1. Use `/rewind` to restore conversation state
+2. Use `/plan-rollback` to update plan status
+3. Use git reset to restore code
+
+## Interrupt and Correct
+
+### Single Escape
+Press Escape during Claude's response to:
+- Stop current generation immediately
+- Preserve all context
+- Provide course correction
+
+**Effective corrections after Escape**:
+- "That approach won't work because X. Try Y instead."
+- "Stop. Let's reconsider the approach first."
+- "Wait - I need to provide more context."
+- "Don't modify that file. Focus on {other file} instead."
+
+### Double Escape
+Access `/rewind` checkpoint selection:
+- See conversation history
+- Select restore point
+- Choose what to restore (conversation, code, both)
+
+### When to Interrupt
+- Claude misunderstood the requirement
+- Going down a wrong technical path
+- About to modify wrong files
+- Generating excessive/unnecessary code
+- Making incorrect assumptions
+
 ## Input
 Plan identifier: $ARGUMENTS
 
@@ -336,3 +471,40 @@ Options:
 2. Manual review (show diff)
 3. Cancel rollback
 ```
+
+## Post-Rollback Actions
+
+After any rollback:
+
+### 1. Document the Failure
+Add to context.md learnings section:
+```markdown
+## Learnings
+- {Failure description}: {What caused it}
+- {What was tried}: {Why it didn't work}
+- {Resolution}: {What fixed it}
+```
+
+### 2. Update CLAUDE.md (if needed)
+If rollback reveals missing guidance:
+- Add specific convention that was violated
+- Add warning about common mistake
+- Update relevant section
+
+### 3. Consider Technique Change
+If same technique failed multiple times:
+- Review technique rotation recommendations
+- Consider switching to TDD if not already
+- Consider Reflexion for learning from failure
+
+### 4. Checkpoint Immediately
+Before retry:
+```bash
+git add -A && git commit -m "checkpoint: after rollback, before retry"
+```
+
+### 5. Review Memory Bank
+Check context.md for:
+- Previous failures in similar steps
+- Successful patterns from other steps
+- Key decisions that still apply
