@@ -5,6 +5,120 @@ You are re-running verification for the current step of an implementation plan. 
 - You made manual fixes and want to check them
 - You want to ensure nothing regressed
 
+## Dual Claude Review Pattern
+
+For high-risk or complex steps, use the dual review pattern:
+
+### The Pattern
+1. **Claude A** implements the code
+2. **Fresh context**: Use `/clear` or new terminal
+3. **Claude B** reviews the implementation
+4. **Address feedback** from review
+5. **Final verification** and commit
+
+### How to Execute
+```
+# After implementation is "complete"
+/clear
+
+# In fresh context:
+Review the changes in {file paths} for:
+1. Code quality and readability
+2. Security vulnerabilities
+3. Performance implications
+4. Test coverage gaps
+5. Adherence to project patterns
+
+Provide specific feedback on issues found.
+```
+
+### Review Checklist for Claude B
+- [ ] Does the code follow project conventions?
+- [ ] Are there any obvious bugs or edge cases missed?
+- [ ] Is error handling appropriate?
+- [ ] Are there security concerns?
+- [ ] Is the code testable and tested?
+- [ ] Does it match the step specification?
+
+### When to Use
+- High-risk steps (data migrations, security code)
+- Complex algorithms with many edge cases
+- Steps that have failed verification before
+- Code that will be difficult to change later
+- Core infrastructure changes
+
+## Systematic Verification Protocol
+
+Follow this order for comprehensive verification. Start with fastest checks to catch obvious issues quickly.
+
+### 1. Syntax Verification (Fastest)
+```bash
+# Build without running
+xcodebuild -scheme Tangentle -sdk iphonesimulator build
+```
+**Expect**: No compilation errors, no new warnings (unless documented)
+
+### 2. Unit Test Verification
+```bash
+# Run tests for changed files
+xcodebuild test -scheme Tangentle -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15'
+```
+**Expect**: All existing tests pass, new tests pass, coverage meets targets
+
+### 3. Lint Verification
+```bash
+# Run linter (if configured)
+swiftlint lint --path {changed files}
+```
+**Expect**: No lint errors, style consistent
+
+### 4. Integration Verification
+- Verify component interactions work
+- Check for circular dependencies
+- Test with real (or mock) data
+- Verify API contracts match
+
+### 5. Manual Verification (Slowest)
+- Visual inspection of UI changes
+- User flow testing
+- Edge case scenarios
+- Performance spot-checks
+
+### Verification Order Rationale
+| Order | Check | Time | Catch |
+|-------|-------|------|-------|
+| 1 | Syntax | Seconds | Typos, import errors |
+| 2 | Unit Tests | Minutes | Logic errors, regressions |
+| 3 | Lint | Seconds | Style violations |
+| 4 | Integration | Minutes | Contract violations |
+| 5 | Manual | Variable | UX issues, visual bugs |
+
+Start with fastest checks to fail fast on obvious issues.
+
+## Subagent Verification (Phase 2)
+
+> **Note**: Custom subagents are planned for Phase 2 of this integration.
+
+The guide recommends using subagents for specialized verification:
+
+### Planned Subagents
+| Agent | Purpose | Use Case |
+|-------|---------|----------|
+| `code-reviewer` | Expert code review | After implementation |
+| `test-writer` | Test creation | Coverage gaps |
+| `security-checker` | Security audit | Sensitive code |
+
+### Future Usage Pattern
+```
+Use the code-reviewer subagent to check my recent changes.
+```
+
+### Current Alternative
+Until subagents are available, use:
+- **Dual Claude Review pattern** (above)
+- **Fresh context review**: `/clear` then ask for review
+- **Manual checklist**: Use review checklist provided
+
 ## Input
 Plan identifier: $ARGUMENTS
 
@@ -392,6 +506,62 @@ After verification, update progress.json:
   "steps[N-1].techniquesSuggested": ["{any switch suggestions}"]
 }
 ```
+
+## Verification Failure Analysis
+
+When verification fails, systematically diagnose:
+
+### 1. Identify Failure Type
+| Failure | Likely Cause | Action |
+|---------|--------------|--------|
+| Build fails | Syntax/import error | Fix specific error message |
+| Tests fail | Logic error or spec mismatch | Debug test output |
+| Lint fails | Style violation | Auto-fix or manual correction |
+| Integration fails | Interface mismatch | Check contracts between components |
+| Manual fails | Logic/UX issue | Review requirements |
+
+### 2. Diagnose Root Cause
+For each failure type:
+
+**Build failures**:
+- Read the exact error message
+- Check import statements
+- Verify type definitions
+- Check for typos
+
+**Test failures**:
+- Read test output for expected vs actual
+- Check if implementation matches spec
+- Verify test expectations are correct
+- Look for off-by-one errors, edge cases
+
+**Integration failures**:
+- Check that interfaces match
+- Verify data formats
+- Look for timing issues
+- Check dependency injection
+
+### 3. Apply Technique Rotation
+If same failure persists after fix attempt:
+- First retry: Same technique, different approach
+- Second retry: Alternative technique
+- Third retry: Escalate to user or try TDD if not already
+
+### 4. Update Memory Bank
+Record failure and resolution in context.md:
+```markdown
+## Learnings
+- {Failure type}: {What caused it}
+- {Diagnosis}: {How it was found}
+- {Fix}: {What resolved it}
+- {Prevention}: {How to avoid in future}
+```
+
+### 5. Consider CLAUDE.md Update
+If failure reveals missing guidance:
+- Add convention that was violated
+- Add warning for common mistake
+- Update testing requirements
 
 ## Verification Best Practices
 
