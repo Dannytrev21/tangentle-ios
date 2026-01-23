@@ -57,10 +57,12 @@ import subprocess
 import sys
 from pathlib import Path
 
-# Add parent to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# Add scripts directory to path for imports
+# Tests are in .windsurf/scripts/tests/, modules are in .windsurf/scripts/
+SCRIPTS_DIR = Path(__file__).parent.parent
+sys.path.insert(0, str(SCRIPTS_DIR))
 
-from technique_selector import select_reasoning_technique
+from technique_selector import TechniqueSelector, select_reasoning_technique
 from problem_classifier import ProblemClassifier
 
 

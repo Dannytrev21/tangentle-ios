@@ -188,6 +188,14 @@ If verification fails:
 3. Check that selection logic matches Step 2 pattern
 4. Ensure plan artifacts still generate correctly
 
+## Fallback Behavior
+**IMPORTANT**: If the Python selector fails (command not found, error, etc.), the workflow MUST fall back to ToT (Tree of Thoughts) as the default reasoning technique. This ensures the workflow never breaks due to script issues.
+
+Add this fallback logic to the workflow:
+```markdown
+If selector fails or returns error, default to ToT.
+```
+
 ## Do NOT
 - Do NOT exceed 12,000 characters
 - Do NOT remove artifact generation logic (plan.md, adr.md, steps/, etc.)

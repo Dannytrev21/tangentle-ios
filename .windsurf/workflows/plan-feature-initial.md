@@ -35,7 +35,28 @@ Display classification:
 ═══════════════════════════════════════════════════════════════
 ```
 
-### Step 2: Tree of Thought Analysis
+### Step 1.5: Select Reasoning Technique
+
+Based on classification, select the optimal reasoning technique:
+
+```bash
+python3 .windsurf/scripts/windsurf_plan.py reasoning {problem_type} {category}
+```
+
+Display selection:
+```
+Reasoning Technique: {ToT|GoT}
+Rationale: {rationale from selector}
+```
+
+**Fallback**: If selector fails or returns error, default to ToT.
+
+- If ToT selected → Use Step 2 (ToT): Tree of Thought Analysis
+- If GoT selected → Use Step 2 (GoT): Graph of Thoughts Synthesis
+
+### Step 2 (ToT): Tree of Thought Analysis
+
+Use this section when ToT is selected.
 
 Analyze across 5 branches:
 
@@ -74,6 +95,32 @@ For each branch, categorize findings:
 - **Implicit**: Inferred from context
 - **Missing**: Critical gaps to fill
 - **Ambiguous**: Multiple interpretations possible
+
+### Step 2 (GoT): Graph of Thoughts Synthesis
+
+Use this section when GoT is selected.
+
+Analyze using aggregation approach:
+
+#### Initial Nodes
+Create thought nodes for:
+- **T1**: Functional requirements - what the feature must do
+- **T2**: Technical constraints - platform, dependencies, performance
+- **T3**: User experience needs - flows, interactions, accessibility
+- **T4**: Integration points - services, APIs, existing code
+
+#### Aggregation
+Merge compatible nodes:
+- **T5**: Combined requirements (T1 + T2) - feasible functionality
+- **T6**: User-technical balance (T3 + T4) - implementable UX
+
+#### Synthesis
+- **T7**: Final specification (T5 + T6) - complete feature definition
+
+For each node, categorize:
+- **Explicit**: Clearly stated by user
+- **Implicit**: Inferred from context
+- **Missing**: Gaps to fill
 
 ### Step 3: Gap Identification
 
@@ -243,34 +290,6 @@ When user confirms, generate:
 {Other answers provided}
 ```
 
-## Question Categories
+## Reference
 
-Always check these areas for gaps:
-
-**Scope**: MVP features, exclusions, phasing, existing features affected
-**UX**: Primary flow, gestures, accessibility, error states
-**Data**: New entities, existing data used, storage, sync
-**Technical**: iOS version, dependencies, performance, offline behavior
-**Visual**: Design spec, reusable components, new components, dark mode
-**Integration**: Services, APIs, third-party, background processing
-**Testing**: Coverage level, manual testing, edge cases, devices
-**Rollout**: Feature flags, migration, rollback, analytics
-
-## Example
-
-**Input**: "Add a dark mode toggle to settings"
-
-**Gap Analysis**:
-- **Explicit**: Toggle in settings, enable dark mode
-- **Implicit**: Uses system appearance API, persists preference
-- **Missing**:
-  - 🔴 Follow system or independent toggle?
-  - 🟡 Animate transition?
-  - 🟢 New Appearance section or existing Settings?
-- **Ambiguous**: Pure black vs dark gray, schedule option scope
-
-## Quality Standards
-
-**Questions**: Specific, provide options, explain importance, give defaults
-**Assumptions**: State explicitly, be conservative, allow overrides
-**Output**: Complete, consistently formatted, copy-paste ready
+See `plan-conventions` rule for question categories and quality standards.

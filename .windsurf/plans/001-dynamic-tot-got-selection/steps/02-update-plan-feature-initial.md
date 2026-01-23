@@ -176,6 +176,14 @@ If verification fails:
 3. Check YAML frontmatter syntax
 4. Ensure both ToT and GoT sections are properly formatted
 
+## Fallback Behavior
+**IMPORTANT**: If the Python selector fails (command not found, error, etc.), the workflow MUST fall back to ToT (Tree of Thoughts) as the default reasoning technique. This ensures the workflow never breaks due to script issues.
+
+Add this fallback logic to the workflow:
+```markdown
+If selector fails or returns error, default to ToT.
+```
+
 ## Do NOT
 - Do NOT exceed 12,000 characters
 - Do NOT remove YAML frontmatter

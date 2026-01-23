@@ -18,7 +18,10 @@ from typing import Optional
 sys.path.insert(0, str(Path(__file__).parent))
 
 from problem_classifier import ProblemClassifier, ClassificationResult
-from technique_selector import TechniqueSelector, Phase, TechniqueSelection
+from technique_selector import (
+    TechniqueSelector, Phase, TechniqueSelection,
+    select_reasoning_technique, ReasoningSelection
+)
 from risk_assessor import RiskAssessor, RiskLevel, StepInfo, RiskAssessment
 from memory_bank import MemoryBank, MemoryBankEntry, create_entry
 from self_correction import SelfCorrection, get_retry_config
@@ -489,6 +492,44 @@ def cmd_stage(args, orchestrator: PlanOrchestrator) -> int:
     return 0
 
 
+def cmd_reasoning(args, orchestrator: PlanOrchestrator) -> int:
+    """Handle reasoning subcommand to select ToT or GoT."""
+    # Build characteristics dict from flags
+    characteristics = {}
+    if args.synthesis:
+        characteristics["requires_synthesis"] = True
+    if args.exploration:
+        characteristics["exploration_needed"] = True
+    if args.multiple:
+        characteristics["multiple_approaches"] = True
+    if args.review:
+        characteristics["review_task"] = True
+    if args.design:
+        characteristics["new_design"] = True
+
+    # Call selector (pass None if no characteristics)
+    chars = characteristics if characteristics else None
+    result = select_reasoning_technique(args.problem_type, args.category, chars)
+
+    content = [
+        f"Problem Type: {args.problem_type}",
+        f"Category: {args.category}",
+        "",
+        f"Technique: {result.technique.upper()}",
+        f"Rationale: {result.rationale}",
+    ]
+
+    if result.characteristics_matched:
+        content.append("")
+        content.append(f"Characteristics Matched: {', '.join(result.characteristics_matched)}")
+
+    print(format_box("REASONING TECHNIQUE", content))
+
+    # Also output just the technique for piping/scripting
+    print(f"\n{result.technique}")
+    return 0
+
+
 def cmd_help(args, orchestrator: PlanOrchestrator) -> int:
     """Handle help subcommand."""
     help_text = """
@@ -500,6 +541,7 @@ USAGE:
 COMMANDS:
   classify <description>   Classify a problem description
   techniques <type>        Show techniques for a problem type
+  reasoning <type> <cat>   Select ToT or GoT reasoning technique
   risk <type>              Assess risk for a step
   status <plan_id>         Show plan status
   list                     List all plans
@@ -522,9 +564,14 @@ STAGE COMMAND:
   stage --plan <id> --step <n>
   stage --plan <id> --step <n> --raw
 
+REASONING COMMAND:
+  reasoning <type> <category> [--synthesis] [--exploration] [--multiple] [--review] [--design]
+
 EXAMPLES:
   windsurf_plan.py classify "Fix the crash when saving"
   windsurf_plan.py techniques debug
+  windsurf_plan.py reasoning debug LOGIC
+  windsurf_plan.py reasoning refactor ARCHITECTURE --synthesis
   windsurf_plan.py risk migration --migration --persistence
   windsurf_plan.py status 004
   windsurf_plan.py memory list --plan 005
@@ -569,6 +616,21 @@ Examples:
     # techniques
     p = subparsers.add_parser("techniques", help="Show techniques for a problem type")
     p.add_argument("problem_type", help="Problem type (e.g., debug, ui, migration)")
+
+    # reasoning
+    p = subparsers.add_parser("reasoning", help="Select ToT or GoT reasoning technique")
+    p.add_argument("problem_type", help="Problem type (e.g., debug, unit-test, refactor)")
+    p.add_argument("category", help="Problem category (e.g., LOGIC, TESTING, ARCHITECTURE)")
+    p.add_argument("--synthesis", action="store_true",
+                   help="Task requires synthesizing information (overrides to GoT)")
+    p.add_argument("--exploration", action="store_true",
+                   help="Task needs exploration of approaches (overrides to ToT)")
+    p.add_argument("--multiple", action="store_true",
+                   help="Multiple valid approaches exist (overrides to ToT)")
+    p.add_argument("--review", action="store_true",
+                   help="Task is a review/verification (overrides to GoT)")
+    p.add_argument("--design", action="store_true",
+                   help="Task involves new design decisions (overrides to ToT)")
 
     # risk
     p = subparsers.add_parser("risk", help="Assess risk for a step")
@@ -642,6 +704,7 @@ Examples:
     handlers = {
         "classify": cmd_classify,
         "techniques": cmd_techniques,
+        "reasoning": cmd_reasoning,
         "risk": cmd_risk,
         "status": cmd_status,
         "list": cmd_list,

@@ -54,6 +54,14 @@ class TechniqueMetadata:
     best_for: list[str]
 
 
+@dataclass
+class ReasoningSelection:
+    """Result of selecting ToT vs GoT reasoning technique."""
+    technique: str                    # "tot" or "got"
+    rationale: str                    # Why this technique was selected
+    characteristics_matched: list[str]  # Which characteristics influenced decision
+
+
 # 10 prompt engineering techniques
 TECHNIQUES = {
     "tdd": {
@@ -194,6 +202,95 @@ RETRY_BUDGETS = {
     "high": 7,
     "critical": 10,
 }
+
+# Category defaults for ToT vs GoT reasoning technique selection
+# ToT (Tree of Thoughts): exploration, design decisions, multiple approaches
+# GoT (Graph of Thoughts): synthesis, aggregation, review
+CATEGORY_DEFAULTS = {
+    "FOUNDATION": "tot",      # Infrastructure decisions need exploration
+    "DATA": "tot",            # Data models benefit from approach exploration
+    "ARCHITECTURE": "tot",    # Architecture requires evaluating alternatives
+    "UI_UX": "tot",           # UI decisions have multiple valid approaches
+    "TESTING": "got",         # Tests verify and synthesize requirements
+    "LOGIC": "tot",           # Algorithms need exploration
+    "DOCUMENTATION": "got",   # Docs synthesize and aggregate information
+    "META": "tot",            # Meta-decisions need exploration
+}
+
+# Characteristic override priority (higher = more priority)
+# When a characteristic is present, it overrides the category default
+CHARACTERISTIC_OVERRIDES = {
+    "requires_synthesis": ("got", 1),     # Highest priority
+    "exploration_needed": ("tot", 2),
+    "multiple_approaches": ("tot", 3),
+    "review_task": ("got", 4),
+    "new_design": ("tot", 5),             # Lowest priority
+}
+
+
+def select_reasoning_technique(
+    problem_type: str,
+    category: str,
+    characteristics: Optional[dict[str, bool]] = None
+) -> ReasoningSelection:
+    """
+    Select ToT or GoT reasoning technique based on problem characteristics.
+
+    Args:
+        problem_type: The problem type (e.g., "debug", "unit-test")
+        category: The problem category (e.g., "LOGIC", "TESTING")
+        characteristics: Optional dict of characteristic flags that can override
+                        the category default
+
+    Returns:
+        ReasoningSelection with technique, rationale, and matched characteristics
+
+    Examples:
+        >>> select_reasoning_technique("debug", "LOGIC")
+        ReasoningSelection(technique="tot", rationale="...", characteristics_matched=[])
+
+        >>> select_reasoning_technique("refactor", "ARCHITECTURE", {"requires_synthesis": True})
+        ReasoningSelection(technique="got", rationale="...", characteristics_matched=["requires_synthesis"])
+    """
+    matched_characteristics: list[str] = []
+
+    # Check for characteristic overrides (sorted by priority)
+    if characteristics:
+        # Sort by priority (lower number = higher priority)
+        sorted_overrides = sorted(
+            CHARACTERISTIC_OVERRIDES.items(),
+            key=lambda x: x[1][1]
+        )
+
+        for char_name, (technique, _) in sorted_overrides:
+            if characteristics.get(char_name, False):
+                matched_characteristics.append(char_name)
+                rationale = (
+                    f"GoT: {char_name} characteristic matched"
+                    if technique == "got"
+                    else f"ToT: {char_name} characteristic matched"
+                )
+                return ReasoningSelection(
+                    technique=technique,
+                    rationale=rationale,
+                    characteristics_matched=matched_characteristics
+                )
+
+    # Use category default
+    category_upper = category.upper()
+    technique = CATEGORY_DEFAULTS.get(category_upper, "tot")
+
+    # Generate rationale based on category
+    if technique == "tot":
+        rationale = f"ToT: Category {category_upper} defaults to exploration"
+    else:
+        rationale = f"GoT: Category {category_upper} defaults to synthesis"
+
+    return ReasoningSelection(
+        technique=technique,
+        rationale=rationale,
+        characteristics_matched=matched_characteristics
+    )
 
 
 class TechniqueSelector:

@@ -157,6 +157,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		556220592F1A772E00A2869B /* prompt.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = prompt.md; sourceTree = "<group>"; };
 		A0000002000000000000001 /* TangentleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TangentleApp.swift; sourceTree = "<group>"; };
 		A0000002000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A0000002000000000000003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -252,17 +253,6 @@
 		A0000002000000000000095 /* TestFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFixtures.swift; sourceTree = "<group>"; };
 		A0000002000000000000096 /* FakeDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeDataGenerator.swift; sourceTree = "<group>"; };
 		A0000002000000000000097 /* TangentleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TangentleUITests.swift; sourceTree = "<group>"; };
-		A0000002000000000000140 /* UITestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestHelpers.swift; sourceTree = "<group>"; };
-		A0000002000000000000141 /* TodayPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayPage.swift; sourceTree = "<group>"; };
-		A0000002000000000000142 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
-		A0000002000000000000143 /* TaskFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFlowTests.swift; sourceTree = "<group>"; };
-		A0000002000000000000144 /* NavigationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTests.swift; sourceTree = "<group>"; };
-		A0000002000000000000150 /* PerformanceTestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTestData.swift; sourceTree = "<group>"; };
-		A0000002000000000000151 /* TaskRepositoryPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepositoryPerformanceTests.swift; sourceTree = "<group>"; };
-		A0000002000000000000152 /* StrategyRepositoryPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyRepositoryPerformanceTests.swift; sourceTree = "<group>"; };
-		A0000002000000000000153 /* ServicePerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePerformanceTests.swift; sourceTree = "<group>"; };
-		A0000002000000000000154 /* ViewModelPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelPerformanceTests.swift; sourceTree = "<group>"; };
-		A0000002000000000000160 /* AIServiceContractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIServiceContractTests.swift; sourceTree = "<group>"; };
 		A0000002000000000000100 /* MockUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUtilities.swift; sourceTree = "<group>"; };
 		A0000002000000000000101 /* MockRepositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRepositories.swift; sourceTree = "<group>"; };
 		A0000002000000000000102 /* MockServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockServices.swift; sourceTree = "<group>"; };
@@ -286,6 +276,17 @@
 		A0000002000000000000135 /* SwipeActionSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionSnapshotTests.swift; sourceTree = "<group>"; };
 		A0000002000000000000136 /* FloatingActionButtonSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingActionButtonSnapshotTests.swift; sourceTree = "<group>"; };
 		A0000002000000000000137 /* TodayViewSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewSnapshotTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000140 /* UITestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestHelpers.swift; sourceTree = "<group>"; };
+		A0000002000000000000141 /* TodayPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayPage.swift; sourceTree = "<group>"; };
+		A0000002000000000000142 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
+		A0000002000000000000143 /* TaskFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFlowTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000144 /* NavigationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000150 /* PerformanceTestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceTestData.swift; sourceTree = "<group>"; };
+		A0000002000000000000151 /* TaskRepositoryPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepositoryPerformanceTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000152 /* StrategyRepositoryPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrategyRepositoryPerformanceTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000153 /* ServicePerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePerformanceTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000154 /* ViewModelPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelPerformanceTests.swift; sourceTree = "<group>"; };
+		A0000002000000000000160 /* AIServiceContractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIServiceContractTests.swift; sourceTree = "<group>"; };
 		A0000006000000000000001 /* Tangentle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tangentle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0000006000000000000002 /* TangentleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TangentleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0000006000000000000003 /* TangentleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TangentleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -320,6 +321,7 @@
 		A0000008000000000000001 = {
 			isa = PBXGroup;
 			children = (
+				556220592F1A772E00A2869B /* prompt.md */,
 				A0000008000000000000002 /* Tangentle */,
 				A0000008000000000000003 /* TangentleTests */,
 				A0000008000000000000098 /* TangentleUITests */,
@@ -813,6 +815,14 @@
 			path = TangentleUITests;
 			sourceTree = "<group>";
 		};
+		A0000008000000000000104 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				A0000002000000000000103 /* MockTests.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		A0000008000000000000140 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -837,14 +847,6 @@
 				A0000002000000000000144 /* NavigationTests.swift */,
 			);
 			path = Flows;
-			sourceTree = "<group>";
-		};
-		A0000008000000000000104 /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				A0000002000000000000103 /* MockTests.swift */,
-			);
-			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

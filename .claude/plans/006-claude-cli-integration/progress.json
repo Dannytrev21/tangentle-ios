@@ -8,8 +8,8 @@
   "createdAt": "2026-01-21T00:00:00Z",
   "updatedAt": "2026-01-22T12:00:00Z",
   "promptsGeneratedAt": "2026-01-21T14:30:00Z",
-  "status": "in_progress",
-  "currentStep": 13,
+  "status": "completed",
+  "currentStep": 14,
   "totalSteps": 13,
   "techniqueProfile": {
     "defaultPlanning": "ps-plus",
@@ -442,7 +442,7 @@
       "name": "integration-verification",
       "title": "Integration Verification",
       "problemType": "integration-test",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "least-to-most",
         "implementation": ["tdd"],
@@ -457,15 +457,19 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "least-to-most", "phase": "planning", "attempts": 1},
+        {"technique": "tdd", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
       "promptGenerated": true,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
+      "startedAt": "2026-01-22T14:15:00Z",
+      "completedAt": "2026-01-22T14:30:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
       "testsWritten": [],
-      "notes": ""
+      "notes": "All 7 integration scenarios pass. Integration test results documented. Plan 006 complete."
     }
   ],
   "context": {

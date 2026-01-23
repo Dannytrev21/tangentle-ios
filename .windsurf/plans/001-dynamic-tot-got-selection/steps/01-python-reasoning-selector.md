@@ -29,8 +29,10 @@ Add `select_reasoning_technique()` function to technique_selector.py that return
 1. Read existing technique_selector.py to understand current structure
 2. Write unit tests for select_reasoning_technique()
 3. Implement the function with category defaults and characteristic overrides
-4. Add CLI command to windsurf_plan.py for workflow access
+4. Add `reasoning` CLI subcommand to windsurf_plan.py (does not exist yet)
 5. Run tests and verify
+
+**Note**: The `reasoning` CLI command does NOT currently exist in windsurf_plan.py. This step must create it.
 
 ## Detailed Requirements
 
@@ -90,14 +92,33 @@ CATEGORY_DEFAULTS = {
 ```
 
 ### CLI Command
-Add to windsurf_plan.py:
+Add new `reasoning` subcommand to windsurf_plan.py (currently does not exist):
+
+**Required additions to windsurf_plan.py**:
+1. Add `handle_reasoning()` function
+2. Add subparser in main(): `p = subparsers.add_parser("reasoning", help="Select ToT or GoT reasoning technique")`
+3. Add arguments: problem_type, category, and optional characteristic flags
+
 ```bash
+# Usage examples:
 python3 windsurf_plan.py reasoning debug LOGIC
 # Output: tot (ToT selected: Category LOGIC defaults to exploration)
 
 python3 windsurf_plan.py reasoning unit-test TESTING --synthesis
 # Output: got (GoT selected: requires_synthesis characteristic matched)
+
+python3 windsurf_plan.py reasoning refactor ARCHITECTURE --exploration
+# Output: tot (ToT selected: exploration_needed characteristic matched)
 ```
+
+**CLI Arguments**:
+- `problem_type` (positional): The problem type (e.g., "debug", "unit-test")
+- `category` (positional): The category (e.g., "LOGIC", "TESTING")
+- `--synthesis`: Flag for requires_synthesis characteristic
+- `--exploration`: Flag for exploration_needed characteristic
+- `--multiple`: Flag for multiple_approaches characteristic
+- `--review`: Flag for review_task characteristic
+- `--design`: Flag for new_design characteristic
 
 ## Files to Create
 - None (modifying existing)

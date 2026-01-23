@@ -38,7 +38,34 @@ echo "Next plan number: $next"
 2. Explore codebase for existing patterns
 3. Identify affected files and systems
 
-### Step 4: Apply Tree of Thought Analysis
+### Step 3.5: Select Reasoning Technique
+
+Determine optimal technique for analyzing this feature:
+
+```bash
+# Classify the feature
+python3 .windsurf/scripts/windsurf_plan.py classify "{feature description}"
+
+# Select reasoning technique based on classification
+python3 .windsurf/scripts/windsurf_plan.py reasoning {type} {category}
+```
+
+Display:
+```
+Feature Analysis Technique: {ToT|GoT}
+Rationale: {rationale}
+```
+
+**Fallback**: If selector fails or returns error, default to ToT.
+
+- If ToT selected → Use Step 4 (ToT): Tree of Thought Analysis
+- If GoT selected → Use Step 4 (GoT): Graph of Thoughts Synthesis
+
+### Step 4: Apply Reasoning Technique
+
+#### Step 4 (ToT): Tree of Thought Analysis
+
+Use this section when ToT is selected.
 
 For each major decision, evaluate multiple options:
 
@@ -59,6 +86,29 @@ Consider at minimum:
 - API/service design
 - UI/UX approach
 - Testing strategy
+
+#### Step 4 (GoT): Graph of Thoughts Synthesis
+
+Use this section when GoT is selected.
+
+For each major decision, use aggregation:
+
+**Initial Nodes**:
+- T1: Requirement analysis - what the feature must do
+- T2: Technical constraints - platform, dependencies, performance
+- T3: Existing patterns - how similar features are built
+
+**Aggregation**:
+- T4: Merge T1 + T2 for feasible requirements
+- T5: Merge T4 + T3 for pattern-compliant approach
+
+**Refinement**:
+- T6: Final decision with rationale
+
+Consider at minimum:
+- How to integrate with existing patterns
+- How to synthesize requirements from multiple sources
+- How to aggregate test coverage needs
 
 ### Step 5: Decompose into Steps
 
@@ -329,26 +379,9 @@ Display:
 - Document rationale for selection
 - Higher risk = more retries
 
-## Risk Levels
+## Reference
 
-| Level | Same Tech | Alt Tech | Total | Escalate |
-|-------|-----------|----------|-------|----------|
-| Low | 2 | 1 | 3 | 2 |
-| Medium | 3 | 2 | 5 | 3 |
-| High | 3 | 3 | 7 | 5 |
-| Critical | 5 | 5 | 10 | 7 |
-
-## Error Recovery
-
-### Plan Number Detection Fails
-1. Check `.windsurf/plans/` exists
-2. List contents: `ls .windsurf/plans/`
-3. Set number explicitly
-
-### Template Fill Fails
-1. Verify template file exists
-2. Check placeholder syntax: `{{NAME}}`
-3. Escape special characters
+See `plan-conventions` rule for risk levels and error recovery.
 
 ## Do NOT
 - Do NOT create prompts (that's `/plan-prompts`)

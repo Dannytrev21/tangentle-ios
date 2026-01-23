@@ -6,9 +6,9 @@
   "problemType": "refactor",
   "problemCategory": "ARCHITECTURE",
   "createdAt": "2026-01-04T13:00:00Z",
-  "updatedAt": "2026-01-04T13:00:00Z",
-  "status": "not_started",
-  "currentStep": 0,
+  "updatedAt": "2026-01-13T16:00:00Z",
+  "status": "completed",
+  "currentStep": 7,
   "totalSteps": 6,
   "techniqueProfile": {
     "defaultPlanning": "ps-plus",
@@ -21,7 +21,7 @@
       "name": "python-reasoning-selector",
       "title": "Python Reasoning Technique Selector",
       "problemType": "service-impl",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["tdd"],
@@ -35,28 +35,36 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
-      "promptGenerated": false,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "tdd", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-10T12:00:00Z",
+      "completedAt": "2026-01-10T12:30:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [".windsurf/scripts/tests/test_technique_selector.py"],
       "files": {
         "created": [],
-        "modified": [],
+        "modified": [
+          ".windsurf/scripts/technique_selector.py",
+          ".windsurf/scripts/windsurf_plan.py",
+          ".windsurf/scripts/tests/test_technique_selector.py"
+        ],
         "deleted": [],
         "renamed": []
       },
-      "notes": ""
+      "notes": "Added select_reasoning_technique() function, ReasoningSelection dataclass, CATEGORY_DEFAULTS, CHARACTERISTIC_OVERRIDES, and reasoning CLI command. 22 new unit tests added."
     },
     {
       "id": 2,
       "name": "update-plan-feature-initial",
       "title": "Update plan-feature-initial Workflow",
       "problemType": "service-impl",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["self-refine"],
@@ -70,28 +78,32 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
-      "promptGenerated": false,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1},
+        {"technique": "tdd", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-13T14:00:00Z",
+      "completedAt": "2026-01-13T14:15:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
       "testsWritten": [],
       "files": {
         "created": [],
-        "modified": [],
+        "modified": [".windsurf/workflows/plan-feature-initial.md"],
         "deleted": [],
         "renamed": []
       },
-      "notes": ""
+      "notes": "Added Step 1.5 (reasoning selection), Step 2 (ToT) conditional marker, Step 2 (GoT) synthesis section. Offloaded Question Categories and Quality Standards to plan-conventions rule. Final size: 6940 chars (5060 headroom)."
     },
     {
       "id": 3,
       "name": "update-plan-feature",
       "title": "Update plan-feature Workflow",
       "problemType": "service-impl",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["self-refine"],
@@ -105,28 +117,32 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
-      "promptGenerated": false,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "self-refine", "phase": "implementation", "attempts": 1},
+        {"technique": "tdd", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-13T14:30:00Z",
+      "completedAt": "2026-01-13T14:45:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
       "testsWritten": [],
       "files": {
         "created": [],
-        "modified": [],
+        "modified": [".windsurf/workflows/plan-feature.md"],
         "deleted": [],
         "renamed": []
       },
-      "notes": ""
+      "notes": "Added Step 3.5 (reasoning selection), Step 4 (ToT) and Step 4 (GoT) sections. Offloaded Risk Levels and Error Recovery to plan-conventions rule. Final size: 8885 chars (3115 headroom)."
     },
     {
       "id": 4,
       "name": "create-windsurf-rules",
       "title": "Create Windsurf Rules",
       "problemType": "infrastructure",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["least-to-most"],
@@ -140,28 +156,36 @@
         "maxAlternative": 1,
         "maxTotal": 3
       },
-      "attempts": 0,
-      "techniquesUsed": [],
-      "promptGenerated": false,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "least-to-most", "phase": "implementation", "attempts": 1},
+        {"technique": "self-refine", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-10T13:00:00Z",
+      "completedAt": "2026-01-10T13:15:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
       "testsWritten": [],
       "files": {
-        "created": [],
+        "created": [
+          ".windsurf/rules/plan-conventions.md",
+          ".windsurf/rules/technique-selection.md",
+          ".windsurf/rules/no-staging.md"
+        ],
         "modified": [],
         "deleted": [],
         "renamed": []
       },
-      "notes": ""
+      "notes": "Created 3 Windsurf rules: plan-conventions (2116 chars), technique-selection (2094 chars), no-staging (774 chars). Total: 4984 chars (well under 12K limit)."
     },
     {
       "id": 5,
       "name": "update-knowledge-base",
       "title": "Update Knowledge Base",
       "problemType": "infrastructure",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["least-to-most"],
@@ -175,28 +199,32 @@
         "maxAlternative": 1,
         "maxTotal": 3
       },
-      "attempts": 0,
-      "techniquesUsed": [],
-      "promptGenerated": false,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "least-to-most", "phase": "implementation", "attempts": 1},
+        {"technique": "self-refine", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-13T15:00:00Z",
+      "completedAt": "2026-01-13T15:15:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
       "testsWritten": [],
       "files": {
-        "created": [],
+        "created": [".windsurf/knowledge/techniques/reasoning-selection.md"],
         "modified": [],
         "deleted": [],
         "renamed": []
       },
-      "notes": ""
+      "notes": "Created reasoning-selection.md with selection criteria, decision flowchart, category defaults, characteristic overrides, 5 examples, and Python CLI usage."
     },
     {
       "id": 6,
       "name": "integration-testing",
       "title": "Integration Testing",
       "problemType": "integration-test",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "ps-plus",
         "implementation": ["tdd"],
@@ -210,34 +238,64 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
-      "promptGenerated": false,
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {"technique": "ps-plus", "phase": "planning", "attempts": 1},
+        {"technique": "tdd", "phase": "implementation", "attempts": 1},
+        {"technique": "reflexion", "phase": "verification", "attempts": 1}
+      ],
+      "promptGenerated": true,
+      "startedAt": "2026-01-13T15:30:00Z",
+      "completedAt": "2026-01-13T16:00:00Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [".windsurf/scripts/tests/test_reasoning_integration.py"],
       "files": {
-        "created": [],
+        "created": [
+          ".windsurf/scripts/tests/test_reasoning_integration.py",
+          ".windsurf/plans/001-dynamic-tot-got-selection/reviews/integration-test-results.md"
+        ],
         "modified": [],
         "deleted": [],
         "renamed": []
       },
-      "notes": ""
+      "notes": "Created integration test file with 32 tests (17 reasoning, 4 workflow, 9 rules, 2 knowledge). All tests pass. 5 manual test scenarios verified. Full pipeline tested: classify -> reasoning selection."
     }
   ],
   "context": {
-    "filesCreated": [],
-    "filesModified": [],
-    "testsCreated": [],
+    "filesCreated": [
+      ".windsurf/rules/plan-conventions.md",
+      ".windsurf/rules/technique-selection.md",
+      ".windsurf/rules/no-staging.md",
+      ".windsurf/knowledge/techniques/reasoning-selection.md",
+      ".windsurf/scripts/tests/test_reasoning_integration.py",
+      ".windsurf/plans/001-dynamic-tot-got-selection/reviews/integration-test-results.md"
+    ],
+    "filesModified": [
+      ".windsurf/scripts/technique_selector.py",
+      ".windsurf/scripts/windsurf_plan.py",
+      ".windsurf/scripts/tests/test_technique_selector.py",
+      ".windsurf/workflows/plan-feature-initial.md",
+      ".windsurf/workflows/plan-feature.md"
+    ],
+    "testsCreated": [
+      ".windsurf/scripts/tests/test_technique_selector.py",
+      ".windsurf/scripts/tests/test_reasoning_integration.py"
+    ],
     "keyDecisions": [
       "Hybrid Python + rules approach for selection logic",
       "Category defaults with characteristic overrides",
       "Three focused rules: conventions, technique-selection, no-staging",
-      "Offload common patterns to rules for character budget"
+      "Offload common patterns to rules for character budget",
+      "Characteristic priority: synthesis > exploration > multiple > review > design",
+      "Always On for conventions (needed in every conversation)",
+      "Model Decision for technique selection (AI applies when relevant)",
+      "Glob for .windsurf protection (triggers on file access)"
     ],
     "blockers": [],
-    "learnings": []
+    "learnings": [
+      "Unknown category defaults to ToT (exploration is safer default)",
+      "Rules content well under limits: 4984 chars total (budget 12K)"
+    ]
   }
 }
