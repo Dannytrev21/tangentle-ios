@@ -27,6 +27,8 @@ from utils import (
     format_risk_level,
     format_status,
     get_current_step,
+    get_thinking_keyword,
+    get_thinking_keyword_description,
     PLANS_DIR
 )
 
@@ -91,6 +93,18 @@ class PlanOrchestrator:
                 problem_type, Phase.VERIFICATION
             ),
         }
+
+    def get_risk_for_type(self, problem_type: str) -> str:
+        """
+        Get the default risk level for a problem type.
+
+        Args:
+            problem_type: The problem type
+
+        Returns:
+            Risk level string (low, medium, high, critical)
+        """
+        return self.selector.get_risk_for_problem_type(problem_type)
 
     def assess_risk(self, step_info: dict) -> RiskAssessment:
         """
@@ -252,8 +266,14 @@ def cmd_techniques(args, orchestrator: PlanOrchestrator) -> int:
     """Handle techniques subcommand."""
     techniques = orchestrator.get_techniques(args.problem_type)
 
+    # Get risk level and thinking keyword
+    risk_level = orchestrator.get_risk_for_type(args.problem_type)
+    thinking_keyword = orchestrator.selector.get_thinking_keyword(risk_level)
+
     content = [
         f"Problem Type: {args.problem_type}",
+        f"Risk Level: {risk_level}",
+        f"Thinking Keyword: {thinking_keyword}",
         "",
         "Planning Phase:",
         f"  Primary: {techniques['planning'].primary}",
@@ -325,6 +345,22 @@ def cmd_risk(args, orchestrator: PlanOrchestrator) -> int:
     return 0
 
 
+def cmd_thinking(args, orchestrator: PlanOrchestrator) -> int:
+    """Handle thinking subcommand."""
+    risk_level = args.risk_level.lower()
+    keyword = get_thinking_keyword(risk_level)
+    description = get_thinking_keyword_description(keyword)
+
+    content = [
+        f"Risk Level: {risk_level}",
+        f"Thinking Keyword: {keyword}",
+        f"Description: {description}",
+    ]
+
+    print(format_box("THINKING KEYWORD", content))
+    return 0
+
+
 def cmd_help(args, orchestrator: PlanOrchestrator) -> int:
     """Handle help subcommand."""
     help_text = """
@@ -336,6 +372,7 @@ USAGE:
 COMMANDS:
   classify <description>   Classify a problem description
   techniques <type>        Show techniques for a problem type
+  thinking <risk_level>    Get thinking keyword for a risk level
   risk <type>              Assess risk for a step
   status <plan_id>         Show plan status
   list                     List all plans
@@ -383,6 +420,10 @@ Examples:
     # techniques
     p = subparsers.add_parser("techniques", help="Show techniques for a problem type")
     p.add_argument("problem_type", help="Problem type (e.g., debug, ui, migration)")
+
+    # thinking
+    p = subparsers.add_parser("thinking", help="Get thinking keyword for a risk level")
+    p.add_argument("risk_level", help="Risk level (low, medium, high, critical)")
 
     # risk
     p = subparsers.add_parser("risk", help="Assess risk for a step")
@@ -436,6 +477,7 @@ Examples:
     handlers = {
         "classify": cmd_classify,
         "techniques": cmd_techniques,
+        "thinking": cmd_thinking,
         "risk": cmd_risk,
         "status": cmd_status,
         "list": cmd_list,
