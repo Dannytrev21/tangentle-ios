@@ -503,3 +503,64 @@ Created ClassificationHistory service with similarity-based learning from user c
 ### Ready for Next Step
 Step 8: Plan-Next Integration
 Prerequisites met: Yes (ClassificationHistory complete)
+
+---
+
+## Step 8 Complete - 2026-01-26
+
+### Summary
+Integrated the feedback system into `/plan-next` command to record technique outcomes and track implementation attempts during step execution.
+
+### Technique Execution Log
+- **Planning**: ps-plus - success on attempt 1
+  - Broke down integration points: step start, during implementation, after verification
+- **Implementation**: tdd + self-refine - success on attempt 1
+  - TDD: Wrote 15 integration tests first
+  - Self-Refine: Enhanced output sections with feedback status
+- **Verification**: reflexion - success on attempt 1
+  - All tests pass (138 total across 7 test files)
+
+### Files Created
+- `.claude/tests/test_plan_next_integration.py`: 15 integration tests
+
+### Files Modified
+- `.claude/commands/plan-next.md`:
+  - Added Step 5.6: Load Implementation Context
+  - Added "Record Attempt Start" in Phase B
+  - Added "Record Outcome" section after verification
+  - Updated success output with Implementation Summary
+  - Updated failure output with attempt tracking and suggestions
+
+### Tests Written
+- `test_plan_next_integration.py`: 15 test cases covering:
+  - Attempt recording (start/end/multiple)
+  - Outcome recording to effectiveness tracker
+  - Metrics updates
+  - Attempt summary generation
+  - Technique suggestion based on history
+  - Full flow simulation
+- Status: All passing
+
+### Verification Results
+- [x] AC1: Implementation attempts tracked during execution
+- [x] AC2: Outcomes recorded to effectiveness tracker
+- [x] AC3: Plan metrics updated on completion
+- [x] AC4: Attempt summary shown in step context
+- [x] AC5: Success/failure output shows feedback status
+- [x] AC6: All existing plan-next functionality preserved
+- [x] All tests pass
+
+### Key Decisions
+- Python snippets use `sys.path.insert(0, '.claude/scripts')` for imports
+- Metrics increment uses read-modify-write pattern
+- Partial failures don't record to effectiveness (only final outcome)
+- Attempt summary includes "methods to avoid" section
+
+### Learnings
+- Feedback integration touches multiple sections of plan-next
+- Tests can validate the Python code even without full command execution
+- Import path handling requires careful attention in markdown commands
+
+### Ready for Next Step
+Step 9: Graph of Thought with Parallel Sub-Agents
+Prerequisites met: Yes (plan-next integration complete)

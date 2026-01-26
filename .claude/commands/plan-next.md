@@ -113,6 +113,64 @@ If the step has technique assignments in progress.json (technique-aware plans), 
 
 **Note**: For plans without technique metadata (legacy plans), skip this section and proceed with standard execution.
 
+### Step 5.6: Load Implementation Context (Feedback Integration)
+
+Before execution, load any previous implementation attempts for this step:
+
+```python
+import sys
+sys.path.insert(0, '.claude/scripts')
+from feedback_store import FeedbackStore
+from implementation_tracker import ImplementationTracker
+
+store = FeedbackStore()
+store.ensure_directory()
+tracker = ImplementationTracker(store)
+summary = tracker.get_attempt_summary('{plan_id}', {step_id})
+print(summary)
+```
+
+If there are previous attempts, include in the step display:
+
+```
+═══════════════════════════════════════════════════════════════
+  IMPLEMENTATION CONTEXT
+═══════════════════════════════════════════════════════════════
+
+  ## Previous Implementation Attempts
+
+  {attempt_summary}
+
+  ## Suggested Technique
+  Based on history: {recommended technique}
+  (Avoiding: {failed techniques})
+
+═══════════════════════════════════════════════════════════════
+```
+
+To get suggested technique if previous attempts exist:
+
+```python
+import sys
+sys.path.insert(0, '.claude/scripts')
+from feedback_store import FeedbackStore
+from implementation_tracker import ImplementationTracker
+
+store = FeedbackStore()
+tracker = ImplementationTracker(store)
+
+# Get available techniques from step config
+available = ["{step.techniques.implementation}"]  # From progress.json
+
+suggestion = tracker.suggest_next_technique('{plan_id}', {step_id}, available)
+failed = tracker.get_failed_techniques('{plan_id}', {step_id})
+
+if suggestion:
+    print(f"Suggested: {suggestion}")
+if failed:
+    print(f"Avoiding: {', '.join(failed)}")
+```
+
 ### Step 6: Load and Execute Prompt with Technique Phases
 Read the prompt file:
 ```bash
@@ -155,6 +213,30 @@ If the step has a planning technique assigned:
 For steps without a planning methodology section, proceed to implementation.
 
 #### Phase B: Implementation
+
+**Record Attempt Start** (Feedback Integration):
+Before starting implementation, record the attempt:
+
+```python
+import sys
+sys.path.insert(0, '.claude/scripts')
+from feedback_store import FeedbackStore
+from implementation_tracker import ImplementationTracker
+
+store = FeedbackStore()
+store.ensure_directory()
+tracker = ImplementationTracker(store)
+
+attempt_num = tracker.start_attempt(
+    plan_id="{plan_id}",
+    step_id={step_id},
+    problem_type="{step.problemType}",
+    technique="{technique_being_used}",
+    method_description="{brief description of approach}"
+)
+
+print(f"Starting attempt #{attempt_num}")
+```
 
 Execute using the assigned implementation technique(s):
 
@@ -289,6 +371,92 @@ Attempt 1 of {step.retryConfig.maxAlternative}
 3. Update context.md with detailed failure log
 4. **Do NOT mark step as failed without user input**
 
+#### Record Outcome (Feedback Integration)
+
+After verification completes (pass or fail), record the outcome:
+
+**On Success:**
+
+```python
+import sys
+sys.path.insert(0, '.claude/scripts')
+from feedback_store import FeedbackStore
+from effectiveness_tracker import EffectivenessTracker
+from implementation_tracker import ImplementationTracker
+
+store = FeedbackStore()
+store.ensure_directory()
+
+# Record implementation attempt outcome
+impl_tracker = ImplementationTracker(store)
+impl_tracker.end_attempt(
+    plan_id="{plan_id}",
+    step_id={step_id},
+    success=True,
+    error_summary=None
+)
+
+# Record technique effectiveness
+eff_tracker = EffectivenessTracker(store)
+eff_tracker.record_outcome(
+    problem_type="{step.problemType}",
+    technique="{technique_used}",
+    success=True,
+    attempts={step.attempts}
+)
+
+# Update plan metrics
+metrics = store.get_metrics()
+store.update_metrics(completedSteps=metrics["completedSteps"] + 1)
+
+print("Feedback recorded successfully")
+```
+
+**On Failure (during self-correction):**
+
+```python
+import sys
+sys.path.insert(0, '.claude/scripts')
+from feedback_store import FeedbackStore
+from implementation_tracker import ImplementationTracker
+
+store = FeedbackStore()
+store.ensure_directory()
+
+# Record implementation attempt outcome (for retry tracking)
+impl_tracker = ImplementationTracker(store)
+impl_tracker.end_attempt(
+    plan_id="{plan_id}",
+    step_id={step_id},
+    success=False,
+    error_summary="{brief error description}"
+)
+
+# NOTE: Don't record to effectiveness tracker on partial failure
+# Only record when step is fully given up on
+```
+
+**On Final Failure (after all retries exhausted):**
+
+```python
+import sys
+sys.path.insert(0, '.claude/scripts')
+from feedback_store import FeedbackStore
+from effectiveness_tracker import EffectivenessTracker
+
+store = FeedbackStore()
+store.ensure_directory()
+
+# Record effectiveness failure
+eff_tracker = EffectivenessTracker(store)
+eff_tracker.record_outcome(
+    problem_type="{step.problemType}",
+    technique="{technique_used}",
+    success=False,
+    attempts={total_attempts}
+)
+```
+
 #### If ALL Acceptance Criteria AND Tests Pass:
 
 1. **Update progress.json** with technique tracking:
@@ -405,6 +573,11 @@ For legacy plans without technique metadata, omit the "Technique Execution Log" 
 Created: {list}
 Modified: {list}
 
+## Implementation Summary
+- Technique: {technique_used}
+- Attempts: {step.attempts}
+- Feedback: Recorded ✓
+
 ## Progress
 {N}/{Total} steps complete ({percentage}%)
 {visual progress bar}
@@ -453,15 +626,24 @@ Continue with completion protocol.
   1. {fix 1} - {result}
   2. {fix 2} - {result}
 
+## Implementation Attempts Tracked
+{attempt_summary from impl_tracker.get_attempt_summary()}
+
+## Suggested Alternative
+Based on failure patterns, try: {suggested_technique}
+(This technique has not been tried or has better history)
+
 ## Recommended Actions
 1. Review the error in detail
 2. Check if spec needs adjustment
-3. Manual debugging may be needed
+3. Try suggested alternative technique
+4. Manual debugging may be needed
 
 ## Progress Saved
 Current state has been preserved in:
 - progress.json (step marked as 'blocked')
 - context.md (failure details recorded)
+- planning-data/ (attempts tracked)
 
 Resume with `/plan-next $ARGUMENTS` after fixing.
 ═══════════════════════════════════════════════════════════════
