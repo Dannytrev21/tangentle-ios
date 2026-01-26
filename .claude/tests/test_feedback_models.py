@@ -3,14 +3,22 @@ Unit tests for feedback data models.
 
 Tests the dataclasses used for tracking technique effectiveness,
 classification history, and implementation attempts.
+
+Run from .claude directory:
+    python3 -m pytest tests/test_feedback_models.py -v
+
+Or run directly:
+    python3 tests/test_feedback_models.py
 """
 
-import pytest
-import hashlib
-from datetime import datetime
+import sys
+from pathlib import Path
 
-# Import will fail until implementation exists - that's expected for TDD
-from scripts.feedback_models import (
+# Add scripts directory to path for direct imports
+scripts_dir = Path(__file__).parent.parent / "scripts"
+sys.path.insert(0, str(scripts_dir))
+
+from feedback_models import (
     TechniqueStats,
     ClassificationEntry,
     ImplementationAttempt,
@@ -507,3 +515,53 @@ class TestDescriptionHash:
         # Should be a hex string (SHA-256 = 64 hex chars)
         assert len(h) == 64
         assert all(c in "0123456789abcdef" for c in h)
+
+
+if __name__ == "__main__":
+    """Run tests when executed directly."""
+    import unittest
+
+    # Discover and run tests
+    loader = unittest.TestLoader()
+
+    # Create test suites from test classes
+    suite = unittest.TestSuite()
+    suite.addTests(loader.loadTestsFromTestCase(type(
+        'TestTechniqueStatsUnit', (unittest.TestCase,),
+        {f"test_{name}": method for name, method in vars(TestTechniqueStats).items() if name.startswith('test_')}
+    )))
+
+    # Run a simpler approach - just run each test class
+    print("Running feedback_models tests...\n")
+
+    all_passed = True
+    test_classes = [
+        TestTechniqueStats,
+        TestClassificationEntry,
+        TestImplementationAttempt,
+        TestStepAttempts,
+        TestDescriptionHash
+    ]
+
+    for test_class in test_classes:
+        print(f"\n{test_class.__name__}:")
+        instance = test_class()
+        for method_name in dir(instance):
+            if method_name.startswith('test_'):
+                try:
+                    getattr(instance, method_name)()
+                    print(f"  ✓ {method_name}")
+                except AssertionError as e:
+                    print(f"  ✗ {method_name}: {e}")
+                    all_passed = False
+                except Exception as e:
+                    print(f"  ✗ {method_name}: {type(e).__name__}: {e}")
+                    all_passed = False
+
+    print("\n" + "="*50)
+    if all_passed:
+        print("All tests passed!")
+        exit(0)
+    else:
+        print("Some tests failed!")
+        exit(1)

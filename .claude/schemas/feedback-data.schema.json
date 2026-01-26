@@ -1,0 +1,244 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "feedback-data.schema.json",
+  "title": "Feedback Data Schema",
+  "description": "JSON schema for planning system feedback data including technique effectiveness, classification history, and implementation attempts",
+  "version": "1.0.0",
+  "definitions": {
+    "TechniqueStats": {
+      "type": "object",
+      "description": "Statistics for a technique's effectiveness on a problem type",
+      "properties": {
+        "success": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of successful uses"
+        },
+        "failure": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of failed uses"
+        },
+        "total_attempts": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total attempt count (may exceed success + failure due to retries)"
+        },
+        "average_attempts_to_success": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Average number of attempts before success"
+        },
+        "last_used": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO-8601 timestamp of last use"
+        }
+      },
+      "required": ["success", "failure", "total_attempts", "average_attempts_to_success", "last_used"]
+    },
+    "ClassificationEntry": {
+      "type": "object",
+      "description": "A semantic classification entry with correction tracking",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this entry"
+        },
+        "description": {
+          "type": "string",
+          "description": "The original problem description"
+        },
+        "description_hash": {
+          "type": "string",
+          "description": "SHA-256 hash of normalized description for deduplication"
+        },
+        "classified_as": {
+          "type": "string",
+          "description": "The initial classification (problem type)"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence score of the classification"
+        },
+        "corrected_to": {
+          "type": ["string", "null"],
+          "description": "User-corrected classification, if any"
+        },
+        "correction_confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence after user correction (1.0 for explicit corrections)"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO-8601 timestamp of classification"
+        },
+        "source": {
+          "type": "string",
+          "enum": ["semantic", "keyword", "user", "learned", "unknown"],
+          "description": "How the classification was made"
+        }
+      },
+      "required": ["id", "description", "description_hash", "classified_as", "confidence", "timestamp", "source"]
+    },
+    "ImplementationAttempt": {
+      "type": "object",
+      "description": "A single attempt to implement a step",
+      "properties": {
+        "attempt_number": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Sequential attempt number"
+        },
+        "technique": {
+          "type": "string",
+          "description": "Technique used for this attempt"
+        },
+        "method": {
+          "type": "string",
+          "description": "Specific method/approach within the technique"
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO-8601 timestamp when attempt started"
+        },
+        "ended_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO-8601 timestamp when attempt ended"
+        },
+        "duration_seconds": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Duration of the attempt in seconds"
+        },
+        "error_summary": {
+          "type": ["string", "null"],
+          "description": "Summary of error if attempt failed"
+        },
+        "success": {
+          "type": "boolean",
+          "description": "Whether this attempt succeeded"
+        }
+      },
+      "required": ["attempt_number", "technique", "method", "started_at", "ended_at", "duration_seconds", "success"]
+    },
+    "StepAttempts": {
+      "type": "object",
+      "description": "All attempts for a single plan step",
+      "properties": {
+        "plan_id": {
+          "type": "string",
+          "description": "Plan identifier (e.g., '007')"
+        },
+        "step_id": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Step number within the plan"
+        },
+        "problem_type": {
+          "type": "string",
+          "description": "Problem type classification for this step"
+        },
+        "attempts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImplementationAttempt"
+          },
+          "description": "List of all attempts for this step"
+        },
+        "total_attempts": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of attempts"
+        },
+        "final_success": {
+          "type": "boolean",
+          "description": "Whether the step ultimately succeeded"
+        },
+        "techniques_used": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of techniques tried"
+        }
+      },
+      "required": ["plan_id", "step_id", "problem_type", "attempts", "total_attempts", "final_success", "techniques_used"]
+    },
+    "EffectivenessData": {
+      "type": "object",
+      "description": "Aggregated effectiveness data by problem type",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Schema version for migration support"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO-8601 timestamp of last update"
+        },
+        "by_problem_type": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/definitions/TechniqueStats"
+            },
+            "description": "Technique name -> stats mapping"
+          },
+          "description": "Problem type -> techniques mapping"
+        }
+      },
+      "required": ["version", "updated_at", "by_problem_type"]
+    },
+    "PlanMetrics": {
+      "type": "object",
+      "description": "Aggregate metrics across all plans",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Schema version"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO-8601 timestamp of last update"
+        },
+        "completed_plans": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total plans completed"
+        },
+        "total_steps": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total steps across all plans"
+        },
+        "successful_steps": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Steps that succeeded"
+        },
+        "total_attempts": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total attempts across all steps"
+        },
+        "average_attempts_per_step": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Average attempts to complete a step"
+        }
+      },
+      "required": ["version", "updated_at", "completed_plans", "total_steps", "successful_steps", "total_attempts", "average_attempts_per_step"]
+    }
+  }
+}

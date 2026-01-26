@@ -1,0 +1,469 @@
+{
+  "planId": "007",
+  "name": "intelligent-feedback-system",
+  "title": "Intelligent Feedback System with Semantic Classification",
+  "description": "Self-improving planning system with feedback loop, semantic classification, and advanced multi-agent techniques",
+  "problemType": "new-feature",
+  "problemCategory": "META",
+  "createdAt": "2025-01-26T00:00:00Z",
+  "updatedAt": "2026-01-26T10:59:16.477955Z",
+  "status": "in_progress",
+  "currentStep": 2,
+  "totalSteps": 12,
+  "promptsGenerated": true,
+  "promptsGeneratedAt": "2025-01-26T14:00:00Z",
+  "techniqueProfile": {
+    "defaultPlanning": "tot",
+    "defaultImplementation": "tdd",
+    "defaultVerification": "reflexion"
+  },
+  "steps": [
+    {
+      "id": 1,
+      "name": "feedback-data-models",
+      "title": "Feedback Data Models",
+      "problemType": "infrastructure",
+      "status": "completed",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": [
+          "tdd"
+        ],
+        "verification": "self-refine"
+      },
+      "techniqueRationale": "Straightforward data structures, TDD ensures correct serialization",
+      "riskLevel": "low",
+      "riskScore": 0.2,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 1,
+      "techniquesUsed": [
+        {
+          "technique": "ps-plus",
+          "phase": "planning",
+          "attempts": 1
+        },
+        {
+          "technique": "tdd",
+          "phase": "implementation",
+          "attempts": 1
+        },
+        {
+          "technique": "self-refine",
+          "phase": "verification",
+          "attempts": 1
+        }
+      ],
+      "promptGenerated": true,
+      "promptFile": "prompts/01-feedback-data-models.prompt.md",
+      "thinkingKeyword": "Think about",
+      "startedAt": null,
+      "completedAt": "2026-01-26T10:59:16.477945Z",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [
+        ".claude/tests/test_feedback_models.py"
+      ],
+      "notes": "Data models created with full serialization support. 26 unit tests pass."
+    },
+    {
+      "id": 2,
+      "name": "feedback-persistence-layer",
+      "title": "Feedback Persistence Layer",
+      "problemType": "infrastructure",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": [
+          "tdd"
+        ],
+        "verification": "self-refine"
+      },
+      "techniqueRationale": "Clear CRUD requirements, TDD ensures atomic writes work correctly",
+      "riskLevel": "low",
+      "riskScore": 0.25,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "promptFile": "prompts/02-feedback-persistence-layer.prompt.md",
+      "thinkingKeyword": "Think about",
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 3,
+      "name": "effectiveness-tracker",
+      "title": "Effectiveness Tracker",
+      "problemType": "service-impl",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": [
+          "tdd"
+        ],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Business logic that affects technique selection, TDD defines expected formulas",
+      "riskLevel": "medium",
+      "riskScore": 0.45,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "promptFile": "prompts/03-effectiveness-tracker.prompt.md",
+      "thinkingKeyword": "Think hard about",
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "name": "implementation-attempt-tracker",
+      "title": "Implementation Attempt Tracker",
+      "problemType": "service-impl",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": [
+          "tdd"
+        ],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Tracks methods to avoid repetition, TDD ensures correct tracking behavior",
+      "riskLevel": "medium",
+      "riskScore": 0.45,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "promptFile": "prompts/04-implementation-attempt-tracker.prompt.md",
+      "thinkingKeyword": "Think hard about",
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 5,
+      "name": "technique-selector-enhancement",
+      "title": "Technique Selector Enhancement",
+      "problemType": "refactor",
+      "status": "pending",
+      "techniques": {
+        "planning": "tot",
+        "implementation": [
+          "tdd",
+          "self-refine"
+        ],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Multiple integration approaches to consider, must maintain backwards compatibility",
+      "riskLevel": "medium",
+      "riskScore": 0.55,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "promptFile": "prompts/05-technique-selector-enhancement.prompt.md",
+      "thinkingKeyword": "Think hard about",
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 6,
+      "name": "semantic-classification-command",
+      "title": "Semantic Classification Command",
+      "problemType": "new-feature",
+      "status": "pending",
+      "techniques": {
+        "planning": "tot",
+        "implementation": [
+          "self-refine"
+        ],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "New user-facing command (markdown file), iterative refinement for quality",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "promptFile": "prompts/06-semantic-classification-command.prompt.md",
+      "thinkingKeyword": "Think hard about",
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 7,
+      "name": "classification-history-learning",
+      "title": "Classification History & Learning",
+      "problemType": "service-impl",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": [
+          "tdd"
+        ],
+        "verification": "self-refine"
+      },
+      "techniqueRationale": "Clear learning algorithm requirements, TDD ensures correct behavior",
+      "riskLevel": "medium",
+      "riskScore": 0.5,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "promptFile": "prompts/07-classification-history-learning.prompt.md",
+      "thinkingKeyword": "Think hard about",
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 8,
+      "name": "plan-next-integration",
+      "title": "Plan-Next Integration",
+      "problemType": "refactor",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": [
+          "tdd",
+          "self-refine"
+        ],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Critical integration deserves tests, then iterative refinement",
+      "riskLevel": "medium",
+      "riskScore": 0.55,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "promptFile": "prompts/08-plan-next-integration.prompt.md",
+      "thinkingKeyword": "Think hard about",
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 9,
+      "name": "got-parallel-subagents",
+      "title": "Graph of Thought with Parallel Sub-Agents",
+      "problemType": "new-feature",
+      "status": "pending",
+      "techniques": {
+        "planning": "tot",
+        "implementation": [
+          "self-refine"
+        ],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Complex multi-agent coordination, learn from failures during verification",
+      "riskLevel": "high",
+      "riskScore": 0.7,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 3,
+        "maxTotal": 7
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "promptFile": "prompts/09-got-parallel-subagents.prompt.md",
+      "thinkingKeyword": "Ultrathink about",
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 10,
+      "name": "multi-agent-decomposition",
+      "title": "Multi-Agent Decomposition",
+      "problemType": "new-feature",
+      "status": "pending",
+      "techniques": {
+        "planning": "tot",
+        "implementation": [
+          "self-refine"
+        ],
+        "verification": "got"
+      },
+      "techniqueRationale": "Complex multi-agent orchestration, multiple decomposition strategies",
+      "riskLevel": "high",
+      "riskScore": 0.7,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 3,
+        "maxTotal": 7
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "promptFile": "prompts/10-multi-agent-decomposition.prompt.md",
+      "thinkingKeyword": "Ultrathink about",
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 11,
+      "name": "cli-feedback-stats",
+      "title": "CLI Feedback Stats",
+      "problemType": "documentation",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": [
+          "self-refine"
+        ],
+        "verification": "self-refine"
+      },
+      "techniqueRationale": "Read-only display command, iterate on output quality",
+      "riskLevel": "low",
+      "riskScore": 0.2,
+      "retryConfig": {
+        "maxSameTechnique": 2,
+        "maxAlternative": 1,
+        "maxTotal": 3
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "promptFile": "prompts/11-cli-feedback-stats.prompt.md",
+      "thinkingKeyword": "Think about",
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    },
+    {
+      "id": 12,
+      "name": "integration-testing",
+      "title": "Integration Testing",
+      "problemType": "integration-test",
+      "status": "pending",
+      "techniques": {
+        "planning": "ps-plus",
+        "implementation": [
+          "tdd"
+        ],
+        "verification": "reflexion"
+      },
+      "techniqueRationale": "Clear test scenarios, TDD defines expected system behavior",
+      "riskLevel": "medium",
+      "riskScore": 0.45,
+      "retryConfig": {
+        "maxSameTechnique": 3,
+        "maxAlternative": 2,
+        "maxTotal": 5
+      },
+      "attempts": 0,
+      "techniquesUsed": [],
+      "promptGenerated": true,
+      "promptFile": "prompts/12-integration-testing.prompt.md",
+      "thinkingKeyword": "Think hard about",
+      "startedAt": null,
+      "completedAt": null,
+      "verificationPassed": null,
+      "testsPassed": null,
+      "testsWritten": [],
+      "notes": ""
+    }
+  ],
+  "context": {
+    "filesCreated": [
+      ".claude/plans/007-intelligent-feedback-system/prompts/01-feedback-data-models.prompt.md",
+      ".claude/plans/007-intelligent-feedback-system/prompts/02-feedback-persistence-layer.prompt.md",
+      ".claude/plans/007-intelligent-feedback-system/prompts/03-effectiveness-tracker.prompt.md",
+      ".claude/plans/007-intelligent-feedback-system/prompts/04-implementation-attempt-tracker.prompt.md",
+      ".claude/plans/007-intelligent-feedback-system/prompts/05-technique-selector-enhancement.prompt.md",
+      ".claude/plans/007-intelligent-feedback-system/prompts/06-semantic-classification-command.prompt.md",
+      ".claude/plans/007-intelligent-feedback-system/prompts/07-classification-history-learning.prompt.md",
+      ".claude/plans/007-intelligent-feedback-system/prompts/08-plan-next-integration.prompt.md",
+      ".claude/plans/007-intelligent-feedback-system/prompts/09-got-parallel-subagents.prompt.md",
+      ".claude/plans/007-intelligent-feedback-system/prompts/10-multi-agent-decomposition.prompt.md",
+      ".claude/plans/007-intelligent-feedback-system/prompts/11-cli-feedback-stats.prompt.md",
+      ".claude/plans/007-intelligent-feedback-system/prompts/12-integration-testing.prompt.md",
+      ".claude/schemas/feedback-data.schema.json",
+      ".claude/scripts/feedback_models.py",
+      ".claude/tests/test_feedback_models.py"
+    ],
+    "filesModified": [],
+    "testsCreated": [
+      ".claude/tests/test_feedback_models.py"
+    ],
+    "keyDecisions": [
+      "Multiple JSON files for feedback data (not single file or SQLite)",
+      "Claude Code skill for semantic classification (not API)",
+      "Sub-agents via Task tool for GoT (not git branches)",
+      "10 sample minimum before adaptation"
+    ],
+    "blockers": [],
+    "learnings": []
+  }
+}

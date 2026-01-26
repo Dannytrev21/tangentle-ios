@@ -1,0 +1,177 @@
+# Plan 007 Context
+
+This file maintains context for resuming work on this plan from a fresh terminal or after conversation compacting.
+
+## Quick Status
+- **Plan**: Intelligent Feedback System with Semantic Classification
+- **Current Step**: 2 - Feedback Persistence Layer
+- **Last Updated**: 2025-01-26 (step 1 complete)
+
+## What's Been Done
+Plan created with 12 implementation steps covering:
+1. Feedback data models
+2. Persistence layer
+3. Effectiveness tracker
+4. Implementation attempt tracker
+5. Technique selector enhancement
+6. Semantic classification command
+7. Classification history & learning
+8. Plan-next integration
+9. Graph of Thought with sub-agents
+10. Multi-agent decomposition
+11. CLI feedback stats
+12. Integration testing
+
+## Files Created
+| File | Purpose |
+|------|---------|
+| `.claude/plans/007-intelligent-feedback-system/plan.md` | Main plan document |
+| `.claude/plans/007-intelligent-feedback-system/adr.md` | Architecture decisions |
+| `.claude/plans/007-intelligent-feedback-system/steps/*.md` | 12 step files |
+| `.claude/plans/007-intelligent-feedback-system/progress.json` | Progress tracking |
+| `.claude/plans/007-intelligent-feedback-system/context.md` | This file |
+| `.claude/schemas/feedback-data.schema.json` | JSON schema for feedback data |
+| `.claude/scripts/feedback_models.py` | Python dataclasses for feedback data |
+| `.claude/tests/__init__.py` | Test module init |
+| `.claude/tests/test_feedback_models.py` | Unit tests for data models |
+
+## Files Modified
+| File | Changes |
+|------|---------|
+| (none yet) | |
+
+## Tests Created
+| Test File | Test Cases | Status |
+|-----------|------------|--------|
+| `.claude/tests/test_feedback_models.py` | 26 tests | ✓ All passing |
+
+## Key Decisions Made
+1. **Data Storage**: Multiple JSON files in `.claude/planning-data/` (organized, git-trackable)
+2. **Semantic Classification**: Claude Code skill, not API (interactive, user confirms)
+3. **GoT Implementation**: Sub-agents via Task tool (faster than git branches)
+4. **Learning Threshold**: 10 samples minimum before adaptation
+5. **Fallback**: Block and require classification (no silent keyword fallback)
+
+## Current State
+Step 1 complete. Ready for Step 2 (Persistence Layer).
+
+## Next Actions
+1. Run `/plan-next 007` to implement Step 2: Feedback Persistence Layer
+
+## Prompts Generated - 2025-01-26
+
+All 12 prompts created in `.claude/plans/007-intelligent-feedback-system/prompts/`:
+
+| Step | Prompt File | Risk | Thinking Keyword |
+|------|-------------|------|------------------|
+| 1 | 01-feedback-data-models.prompt.md | low | Think about |
+| 2 | 02-feedback-persistence-layer.prompt.md | low | Think about |
+| 3 | 03-effectiveness-tracker.prompt.md | medium | Think hard about |
+| 4 | 04-implementation-attempt-tracker.prompt.md | medium | Think hard about |
+| 5 | 05-technique-selector-enhancement.prompt.md | medium | Think hard about |
+| 6 | 06-semantic-classification-command.prompt.md | medium | Think hard about |
+| 7 | 07-classification-history-learning.prompt.md | medium | Think hard about |
+| 8 | 08-plan-next-integration.prompt.md | medium | Think hard about |
+| 9 | 09-got-parallel-subagents.prompt.md | high | Ultrathink about |
+| 10 | 10-multi-agent-decomposition.prompt.md | high | Ultrathink about |
+| 11 | 11-cli-feedback-stats.prompt.md | low | Think about |
+| 12 | 12-integration-testing.prompt.md | medium | Think hard about |
+
+Each prompt includes:
+- Mission statement
+- Pre-implementation checklist with specific files to read
+- TDD or self-refine workflow (per technique assignment)
+- Acceptance criteria with verification commands
+- Error recovery guidance
+- Completion protocol with commit message template
+
+## Things to Remember
+- The existing `MemoryBank` is per-step session memory, this is cross-plan learning
+- `technique-config.json` has static weights, this adds dynamic adjustment layer
+- Classification corrections are learned immediately (not batched)
+- Sub-agents for GoT use `subagent_type="Explore"` via Task tool
+
+## Review Findings (2025-01-26)
+- **Score**: 52/60 (Good)
+- **Technique changes applied**: Steps 6, 8, 9
+  - Step 6: Changed TDD to self-refine (markdown command, not testable)
+  - Step 8: Added TDD as secondary (critical integration deserves tests)
+  - Step 9: Changed GoT to reflexion for verification (avoid circular verification)
+- Prompts regenerated with updated techniques
+
+## Dependencies Graph
+```
+Step 1 (Data Models)
+    └──► Step 2 (Persistence)
+              └──► Step 3 (Effectiveness) ──► Step 5 (Selector) ──┐
+              │                                                    │
+              └──► Step 4 (Implementation Tracker) ───────────────┤
+                                                                   │
+Step 6 (Classification Command)                                    │
+    └──► Step 7 (Classification Learning) ────────────────────────┤
+                                                                   │
+                                             Step 8 (Plan-Next) ◄──┘
+                                                   │
+                                     ┌─────────────┴─────────────┐
+                                     │                           │
+                              Step 9 (GoT)              Step 10 (Multi-Agent)
+                                     │                           │
+                                     └─────────────┬─────────────┘
+                                                   │
+                                          Step 11 (CLI Stats)
+                                                   │
+                                          Step 12 (Integration Tests)
+```
+
+## Blockers
+(none)
+
+## Learnings
+- TDD workflow works well for dataclass serialization (write tests first, implement to pass)
+- Following MemoryBankEntry pattern from memory_bank.py ensures consistency
+- Hash normalization (lowercase, collapse whitespace) enables fuzzy matching
+
+---
+
+## Step 1 Complete - 2025-01-26
+
+### Summary
+Created feedback data models with JSON schemas and Python dataclasses.
+
+### Technique Execution Log
+- **Planning**: ps-plus - success on attempt 1
+- **Implementation**: tdd - success on attempt 1
+- **Verification**: self-refine - success on attempt 1
+
+### Files Created
+- `.claude/schemas/feedback-data.schema.json`: JSON schema (v1.0.0) for all feedback types
+- `.claude/scripts/feedback_models.py`: Python dataclasses with serialization
+- `.claude/tests/test_feedback_models.py`: 26 unit tests
+
+### Tests Written
+- `test_feedback_models.py`: 26 test cases
+- Status: All passing
+
+### Verification Results
+- [x] AC1: JSON schema validates correctly
+- [x] AC2: Python dataclasses serialize to/from JSON
+- [x] AC3: All dataclasses have to_dict() and from_dict() methods
+- [x] AC4: Type hints are complete and correct
+- [x] AC5: All tests pass
+
+### Key Decisions
+- Followed MemoryBankEntry pattern for consistency
+- Used Optional for nullable fields (corrected_to, error_summary)
+- Added version field in JSON schema for future migrations
+- SHA-256 hash for description deduplication with normalization
+
+### Ready for Next Step
+Step 2: Feedback Persistence Layer
+Prerequisites met: Yes (data models complete)
+
+## Rollback Plan
+If issues arise:
+1. Delete `.claude/planning-data/` directory for data rollback
+2. `git checkout` modified scripts for code rollback
+3. Delete new command files
+4. System handles missing feedback data gracefully (uses defaults)
