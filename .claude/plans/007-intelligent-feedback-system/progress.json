@@ -6,9 +6,9 @@
   "problemType": "new-feature",
   "problemCategory": "META",
   "createdAt": "2025-01-26T00:00:00Z",
-  "updatedAt": "2026-01-26T11:31:45.342146",
+  "updatedAt": "2026-01-26T11:41:50.010325",
   "status": "in_progress",
-  "currentStep": 5,
+  "currentStep": 6,
   "totalSteps": 12,
   "promptsGenerated": true,
   "promptsGeneratedAt": "2025-01-26T14:00:00Z",
@@ -227,7 +227,7 @@
       "name": "technique-selector-enhancement",
       "title": "Technique Selector Enhancement",
       "problemType": "refactor",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "tot",
         "implementation": [
@@ -244,17 +244,40 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {
+          "technique": "tot",
+          "phase": "planning",
+          "attempts": 1
+        },
+        {
+          "technique": "tdd",
+          "phase": "implementation",
+          "attempts": 1
+        },
+        {
+          "technique": "self-refine",
+          "phase": "implementation",
+          "attempts": 1
+        },
+        {
+          "technique": "reflexion",
+          "phase": "verification",
+          "attempts": 1
+        }
+      ],
       "promptGenerated": true,
       "promptFile": "prompts/05-technique-selector-enhancement.prompt.md",
       "thinkingKeyword": "Think hard about",
       "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
-      "testsWritten": [],
-      "notes": ""
+      "completedAt": "2026-01-26T11:41:50.010318",
+      "verificationPassed": true,
+      "testsPassed": true,
+      "testsWritten": [
+        ".claude/tests/test_selector_integration.py"
+      ],
+      "notes": "Integrated EffectivenessTracker into TechniqueSelector with backwards compatibility. 13 tests pass."
     },
     {
       "id": 6,
@@ -512,14 +535,18 @@
       ".claude/scripts/effectiveness_tracker.py",
       ".claude/tests/test_effectiveness_tracker.py",
       ".claude/scripts/implementation_tracker.py",
-      ".claude/tests/test_implementation_tracker.py"
+      ".claude/tests/test_implementation_tracker.py",
+      ".claude/tests/test_selector_integration.py"
     ],
-    "filesModified": [],
+    "filesModified": [
+      ".claude/scripts/technique_selector.py"
+    ],
     "testsCreated": [
       ".claude/tests/test_feedback_models.py",
       ".claude/tests/test_feedback_store.py",
       ".claude/tests/test_effectiveness_tracker.py",
-      ".claude/tests/test_implementation_tracker.py"
+      ".claude/tests/test_implementation_tracker.py",
+      ".claude/tests/test_selector_integration.py"
     ],
     "keyDecisions": [
       "Multiple JSON files for feedback data (not single file or SQLite)",

@@ -45,6 +45,7 @@ class TechniqueSelection:
     rationale: str                  # Why these were selected
     estimated_cost: str             # "low", "medium", "high"
     retry_budget: int               # Max retries for this selection
+    confidence: float = 0.5         # Confidence in selection (0.0 to 1.0)
 
 
 @dataclass
@@ -85,15 +86,21 @@ class TechniqueSelector:
         "critical": 10,
     }
 
-    def __init__(self, config_path: str = ".claude/technique-config.json"):
+    def __init__(
+        self,
+        config_path: str = ".claude/technique-config.json",
+        effectiveness_tracker: Optional["EffectivenessTracker"] = None
+    ):
         """
         Initialize with technique configuration.
 
         Args:
             config_path: Path to the technique configuration JSON file
+            effectiveness_tracker: Optional tracker for effectiveness-based selection
         """
         self.config_path = Path(config_path)
         self._load_config()
+        self.effectiveness_tracker = effectiveness_tracker
 
     def _load_config(self) -> None:
         """Load and parse the technique configuration file."""
@@ -180,27 +187,95 @@ class TechniqueSelector:
         else:
             tech_list = ["ps-plus"]
 
-        primary = tech_list[0]
+        config_primary = tech_list[0]
         secondary = tech_list[1:] if len(tech_list) > 1 else []
 
-        # 2. Context adjustment
+        # 2. Check effectiveness data (if tracker available)
+        primary, confidence, rationale_source = self._decide_technique_with_effectiveness(
+            config_primary, problem_type, phase
+        )
+
+        # 3. Context adjustment
         if context:
             primary, secondary = self._adjust_for_context(
                 primary, secondary, context, phase
             )
 
-        # 3. Get risk level and retry budget
+        # 4. Get risk level and retry budget
         risk_level = subtype.get("riskLevel", "medium")
         retry_budget = self._get_retry_budget(risk_level)
 
-        # 4. Build result
+        # 5. Build result with confidence
+        rationale = self._generate_rationale(
+            problem_type, phase, primary, secondary, context, rationale_source
+        )
+
         return TechniqueSelection(
             primary=primary,
             secondary=secondary,
             prompt_template=self.get_technique_prompt(primary),
-            rationale=self._generate_rationale(problem_type, phase, primary, secondary, context),
+            rationale=rationale,
             estimated_cost=self._estimate_cost(primary, secondary),
-            retry_budget=retry_budget
+            retry_budget=retry_budget,
+            confidence=confidence
+        )
+
+    def _decide_technique_with_effectiveness(
+        self,
+        config_technique: str,
+        problem_type: str,
+        phase: Phase
+    ) -> tuple[str, float, str]:
+        """
+        Decide technique using effectiveness data if available.
+
+        Args:
+            config_technique: The technique from configuration
+            problem_type: The problem type
+            phase: The workflow phase
+
+        Returns:
+            Tuple of (technique, confidence, rationale_source)
+        """
+        # If no tracker, use config defaults
+        if not self.effectiveness_tracker:
+            return (config_technique, 0.5, "Configuration default")
+
+        # Get available techniques for this phase
+        available = list(self.COST_LEVELS.keys())
+
+        # Query effectiveness tracker
+        effectiveness_tech, effectiveness_confidence, effectiveness_rationale = (
+            self.effectiveness_tracker.get_recommended_technique(
+                problem_type, available, phase.value
+            )
+        )
+
+        # Decision logic
+        if effectiveness_tech and effectiveness_confidence > 0.7:
+            # High confidence from effectiveness data
+            return (
+                effectiveness_tech,
+                effectiveness_confidence,
+                f"Historical effectiveness: {effectiveness_confidence:.0%}"
+            )
+
+        if effectiveness_tech and effectiveness_confidence > 0.5:
+            # Moderate confidence - check if it agrees with config
+            if effectiveness_tech == config_technique:
+                # Boost confidence when they agree
+                boosted_confidence = min(0.8, effectiveness_confidence + 0.2)
+                return (
+                    config_technique,
+                    boosted_confidence,
+                    "Configuration default (confirmed by historical data)"
+                )
+
+        # Use config default with neutral confidence
+        return (
+            config_technique,
+            0.5,
+            "Configuration default (insufficient historical data)"
         )
 
     def _adjust_for_context(
@@ -292,7 +367,8 @@ class TechniqueSelector:
         phase: Phase,
         primary: str,
         secondary: list[str],
-        context: Optional[StepContext]
+        context: Optional[StepContext],
+        rationale_source: str = "Configuration default"
     ) -> str:
         """Generate human-readable rationale for technique selection."""
         reasons = []
@@ -301,6 +377,9 @@ class TechniqueSelector:
         reasons.append(
             f"Selected {primary.upper()} for {phase.value} phase of '{problem_type}'"
         )
+
+        # Selection source (effectiveness vs config)
+        reasons.append(f"[{rationale_source}]")
 
         # Secondary techniques
         if secondary:

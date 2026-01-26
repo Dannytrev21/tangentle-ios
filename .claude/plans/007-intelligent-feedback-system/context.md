@@ -4,8 +4,8 @@ This file maintains context for resuming work on this plan from a fresh terminal
 
 ## Quick Status
 - **Plan**: Intelligent Feedback System with Semantic Classification
-- **Current Step**: 5 - Technique Selector Enhancement
-- **Last Updated**: 2026-01-26 (step 4 complete)
+- **Current Step**: 6 - Semantic Classification Command
+- **Last Updated**: 2026-01-26 (step 5 complete)
 
 ## What's Been Done
 Plan created with 12 implementation steps covering:
@@ -54,6 +54,7 @@ Plan created with 12 implementation steps covering:
 | `.claude/tests/test_feedback_store.py` | 20 tests | ✓ All passing |
 | `.claude/tests/test_effectiveness_tracker.py` | 20 tests | ✓ All passing |
 | `.claude/tests/test_implementation_tracker.py` | 21 tests | ✓ All passing |
+| `.claude/tests/test_selector_integration.py` | 13 tests | ✓ All passing |
 
 ## Key Decisions Made
 1. **Data Storage**: Multiple JSON files in `.claude/planning-data/` (organized, git-trackable)
@@ -63,10 +64,10 @@ Plan created with 12 implementation steps covering:
 5. **Fallback**: Block and require classification (no silent keyword fallback)
 
 ## Current State
-Steps 1-4 complete. Ready for Step 5 (Technique Selector Enhancement).
+Steps 1-5 complete. Ready for Step 6 (Semantic Classification Command).
 
 ## Next Actions
-1. Run `/plan-next 007` to implement Step 5: Technique Selector Enhancement
+1. Run `/plan-next 007` to implement Step 6: Semantic Classification Command
 
 ## Prompts Generated - 2025-01-26
 
@@ -330,3 +331,56 @@ tracker.get_attempt_summary(plan_id, step_id) -> str
 ### Ready for Next Step
 Step 5: Technique Selector Enhancement
 Prerequisites met: Yes (ImplementationTracker complete)
+
+---
+
+## Step 5 Complete - 2026-01-26
+
+### Summary
+Integrated EffectivenessTracker into TechniqueSelector with full backwards compatibility.
+
+### Technique Execution Log
+- **Planning**: tot - success on attempt 1
+- **Implementation**: tdd + self-refine - success on attempt 1
+- **Verification**: reflexion - success on attempt 1
+
+### Files Modified
+- `.claude/scripts/technique_selector.py`: Added effectiveness integration
+
+### Files Created
+- `.claude/tests/test_selector_integration.py`: 13 integration tests
+
+### Tests Written
+- `test_selector_integration.py`: 13 test cases covering:
+  - Backwards compatibility (no tracker)
+  - Tracker with no data
+  - Tracker with low/high confidence
+  - Confidence boosting
+  - Rationale explanation
+- Status: All passing
+
+### Verification Results
+- [x] AC1: Selector works without tracker (backwards compatible)
+- [x] AC2: Selector uses effectiveness when confidence > 0.7
+- [x] AC3: Confidence field added to TechniqueSelection
+- [x] AC4: Rationale explains selection source
+- [x] AC5: All 13 integration tests pass
+
+### Key Decisions
+- Tracker is optional (None default for backwards compatibility)
+- Use effectiveness only when confidence > 0.7
+- Boost confidence by +0.2 when config and effectiveness agree (cap at 0.8)
+- Rationale always shows source [Configuration default] or [Historical effectiveness]
+
+### API Changes
+```python
+# New parameter in __init__
+TechniqueSelector(effectiveness_tracker=tracker)
+
+# New field in TechniqueSelection
+result.confidence  # float, default 0.5
+```
+
+### Ready for Next Step
+Step 6: Semantic Classification Command
+Prerequisites met: Yes (TechniqueSelector enhanced)
