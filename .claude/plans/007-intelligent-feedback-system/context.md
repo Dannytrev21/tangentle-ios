@@ -4,8 +4,8 @@ This file maintains context for resuming work on this plan from a fresh terminal
 
 ## Quick Status
 - **Plan**: Intelligent Feedback System with Semantic Classification
-- **Current Step**: 3 - Effectiveness Tracker
-- **Last Updated**: 2026-01-26 (step 2 complete)
+- **Current Step**: 4 - Implementation Attempt Tracker
+- **Last Updated**: 2026-01-26 (step 3 complete)
 
 ## What's Been Done
 Plan created with 12 implementation steps covering:
@@ -37,6 +37,8 @@ Plan created with 12 implementation steps covering:
 | `.claude/scripts/feedback_store.py` | FeedbackStore persistence layer |
 | `.claude/planning-data/.gitkeep` | Directory placeholder |
 | `.claude/tests/test_feedback_store.py` | Unit tests for persistence layer |
+| `.claude/scripts/effectiveness_tracker.py` | Effectiveness calculation service |
+| `.claude/tests/test_effectiveness_tracker.py` | Unit tests for effectiveness tracker |
 
 ## Files Modified
 | File | Changes |
@@ -48,6 +50,7 @@ Plan created with 12 implementation steps covering:
 |-----------|------------|--------|
 | `.claude/tests/test_feedback_models.py` | 26 tests | ✓ All passing |
 | `.claude/tests/test_feedback_store.py` | 20 tests | ✓ All passing |
+| `.claude/tests/test_effectiveness_tracker.py` | 20 tests | ✓ All passing |
 
 ## Key Decisions Made
 1. **Data Storage**: Multiple JSON files in `.claude/planning-data/` (organized, git-trackable)
@@ -57,10 +60,10 @@ Plan created with 12 implementation steps covering:
 5. **Fallback**: Block and require classification (no silent keyword fallback)
 
 ## Current State
-Steps 1-2 complete. Ready for Step 3 (Effectiveness Tracker).
+Steps 1-3 complete. Ready for Step 4 (Implementation Attempt Tracker).
 
 ## Next Actions
-1. Run `/plan-next 007` to implement Step 3: Effectiveness Tracker
+1. Run `/plan-next 007` to implement Step 4: Implementation Attempt Tracker
 
 ## Prompts Generated - 2025-01-26
 
@@ -228,3 +231,46 @@ Created FeedbackStore persistence layer with atomic writes and thread-safe concu
 ### Ready for Next Step
 Step 3: Effectiveness Tracker
 Prerequisites met: Yes (FeedbackStore complete)
+
+---
+
+## Step 3 Complete - 2026-01-26
+
+### Summary
+Created EffectivenessTracker with formula-based scoring and minimum sample threshold.
+
+### Technique Execution Log
+- **Planning**: ps-plus - success on attempt 1
+- **Implementation**: tdd - success on attempt 1
+- **Verification**: reflexion - success on attempt 1
+
+### Files Created
+- `.claude/scripts/effectiveness_tracker.py`: EffectivenessTracker class
+- `.claude/tests/test_effectiveness_tracker.py`: 20 unit tests
+
+### Tests Written
+- `test_effectiveness_tracker.py`: 20 test cases covering:
+  - Formula calculation (success rate, speed factor)
+  - Minimum sample threshold (10 samples)
+  - Cold start handling
+  - Technique recommendations
+  - Speed factor impact
+- Status: All passing
+
+### Verification Results
+- [x] AC1: Effectiveness formula correctly calculates scores
+- [x] AC2: MIN_SAMPLES threshold (10) is respected
+- [x] AC3: Cold start returns defaults with explanation
+- [x] AC4: Recommendations are sensible (higher success rate wins)
+- [x] AC5: All 20 tests pass
+
+### Key Decisions
+- Formula: `(success_rate * 0.7) + (speed_factor * 0.3)`
+- Speed factor: `min(1.0, baseline_attempts / avg_attempts_to_success)`
+- Baseline attempts: 2
+- Confidence capped at 95%
+- All failures: speed_factor = 0.0
+
+### Ready for Next Step
+Step 4: Implementation Attempt Tracker
+Prerequisites met: Yes (EffectivenessTracker complete)
