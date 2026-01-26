@@ -666,3 +666,59 @@ Created `/multi-agent` command for complex problem decomposition into sub-proble
 ### Ready for Next Step
 Step 11: CLI Feedback Stats
 Prerequisites met: Yes (multi-agent complete)
+
+---
+
+## Step 11 Complete - 2026-01-26
+
+### Summary
+Created `/feedback` skill and CLI subcommand for viewing technique effectiveness statistics with 6 display modes.
+
+### Technique Execution Log
+- **Planning**: ps-plus - success on attempt 1
+  - Broke down implementation into command file, CLI integration, display helpers
+- **Implementation**: self-refine - success on attempt 1
+  - Created command file and CLI subcommand
+  - Fixed orchestrator dependency issue (feedback doesn't need it)
+- **Verification**: self-refine - success on attempt 1
+  - Tested all 6 modes with mock data
+
+### Files Created
+- `.claude/commands/feedback.md`: Feedback skill command file
+
+### Files Modified
+- `.claude/scripts/tangentle_plan.py`: Added feedback subcommand with 6 display modes
+
+### Tests Written
+- None (output formatting, tested manually)
+- All 6 modes verified: summary, detailed, techniques, types, recent, json
+
+### Verification Results
+- [x] AC1: /feedback skill works interactively
+- [x] AC2: CLI subcommand works (`tangentle_plan.py feedback`)
+- [x] AC3: All display modes render correctly
+- [x] AC4: Empty data handled gracefully with getting-started message
+- [x] AC5: Recommendations are sensible (based on success rates)
+- [x] AC6: JSON output mode works for scripting
+
+### Key Decisions
+- **6 display modes**: summary (default), detailed, techniques, types, recent, json
+- **Standalone handler**: Feedback doesn't require PlanOrchestrator
+- **Read-only**: No data modification, display only
+- **MIN_SAMPLES (10)**: Shows "limited" vs "reliable" status
+
+### Key Display Features
+- Summary: Overview, top 5 techniques, most active types, key insights
+- Detailed: Full breakdown by problem type and technique
+- Techniques: Ranking with reliability status
+- Types: Statistics per problem type with best technique
+- Recent: Last updated time, classification corrections
+- JSON: Raw data for scripting
+
+### Learnings
+- Standalone commands should bypass orchestrator initialization
+- Display helpers keep display code clean and reusable
+
+### Ready for Next Step
+Step 12: Integration Testing
+Prerequisites met: Yes (feedback command complete)

@@ -15,9 +15,13 @@ from typing import Optional
 # Add the scripts directory to the path for imports
 sys.path.insert(0, str(Path(__file__).parent))
 
+import json
+
 from problem_classifier import ProblemClassifier, ClassificationResult
 from technique_selector import TechniqueSelector, Phase, TechniqueSelection
 from risk_assessor import RiskAssessor, RiskLevel, StepInfo, RiskAssessment
+from feedback_store import FeedbackStore
+from effectiveness_tracker import EffectivenessTracker
 from utils import (
     find_plan,
     load_plan_progress,
@@ -361,6 +365,347 @@ def cmd_thinking(args, orchestrator: PlanOrchestrator) -> int:
     return 0
 
 
+def cmd_feedback(args, orchestrator: PlanOrchestrator) -> int:
+    """Handle feedback subcommand - display technique effectiveness statistics."""
+    store = FeedbackStore()
+    tracker = EffectivenessTracker(store)
+
+    mode = args.mode if hasattr(args, 'mode') and args.mode else 'summary'
+
+    if mode == 'json':
+        data = store.get_effectiveness_data()
+        print(json.dumps(data, indent=2))
+        return 0
+
+    effectiveness_data = store.get_effectiveness_data()
+    metrics = store.get_metrics()
+
+    # Check if we have any data
+    by_problem_type = effectiveness_data.get("byProblemType", {})
+    if not by_problem_type:
+        print_empty_feedback_message()
+        return 0
+
+    if mode == 'summary':
+        display_feedback_summary(store, tracker, metrics, by_problem_type)
+    elif mode == 'detailed':
+        display_feedback_detailed(by_problem_type)
+    elif mode == 'techniques':
+        display_feedback_techniques(by_problem_type)
+    elif mode == 'types':
+        display_feedback_types(by_problem_type)
+    elif mode == 'recent':
+        display_feedback_recent(store, metrics)
+    else:
+        print(f"Unknown mode: {mode}")
+        print("Available: summary, detailed, techniques, types, recent, json")
+        return 1
+
+    return 0
+
+
+def print_empty_feedback_message():
+    """Print helpful message when no feedback data exists."""
+    print("""
+===============================================================
+  PLANNING SYSTEM FEEDBACK
+===============================================================
+
+  No feedback data collected yet.
+
+  To start collecting data:
+  1. Run /plan-feature to create a plan
+  2. Run /plan-prompts to generate prompts
+  3. Run /plan-next to execute steps
+
+  After completing steps, feedback data will appear here.
+
+  Minimum samples needed for recommendations: 10
+
+===============================================================
+""")
+
+
+def display_feedback_summary(store, tracker, metrics, by_problem_type):
+    """Display summary statistics."""
+    total_plans = metrics.get("totalPlans", 0)
+    total_steps = metrics.get("totalSteps", 0)
+    completed_steps = metrics.get("completedSteps", 0)
+
+    # Calculate overall technique stats
+    technique_stats = {}
+    for problem_type, techniques in by_problem_type.items():
+        for tech, stats in techniques.items():
+            if tech not in technique_stats:
+                technique_stats[tech] = {"success": 0, "failure": 0, "total_attempts": 0}
+            technique_stats[tech]["success"] += stats.get("success", 0)
+            technique_stats[tech]["failure"] += stats.get("failure", 0)
+            technique_stats[tech]["total_attempts"] += stats.get("total_attempts", 0)
+
+    # Calculate success rates for techniques
+    technique_rankings = []
+    for tech, stats in technique_stats.items():
+        total = stats["success"] + stats["failure"]
+        if total > 0:
+            rate = stats["success"] / total * 100
+            technique_rankings.append((tech, rate, total))
+
+    technique_rankings.sort(key=lambda x: x[1], reverse=True)
+
+    # Calculate problem type stats
+    type_stats = []
+    for problem_type, techniques in by_problem_type.items():
+        total_success = sum(t.get("success", 0) for t in techniques.values())
+        total_failure = sum(t.get("failure", 0) for t in techniques.values())
+        total = total_success + total_failure
+        if total > 0:
+            rate = total_success / total * 100
+            type_stats.append((problem_type, total, rate))
+
+    type_stats.sort(key=lambda x: x[1], reverse=True)
+
+    # Print summary
+    print()
+    print("=" * 65)
+    print("  PLANNING SYSTEM FEEDBACK - SUMMARY")
+    print("=" * 65)
+    print()
+    print("  ## Overview")
+    print(f"  - Total Plans: {total_plans}")
+    print(f"  - Total Steps: {total_steps}")
+    print(f"  - Completed Steps: {completed_steps}")
+    if total_steps > 0:
+        print(f"  - Completion Rate: {completed_steps / total_steps * 100:.0f}%")
+    print()
+
+    if technique_rankings:
+        print("  ## Technique Effectiveness (Top 5)")
+        print()
+        print("  | Technique     | Success Rate | Samples |")
+        print("  |---------------|--------------|---------|")
+        for tech, rate, samples in technique_rankings[:5]:
+            status = "reliable" if samples >= 10 else "limited"
+            print(f"  | {tech:13} | {rate:10.0f}% | {samples:7} |")
+        print()
+
+    if type_stats:
+        print("  ## Problem Types (Most Active)")
+        print()
+        print("  | Type          | Total Uses | Success Rate |")
+        print("  |---------------|------------|--------------|")
+        for ptype, uses, rate in type_stats[:5]:
+            print(f"  | {ptype:13} | {uses:10} | {rate:10.0f}% |")
+        print()
+
+    # Key insights
+    print("  ## Key Insights")
+    if technique_rankings:
+        best = technique_rankings[0]
+        print(f"  - {best[0]} has highest success rate ({best[1]:.0f}%)")
+
+    total_all_attempts = sum(s.get("total_attempts", 0) for t in by_problem_type.values() for s in t.values())
+    total_all_success = sum(s.get("success", 0) for t in by_problem_type.values() for s in t.values())
+    if total_all_success > 0:
+        avg_attempts = total_all_attempts / total_all_success
+        print(f"  - Average attempts per success: {avg_attempts:.1f}")
+
+    reliable_count = sum(1 for _, _, s in technique_rankings if s >= 10)
+    print(f"  - {reliable_count} technique(s) have sufficient data (10+ samples)")
+    print()
+    print("  Run `/feedback detailed` for full breakdown.")
+    print("=" * 65)
+    print()
+
+
+def display_feedback_detailed(by_problem_type):
+    """Display detailed breakdown by problem type."""
+    print()
+    print("=" * 65)
+    print("  PLANNING SYSTEM FEEDBACK - DETAILED")
+    print("=" * 65)
+    print()
+    print("  ## By Problem Type")
+    print()
+
+    for problem_type, techniques in sorted(by_problem_type.items()):
+        print(f"  ### {problem_type}")
+        print()
+        print("  | Technique     | Success | Failure | Rate  | Avg Attempts |")
+        print("  |---------------|---------|---------|-------|--------------|")
+
+        for tech, stats in sorted(techniques.items()):
+            success = stats.get("success", 0)
+            failure = stats.get("failure", 0)
+            total = success + failure
+            rate = (success / total * 100) if total > 0 else 0
+            total_attempts = stats.get("total_attempts", 0)
+            avg = (total_attempts / success) if success > 0 else 0
+
+            print(f"  | {tech:13} | {success:7} | {failure:7} | {rate:4.0f}% | {avg:12.1f} |")
+
+        print()
+
+    print("=" * 65)
+    print()
+
+
+def display_feedback_techniques(by_problem_type):
+    """Display technique effectiveness rankings."""
+    print()
+    print("=" * 65)
+    print("  TECHNIQUE EFFECTIVENESS RANKINGS")
+    print("=" * 65)
+    print()
+
+    # Aggregate across all problem types
+    technique_stats = {}
+    for problem_type, techniques in by_problem_type.items():
+        for tech, stats in techniques.items():
+            if tech not in technique_stats:
+                technique_stats[tech] = {"success": 0, "failure": 0, "total_attempts": 0}
+            technique_stats[tech]["success"] += stats.get("success", 0)
+            technique_stats[tech]["failure"] += stats.get("failure", 0)
+            technique_stats[tech]["total_attempts"] += stats.get("total_attempts", 0)
+
+    # Rank by success rate
+    rankings = []
+    for tech, stats in technique_stats.items():
+        total = stats["success"] + stats["failure"]
+        if total > 0:
+            rate = stats["success"] / total * 100
+            status = "reliable" if total >= 10 else "limited"
+            rankings.append((tech, rate, total, status))
+
+    rankings.sort(key=lambda x: x[1], reverse=True)
+
+    print("  | Rank | Technique     | Success Rate | Samples | Status   |")
+    print("  |------|---------------|--------------|---------|----------|")
+    for i, (tech, rate, samples, status) in enumerate(rankings, 1):
+        print(f"  | {i:4} | {tech:13} | {rate:10.0f}% | {samples:7} | {status:8} |")
+
+    print()
+
+    # Per problem type best
+    print("  ## Best Technique by Problem Type")
+    print()
+    for problem_type, techniques in sorted(by_problem_type.items()):
+        best_tech = None
+        best_rate = 0
+        best_samples = 0
+
+        for tech, stats in techniques.items():
+            total = stats.get("success", 0) + stats.get("failure", 0)
+            if total > 0:
+                rate = stats.get("success", 0) / total * 100
+                if rate > best_rate:
+                    best_tech = tech
+                    best_rate = rate
+                    best_samples = total
+
+        if best_tech:
+            status = "sufficient" if best_samples >= 10 else "insufficient"
+            print(f"  {problem_type}: {best_tech} ({best_rate:.0f}%) - {best_samples} samples ({status})")
+
+    print()
+    print("=" * 65)
+    print()
+
+
+def display_feedback_types(by_problem_type):
+    """Display problem type statistics."""
+    print()
+    print("=" * 65)
+    print("  PROBLEM TYPE STATISTICS")
+    print("=" * 65)
+    print()
+
+    # Calculate type stats
+    type_stats = []
+    for problem_type, techniques in by_problem_type.items():
+        total_success = sum(t.get("success", 0) for t in techniques.values())
+        total_failure = sum(t.get("failure", 0) for t in techniques.values())
+        total = total_success + total_failure
+
+        # Find best technique
+        best_tech = None
+        best_rate = 0
+        for tech, stats in techniques.items():
+            t = stats.get("success", 0) + stats.get("failure", 0)
+            if t > 0:
+                rate = stats.get("success", 0) / t * 100
+                if rate > best_rate:
+                    best_tech = tech
+                    best_rate = rate
+
+        if total > 0:
+            rate = total_success / total * 100
+            type_stats.append((problem_type, total, rate, best_tech or "N/A"))
+
+    type_stats.sort(key=lambda x: x[1], reverse=True)
+
+    print("  | Type          | Total Uses | Success Rate | Best Technique |")
+    print("  |---------------|------------|--------------|----------------|")
+    for ptype, uses, rate, best in type_stats:
+        print(f"  | {ptype:13} | {uses:10} | {rate:10.0f}% | {best:14} |")
+
+    print()
+
+    # Detailed breakdown
+    print("  ## Details")
+    print()
+    for problem_type, techniques in sorted(by_problem_type.items()):
+        total_success = sum(t.get("success", 0) for t in techniques.values())
+        total_failure = sum(t.get("failure", 0) for t in techniques.values())
+        total = total_success + total_failure
+
+        print(f"  ### {problem_type}")
+        print(f"  - Uses: {total}")
+        print(f"  - Success: {total_success}")
+        print(f"  - Failure: {total_failure}")
+        print(f"  - Techniques used: {', '.join(sorted(techniques.keys()))}")
+        print()
+
+    print("=" * 65)
+    print()
+
+
+def display_feedback_recent(store, metrics):
+    """Display recent activity."""
+    print()
+    print("=" * 65)
+    print("  RECENT ACTIVITY")
+    print("=" * 65)
+    print()
+
+    last_updated = metrics.get("lastUpdated", "Never")
+    completed_steps = metrics.get("completedSteps", 0)
+
+    print(f"  Last updated: {last_updated}")
+    print(f"  Total completed steps: {completed_steps}")
+    print()
+
+    # Note about recent data
+    print("  Note: Detailed activity log available in planning-data/")
+    print("  - step_attempts.json: Per-step implementation attempts")
+    print("  - effectiveness.json: Technique effectiveness data")
+    print()
+
+    # Show classification history if available
+    classification_history = store.get_classification_history()
+    if classification_history:
+        corrections = [c for c in classification_history if c.get("corrected_to")]
+        if corrections:
+            print("  ## Recent Classification Corrections")
+            print()
+            for corr in corrections[-5:]:
+                print(f"  - \"{corr.get('description', 'N/A')[:40]}...\"")
+                print(f"    {corr.get('classified_as')} -> {corr.get('corrected_to')}")
+            print()
+
+    print("=" * 65)
+    print()
+
+
 def cmd_help(args, orchestrator: PlanOrchestrator) -> int:
     """Handle help subcommand."""
     help_text = """
@@ -376,6 +721,7 @@ COMMANDS:
   risk <type>              Assess risk for a step
   status <plan_id>         Show plan status
   list                     List all plans
+  feedback [mode]          View technique effectiveness statistics
 
 EXAMPLES:
   tangentle-plan classify "Fix the crash when saving"
@@ -383,6 +729,8 @@ EXAMPLES:
   tangentle-plan risk migration --migration --persistence
   tangentle-plan status 004
   tangentle-plan list
+  tangentle-plan feedback              # summary view
+  tangentle-plan feedback detailed     # detailed breakdown
 
 OPTIONS:
   --help, -h              Show this help message
@@ -443,6 +791,12 @@ Examples:
     # list
     subparsers.add_parser("list", help="List all plans")
 
+    # feedback
+    p = subparsers.add_parser("feedback", help="View technique effectiveness statistics")
+    p.add_argument("mode", nargs="?", default="summary",
+                   choices=["summary", "detailed", "techniques", "types", "recent", "json"],
+                   help="Display mode (default: summary)")
+
     # Placeholder commands (not yet implemented)
     p = subparsers.add_parser("create", help="Create a new plan (not yet implemented)")
     p.add_argument("description", help="Feature description")
@@ -466,7 +820,20 @@ Examples:
         parser.print_help()
         return 0
 
-    # Initialize orchestrator
+    # Commands that don't need the orchestrator
+    standalone_handlers = {
+        "feedback": cmd_feedback,
+    }
+
+    # Check if this is a standalone command
+    if args.command in standalone_handlers:
+        try:
+            return standalone_handlers[args.command](args, None)
+        except Exception as e:
+            print(f"Error: {e}")
+            return 1
+
+    # Initialize orchestrator for commands that need it
     try:
         orchestrator = PlanOrchestrator()
     except Exception as e:
