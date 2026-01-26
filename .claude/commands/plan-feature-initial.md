@@ -86,49 +86,126 @@ Only after exploration is complete, proceed to classification.
 - Flag potential risks discovered
 - Consider asking user for clarification
 
-### Step 2: Classify Problem Type
+### Step 2: Classify Problem Type (Semantic)
 
 > **Note**: Complete Step 1.5 (Explore) before classification. Exploration findings inform accurate classification.
 
-Before analyzing the request, classify the problem type to determine optimal techniques:
+Before analyzing the request, classify the problem type using **semantic understanding** (not just keywords):
+
+#### 2.1: Get Keyword Baseline
+First, get the keyword-based suggestion as a starting point:
 
 ```bash
-# Run classifier (if Python scripts available)
 python3 .claude/scripts/tangentle_plan.py classify "$ARGUMENTS"
 ```
 
-If Python scripts are not available, manually classify based on keywords:
-- Contains "fix", "bug", "crash", "error" → `debug`
-- Contains "add", "create", "new" screen/view → `ui`
-- Contains "refactor", "restructure" → `refactor`
-- Contains "test" → `unit-test` or `integration-test`
-- Contains "api", "oauth", "auth" → `api-integration`
-- Default → `new-feature`
+#### 2.2: Apply Semantic Analysis
+Think hard about the description. Consider:
 
-#### Display Classification
+1. **Primary Intent**: What is the user fundamentally trying to accomplish?
+   - Building something new vs. fixing something existing?
+   - Structure, behavior, or presentation?
+   - Data, logic, or interface?
+
+2. **Domain Signals**: Which category does this naturally fall into?
+   - Testing: tests, coverage, assertions, mocks
+   - UI: screens, views, buttons, layout, visual
+   - Data: models, entities, storage, queries
+   - Logic: algorithms, validation, bugs, fixes
+   - Architecture: services, protocols, patterns
+
+3. **Override Keyword Results When**:
+   - Description implies bug fix but keyword says otherwise (e.g., "users can't X" → `debug`)
+   - Context from exploration suggests different type
+   - Multi-word phrases change meaning (e.g., "test data" vs "test")
+
+#### 2.3: Available Problem Types
+
+| Category | Types |
+|----------|-------|
+| FOUNDATION | infrastructure, scaffolding, configuration |
+| DATA | data-modeling, data-access, migration, state-mgmt |
+| ARCHITECTURE | system-design, protocol-design, di-setup, service-impl, refactor |
+| UI_UX | ui, component-lib, design-tokens, animation, gesture, accessibility, polish |
+| TESTING | test-setup, unit-test, integration-test, snapshot-test, e2e-test, performance-test |
+| LOGIC | algorithm, validation, api-integration, debug |
+| DOCUMENTATION | documentation, changelog |
+| META | ideation, new-feature |
+
+#### 2.4: Determine Final Classification
+Based on semantic understanding:
+- **Primary Type**: The single best match
+- **Confidence**: 0.0-1.0 (high if clear, low if ambiguous)
+- **Risk Level**: low/medium/high
+- **Secondary Types**: If multi-faceted, note others
+
+**Semantic overrides keyword results** when your analysis indicates a better fit.
+
+#### 2.5: Display Classification
 
 ```
-═══════════════════════════════════════════════════════════════
-  PROBLEM CLASSIFICATION
-═══════════════════════════════════════════════════════════════
+===============================================================
+  SEMANTIC CLASSIFICATION
+===============================================================
 
-  Detected Type: {primary_type} (Category: {category})
+  Description: "$ARGUMENTS"
+
+  Primary Type: {primary_type}
+  Category: {category}
   Confidence: {confidence}%
 
+  Risk Level: {risk_level}
+
+  Rationale:
+  {2-3 sentence explanation of why this type, based on semantic analysis}
+
+  Keyword classifier suggested: {keyword_type} ({keyword_confidence}%)
+  Semantic analysis determined: {semantic_type} ({semantic_confidence}%)
+  {If different: "Override reason: {why semantic is better}"}
+
   Suggested Techniques:
-  ┌─────────────┬────────────────────┐
-  │ Phase       │ Technique          │
-  ├─────────────┼────────────────────┤
-  │ Planning    │ {planning_tech}    │
-  │ Implement   │ {impl_tech}        │
-  │ Verify      │ {verify_tech}      │
-  └─────────────┴────────────────────┘
+  +---------------+--------------------+
+  | Phase         | Technique          |
+  +---------------+--------------------+
+  | Planning      | {planning_tech}    |
+  | Implementation| {impl_tech}        |
+  | Verification  | {verify_tech}      |
+  +---------------+--------------------+
 
-  Alternatives considered:
-  - {alt1} ({confidence1}%)
-  - {alt2} ({confidence2}%)
+  Secondary Types (if applicable):
+  - {alt1} ({confidence1}%) - {reason}
+  - {alt2} ({confidence2}%) - {reason}
 
-═══════════════════════════════════════════════════════════════
+===============================================================
+```
+
+#### 2.6: Record Classification (for learning)
+
+After displaying, record the classification:
+
+```python
+import sys
+sys.path.insert(0, '.claude/scripts')
+from feedback_store import FeedbackStore
+from feedback_models import ClassificationEntry
+import hashlib, uuid
+from datetime import datetime
+
+description = "$ARGUMENTS"
+store = FeedbackStore()
+store.ensure_directory()
+entry = ClassificationEntry(
+    id=str(uuid.uuid4()),
+    description=description,
+    description_hash=hashlib.sha256(description.lower().strip().encode()).hexdigest()[:16],
+    classified_as="{primary_type}",
+    confidence={confidence},
+    corrected_to=None,  # Will be updated if user corrects
+    correction_confidence=0.0,
+    timestamp=datetime.now().isoformat(),
+    source="semantic"
+)
+store.add_classification(entry)
 ```
 
 Use this classification to inform your analysis and include it in the output template.
@@ -228,19 +305,32 @@ Based on your description, here's what I understand:
 
 These questions must be answered before I can create a good plan:
 
-#### 0. Problem Type Confirmation
+#### 0. Problem Type Confirmation (Semantic Classification)
 > The correct problem type affects which techniques are used and how the plan is structured.
 
-Based on your description, I classified this as a **{detected_type}** problem (Category: {category}).
+I analyzed your description using **semantic classification**:
+
+| Analysis | Result |
+|----------|--------|
+| **Primary Type** | {detected_type} |
+| **Category** | {category} |
+| **Confidence** | {confidence}% |
+| **Risk Level** | {risk_level} |
+
+**Rationale**: {2-3 sentences explaining why this type based on semantic analysis}
+
+**Secondary Types**: {list any secondary types with confidence, or "None"}
 
 **Question**: Is this classification correct?
 
 **Options**:
-- [ ] Yes, this is correct
-- [ ] No, it's actually: {list alternatives from classification}
-- [ ] Other: _______________
+- [ ] Yes, proceed with **{detected_type}**
+- [ ] No, it should be: {list 3-4 alternative types from classification}
+- [ ] Let me specify: _______________
 
 **Your answer**: _______________
+
+> Note: If you correct the classification, this helps improve future classifications.
 
 ---
 

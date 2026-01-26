@@ -6,9 +6,9 @@
   "problemType": "new-feature",
   "problemCategory": "META",
   "createdAt": "2025-01-26T00:00:00Z",
-  "updatedAt": "2026-01-26T11:41:50.010325",
+  "updatedAt": "2026-01-26T12:15:00.000000",
   "status": "in_progress",
-  "currentStep": 6,
+  "currentStep": 7,
   "totalSteps": 12,
   "promptsGenerated": true,
   "promptsGeneratedAt": "2025-01-26T14:00:00Z",
@@ -284,7 +284,7 @@
       "name": "semantic-classification-command",
       "title": "Semantic Classification Command",
       "problemType": "new-feature",
-      "status": "pending",
+      "status": "completed",
       "techniques": {
         "planning": "tot",
         "implementation": [
@@ -300,17 +300,33 @@
         "maxAlternative": 2,
         "maxTotal": 5
       },
-      "attempts": 0,
-      "techniquesUsed": [],
+      "attempts": 1,
+      "techniquesUsed": [
+        {
+          "technique": "tot",
+          "phase": "planning",
+          "attempts": 1
+        },
+        {
+          "technique": "self-refine",
+          "phase": "implementation",
+          "attempts": 1
+        },
+        {
+          "technique": "reflexion",
+          "phase": "verification",
+          "attempts": 1
+        }
+      ],
       "promptGenerated": true,
       "promptFile": "prompts/06-semantic-classification-command.prompt.md",
       "thinkingKeyword": "Think hard about",
-      "startedAt": null,
-      "completedAt": null,
-      "verificationPassed": null,
-      "testsPassed": null,
+      "startedAt": "2026-01-26T12:00:00.000000",
+      "completedAt": "2026-01-26T12:15:00.000000",
+      "verificationPassed": true,
+      "testsPassed": true,
       "testsWritten": [],
-      "notes": ""
+      "notes": "Created /classify command and integrated semantic classification into /plan-feature-initial. No unit tests (markdown command files not testable)."
     },
     {
       "id": 7,
@@ -536,10 +552,12 @@
       ".claude/tests/test_effectiveness_tracker.py",
       ".claude/scripts/implementation_tracker.py",
       ".claude/tests/test_implementation_tracker.py",
-      ".claude/tests/test_selector_integration.py"
+      ".claude/tests/test_selector_integration.py",
+      ".claude/commands/classify.md"
     ],
     "filesModified": [
-      ".claude/scripts/technique_selector.py"
+      ".claude/scripts/technique_selector.py",
+      ".claude/commands/plan-feature-initial.md"
     ],
     "testsCreated": [
       ".claude/tests/test_feedback_models.py",
