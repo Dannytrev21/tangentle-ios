@@ -60,14 +60,38 @@ Before classifying, understand the available types:
 
 ## Classification Process
 
+### Step 0: Check for Learned Classification
+First, check if we have learned a classification from similar past descriptions:
+
+```python
+import sys
+sys.path.insert(0, '.claude/scripts')
+from feedback_store import FeedbackStore
+from classification_history import ClassificationHistory
+
+store = FeedbackStore()
+store.ensure_directory()
+history = ClassificationHistory(store)
+
+learned = history.get_learned_classification("$ARGUMENTS")
+if learned:
+    learned_type, confidence, rationale = learned
+    print(f"Learned classification: {learned_type} ({confidence:.0%})")
+    print(f"Rationale: {rationale}")
+else:
+    print("No learned classification found")
+```
+
+**If a learned classification is found** with confidence > 0.7, use it as the primary suggestion but still allow user confirmation.
+
 ### Step 1: Read Keyword-Based Suggestion
-First, get the keyword-based classification as a starting point:
+Get the keyword-based classification as a baseline:
 
 ```bash
 python3 .claude/scripts/problem_classifier.py "$ARGUMENTS"
 ```
 
-This provides a baseline, but you should use semantic understanding to potentially override it.
+This provides a baseline. Compare with learned classification if available.
 
 ### Step 2: Semantic Analysis
 
@@ -174,7 +198,7 @@ Use the AskUserQuestion tool with:
 
 ### Step 7: Record Classification
 
-After confirmation/correction, save to classification history:
+After confirmation/correction, save to classification history using ClassificationHistory:
 
 ```python
 # Execute this to record the classification
@@ -182,34 +206,43 @@ import sys
 sys.path.insert(0, '.claude/scripts')
 
 from feedback_store import FeedbackStore
-from feedback_models import ClassificationEntry
-import hashlib
-import uuid
-from datetime import datetime
+from classification_history import ClassificationHistory
 
 description = "{the original description}"
 final_type = "{the final type after confirmation/correction}"
+original_type = "{the type that was suggested}"
 confidence = {confidence as float, e.g., 0.85}
 was_corrected = {True if user corrected, False if confirmed}
-original_type = "{original type if corrected, else None}"
 
 store = FeedbackStore()
 store.ensure_directory()
+history = ClassificationHistory(store)
 
-entry = ClassificationEntry(
-    id=str(uuid.uuid4()),
-    description=description,
-    description_hash=hashlib.sha256(description.lower().strip().encode()).hexdigest()[:16],
-    classified_as=final_type if not was_corrected else original_type,
-    confidence=confidence,
-    corrected_to=final_type if was_corrected else None,
-    correction_confidence=1.0 if was_corrected else 0.0,
-    timestamp=datetime.now().isoformat(),
-    source="semantic" if not was_corrected else "user"
-)
-store.add_classification(entry)
-print(f"Classification recorded: {final_type}")
+# Add the classification
+if was_corrected:
+    # Record original classification first
+    entry = history.add_classification(
+        description=description,
+        classified_as=original_type,
+        confidence=confidence,
+        source="semantic"
+    )
+    # Then record the correction (enables learning)
+    history.record_correction(entry.id, final_type)
+    print(f"Correction recorded: {original_type} -> {final_type}")
+    print("This will help improve future classifications!")
+else:
+    # Just record the confirmed classification
+    entry = history.add_classification(
+        description=description,
+        classified_as=final_type,
+        confidence=confidence,
+        source="semantic"
+    )
+    print(f"Classification recorded: {final_type}")
 ```
+
+**Learning Note**: When users correct classifications, the system learns from these corrections. Future similar descriptions will suggest the corrected type.
 
 ### Step 8: Output Final Confirmation
 

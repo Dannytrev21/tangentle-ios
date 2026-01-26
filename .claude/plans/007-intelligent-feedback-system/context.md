@@ -444,3 +444,62 @@ Created `/classify` semantic classification command and integrated semantic clas
 ### Ready for Next Step
 Step 7: Classification History & Learning
 Prerequisites met: Yes (classification recording infrastructure complete)
+
+---
+
+## Step 7 Complete - 2026-01-26
+
+### Summary
+Created ClassificationHistory service with similarity-based learning from user corrections.
+
+### Technique Execution Log
+- **Planning**: ps-plus - success on attempt 1
+- **Implementation**: tdd - success on attempt 1
+  - 23 tests written first (TDD red phase)
+  - 2 tests needed adjustment for realistic values
+  - All 23 tests pass
+- **Verification**: self-refine - success on attempt 1
+  - Integration check confirmed learning works
+
+### Files Created
+- `.claude/scripts/classification_history.py`: Learning service with:
+  - Jaccard similarity on word tokens
+  - Tokenization with stopword removal
+  - Confidence boost from corrections (+0.3 per, max 3)
+  - Confidence decay after 90 days (-0.1 per 30 days)
+  - Max confidence cap at 0.95
+- `.claude/tests/test_classification_history.py`: 23 unit tests
+
+### Files Modified
+- `.claude/commands/classify.md`:
+  - Added Step 0: Check for Learned Classification
+  - Updated Step 7 to use ClassificationHistory instead of raw FeedbackStore
+  - Added learning note about corrections improving future classifications
+
+### Tests Written
+- `test_classification_history.py`: 23 test cases
+- Status: All passing
+
+### Verification Results
+- [x] AC1: Classifications stored with full metadata
+- [x] AC2: Corrections recorded and tracked
+- [x] AC3: Similar descriptions matched correctly
+- [x] AC4: Learned confidence calculated correctly
+- [x] AC5: Old entries decay appropriately
+- [x] AC6: All 23 tests pass
+
+### Key Decisions
+- Jaccard similarity for matching (simple, effective)
+- 0.5 min similarity for matches (practical threshold)
+- Confidence boost formula: base + (0.3 * min(3, corrections)) - decay
+- Decay starts after 90 days, -0.1 per 30 days
+- Corrections enable immediate learning (no batch processing)
+
+### Learnings
+- Test values must account for caps (MAX_CONFIDENCE) to show decay
+- Similarity depends heavily on tokenization - stopwords matter
+- Learning from corrections requires high enough similarity match
+
+### Ready for Next Step
+Step 8: Plan-Next Integration
+Prerequisites met: Yes (ClassificationHistory complete)
