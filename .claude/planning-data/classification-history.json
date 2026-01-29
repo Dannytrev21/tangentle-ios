@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "entries": [
+    {
+      "id": "ec1238ac-7090-4b69-9409-2f1ad17a5476",
+      "description": "Add unit tests for auth module",
+      "description_hash": "d9c4648fe092a67d",
+      "classified_as": "unit-test",
+      "confidence": 0.9,
+      "corrected_to": "integration-test",
+      "correction_confidence": 1.0,
+      "timestamp": "2026-01-26T12:07:33.915504",
+      "source": "semantic"
+    }
+  ],
+  "corrections": {
+    "d9c4648fe092a67d": {
+      "original": "unit-test",
+      "corrected_to": "integration-test",
+      "timestamp": "2026-01-26T12:07:33.916052"
+    }
+  }
+}

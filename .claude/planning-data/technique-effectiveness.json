@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-26T15:28:02.873862",
+  "byProblemType": {
+    "debug": {
+      "tdd": {
+        "success": 5,
+        "failure": 1,
+        "total_attempts": 14,
+        "average_attempts_to_success": 2.8,
+        "last_used": "2026-01-26T15:28:02.873631"
+      },
+      "reflexion": {
+        "success": 5,
+        "failure": 0,
+        "total_attempts": 15,
+        "average_attempts_to_success": 3.0,
+        "last_used": "2026-01-26T15:28:02.871795"
+      }
+    },
+    "new-feature": {
+      "tdd": {
+        "success": 3,
+        "failure": 0,
+        "total_attempts": 3,
+        "average_attempts_to_success": 1.0,
+        "last_used": "2026-01-26T15:28:02.873155"
+      },
+      "self-refine": {
+        "success": 3,
+        "failure": 0,
+        "total_attempts": 6,
+        "average_attempts_to_success": 2.0,
+        "last_used": "2026-01-26T15:28:02.873404"
+      }
+    },
+    "refactor": {
+      "tdd": {
+        "success": 1,
+        "failure": 0,
+        "total_attempts": 1,
+        "average_attempts_to_success": 1.0,
+        "last_used": "2026-01-26T15:28:02.873861"
+      }
+    }
+  }
+}
